@@ -22,6 +22,8 @@ import { ApiService, XoArray, XoDescriber } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcDialogService, XcSelectionModel, XcStructureTreeDataSource, XoRemappingTableInfoClass, XoTableInfo } from '@zeta/xc';
 
+import { finalize } from 'rxjs';
+
 import { extractError, OPTIONS_WITH_ERROR } from '../const';
 import { ImexService } from '../shared/imex.service';
 import { SettingsService } from '../shared/settings.service';
@@ -110,7 +112,9 @@ export class TestReportsComponent {
 
     export() {
         this.exporting = true;
-        this.imexService.export(this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.ExportTestReport', [this.testReport]).subscribe(
+        this.imexService.export(this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.ExportTestReport', [this.testReport]).pipe(
+            finalize(() => this.exporting = false)
+        ).subscribe(
             result => {
                 if (result.errorMessage) {
                     this.dialogService.error(this.i18nService.translateErrorCode(result.errorMessage));
