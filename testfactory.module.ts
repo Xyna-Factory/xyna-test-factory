@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -48,14 +48,7 @@ import { TestfactoryComponent } from './testfactory.component';
 import { TestProjectMenuComponent } from './usermenu/testprojectmenu.component';
 
 
-@NgModule({
-    imports: [
-        CommonModule,
-        HttpClientModule,
-        RouterModule,
-        ZetaModule
-    ],
-    declarations: [
+@NgModule({ declarations: [
         AddCounterComponent,
         AddTestCaseChainComponent,
         AddTestCaseComponent,
@@ -75,12 +68,13 @@ import { TestProjectMenuComponent } from './usermenu/testprojectmenu.component';
         TestReportsComponent,
         XTFFocusCandidateDirective,
         NoteComponent
-    ],
-    providers: [
+    ], imports: [CommonModule,
+        RouterModule,
+        ZetaModule], providers: [
         ImexService,
-        SettingsService
-    ]
-})
+        SettingsService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class TestfactoryModule {
     constructor(
         factoryManagerSettings: FactoryManagerSettingsService,
