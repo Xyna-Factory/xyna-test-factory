@@ -48,7 +48,8 @@ import { TestfactoryComponent } from './testfactory.component';
 import { TestProjectMenuComponent } from './usermenu/testprojectmenu.component';
 
 
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AddCounterComponent,
         AddTestCaseChainComponent,
         AddTestCaseComponent,
@@ -68,13 +69,17 @@ import { TestProjectMenuComponent } from './usermenu/testprojectmenu.component';
         TestReportsComponent,
         XTFFocusCandidateDirective,
         NoteComponent
-    ], imports: [CommonModule,
+    ],
+    imports: [CommonModule,
         RouterModule,
-        ZetaModule], providers: [
+        ZetaModule
+    ],
+    providers: [
         ImexService,
         SettingsService,
         provideHttpClient(withInterceptorsFromDi())
-    ] })
+    ]
+})
 export class TestfactoryModule {
     constructor(
         factoryManagerSettings: FactoryManagerSettingsService,
