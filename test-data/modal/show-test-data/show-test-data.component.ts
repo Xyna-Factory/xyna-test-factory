@@ -38,7 +38,8 @@ export interface ShowTestDataComponentData {
 @Component({
     selector: 'app-show-test-data',
     templateUrl: './show-test-data.component.html',
-    styleUrls: ['./show-test-data.component.scss']
+    styleUrls: ['./show-test-data.component.scss'],
+    standalone: false
 })
 export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataComponentData> {
 

@@ -38,7 +38,8 @@ export interface TestProjectMenuData {
 
 @Component({
     templateUrl: './testprojectmenu.component.html',
-    styleUrls: ['./testprojectmenu.component.scss']
+    styleUrls: ['./testprojectmenu.component.scss'],
+    standalone: false
 })
 
 export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSelector, TestProjectMenuData> {

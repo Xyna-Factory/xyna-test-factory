@@ -26,7 +26,8 @@ import { XoTestCaseEntry, XoTestCaseEntryArray } from '../xo/test-case-entry.mod
 
 @Component({
     templateUrl: './get-test-case-reference.component.html',
-    styleUrls: ['./get-test-case-reference.component.scss']
+    styleUrls: ['./get-test-case-reference.component.scss'],
+    standalone: false
 })
 export class GetTestCaseReferenceComponent extends XcDialogComponent<{value: string; label?: string}> {
 

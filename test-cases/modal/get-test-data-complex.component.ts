@@ -27,7 +27,8 @@ import { XoTestData, XoTestDataArray } from '../xo/test-data.model';
 
 @Component({
     templateUrl: './get-test-data-complex.component.html',
-    styleUrls: ['./get-test-data-complex.component.scss']
+    styleUrls: ['./get-test-data-complex.component.scss'],
+    standalone: false
 })
 export class GetTestDataComplexComponent extends XcDialogComponent<{value: string; label?: any}, XoTestDataSelectorInstance> {
 

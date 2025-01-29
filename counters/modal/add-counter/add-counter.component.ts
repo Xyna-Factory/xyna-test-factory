@@ -34,7 +34,8 @@ export interface AddCounterComponentData {
 
 @Component({
     templateUrl: './add-counter.component.html',
-    styleUrls: ['./add-counter.component.scss']
+    styleUrls: ['./add-counter.component.scss'],
+    standalone: false
 })
 export class AddCounterComponent extends XcDialogComponent<boolean, AddCounterComponentData> {
 

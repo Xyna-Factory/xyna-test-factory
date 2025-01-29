@@ -58,7 +58,8 @@ interface StartTestCaseError {
 
 @Component({
     templateUrl: './test-cases.component.html',
-    styleUrls: ['./test-cases.component.scss']
+    styleUrls: ['./test-cases.component.scss'],
+    standalone: false
 })
 export class TestCasesComponent extends RouteComponent {
 
