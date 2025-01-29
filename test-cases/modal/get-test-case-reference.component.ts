@@ -25,6 +25,7 @@ import { XoTestCaseEntry, XoTestCaseEntryArray } from '../xo/test-case-entry.mod
 
 
 @Component({
+    selector: 'get-test-case-reference',
     templateUrl: './get-test-case-reference.component.html',
     styleUrls: ['./get-test-case-reference.component.scss'],
     standalone: false

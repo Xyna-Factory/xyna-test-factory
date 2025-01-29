@@ -26,6 +26,7 @@ import { XoTestData, XoTestDataArray } from '../xo/test-data.model';
 
 
 @Component({
+    selector: 'get-test-data-complex',
     templateUrl: './get-test-data-complex.component.html',
     styleUrls: ['./get-test-data-complex.component.scss'],
     standalone: false
