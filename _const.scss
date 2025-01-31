@@ -15,15 +15,9 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-@use '../const' as *;
+ @import '../../zeta/const';
 
-:host {
-    width: 100%;
-    background-color: #1a1a1b;
 
-    xc-panel {
-        height: 100%;
-        width: 850px;
-        background-color: $color-gray-2;
-    }
-}
+ /****************************************************
+  * Test Factory Variables
+  ****************************************************/
