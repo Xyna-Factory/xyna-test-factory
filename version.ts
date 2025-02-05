@@ -16,4 +16,4 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 export const TestFactoryName = 'Test Factory';
-export const TestFactoryVersion = '2.3.0';
+export const TestFactoryVersion = '2.4.0';
