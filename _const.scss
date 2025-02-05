@@ -15,7 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
- @import '../../zeta/const';
+ @forward "../../const";
+@use "../../const" as *;
 
 
  /****************************************************
