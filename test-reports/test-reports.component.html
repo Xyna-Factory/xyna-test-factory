@@ -1,39 +1,43 @@
-<xc-master-detail [xc-master-detail-opened]="dsTestReportEdit !== null" *ngIf="isTestprojectSelected">
-
+@if (isTestprojectSelected) {
+  <xc-master-detail [xc-master-detail-opened]="dsTestReportEdit !== null">
     <xc-panel master>
-        <header>
-            <h2 i18n>Test Report</h2>
-            <div class="items-right">
-                <xc-button (click)="refreshTestReports()">Refresh Data</xc-button>
-                <xc-icon-button (click)="refresh()" xc-icon-name="reload" xc-icon-style="xds" xc-tooltip="Refresh" i18n-xc-tooltip></xc-icon-button>
-            </div>
-        </header>
-        <section class="stretch scroll">
-            <xc-table [xc-table-datasource]="dsTestReport" xc-table-allowsort xc-table-allowfilter xc-table-allowselect
-                xc-table-lazyupdate i18n-label
-            ></xc-table>
-            <div *ngIf="!!dsTestReport.requestErrorMessage" class="info-box" i18n>
+      <header>
+        <h2 i18n>Test Report</h2>
+        <div class="items-right">
+          <xc-button (click)="refreshTestReports()">Refresh Data</xc-button>
+          <xc-icon-button (click)="refresh()" xc-icon-name="reload" xc-icon-style="xds" xc-tooltip="Refresh" i18n-xc-tooltip></xc-icon-button>
+        </div>
+      </header>
+      <section class="stretch scroll">
+        <xc-table [xc-table-datasource]="dsTestReport" xc-table-allowsort xc-table-allowfilter xc-table-allowselect
+          xc-table-lazyupdate i18n-label
+        ></xc-table>
+        @if (!!dsTestReport.requestErrorMessage) {
+          <div class="info-box" i18n>
                 There is no Workflow defined for this table. To see data here, at least the TableInfo-Workflow 'xdev.xtestfactory.infrastructure.gui.GetTestReports' has to be created.
             </div>
-        </section>
-        <footer>
-            <div class="items-right">
-            </div>
-        </footer>
+        }
+      </section>
+      <footer>
+        <div class="items-right">
+        </div>
+      </footer>
     </xc-panel>
-
     <xc-panel detail>
-        <section *ngIf="dsTestReportEdit !== null" class="stretch scroll">
-            <xc-tree [xc-tree-datasource]="dsTestReportTree" xc-tree-autoexpand="first"></xc-tree>
+      @if (dsTestReportEdit !== null) {
+        <section class="stretch scroll">
+          <xc-tree [xc-tree-datasource]="dsTestReportTree" xc-tree-autoexpand="first"></xc-tree>
         </section>
-        <footer>
-            <div class="items-left">
-                <xc-button (click)="close()">Cancel</xc-button>
-            </div>
-            <div class="items-right">
-                <xc-button (click)="export()" [busy]="exporting" [disabled]="exporting" color="normal" i18n>CSV Export</xc-button>
-                <xc-button (click)="save()" color="primary" i18n>Save</xc-button>
-            </div>
-        </footer>
+      }
+      <footer>
+        <div class="items-left">
+          <xc-button (click)="close()">Cancel</xc-button>
+        </div>
+        <div class="items-right">
+          <xc-button (click)="export()" [busy]="exporting" [disabled]="exporting" color="normal" i18n>CSV Export</xc-button>
+          <xc-button (click)="save()" color="primary" i18n>Save</xc-button>
+        </div>
+      </footer>
     </xc-panel>
-</xc-master-detail>
+  </xc-master-detail>
+}

@@ -1,56 +1,58 @@
 <xc-dialog-wrapper>
-    <ng-container header i18n>{{dataLabel}}</ng-container>
+  <ng-container header i18n>{{dataLabel}}</ng-container>
 
-    <ng-container aside>
-        <xc-icon-button
-            color="normal"
-            (click)="add()"
-            xc-icon-name="add"
-            xc-tooltip="Add New Test Data Instance"
-            i18n-xc-tooltip
-        ></xc-icon-button>
-    </ng-container>
+  <ng-container aside>
+    <xc-icon-button
+      color="normal"
+      (click)="add()"
+      xc-icon-name="add"
+      xc-tooltip="Add New Test Data Instance"
+      i18n-xc-tooltip
+    ></xc-icon-button>
+  </ng-container>
 
-    <ng-container content>
-        <note-component [note]="note" class="note" *ngIf="note"></note-component>
-        <xc-master-detail [xc-master-detail-opened]="testData" xc-master-detail-side-area-size="half">
-            <xc-panel master>
-                <section class="stretch scroll table-wrapper">
-                    <xc-table [xc-table-datasource]="tableDataSource"
-                        xc-table-allowsort
-                        xc-table-allowfilter
-                        xc-table-allowselect
-                        xc-table-lazyupdate
-                        xc-table-multiselect
-                    >
-                    </xc-table>
-                </section>
-                <footer>
-                    <xc-button
-                        (click)="delete(tableDataSource.selectionModel.selection)"
-                        [disabled]="tableDataSource.selectionModel.isEmpty()"
-                        class="items-right"
-                        i18n
-                    >Delete</xc-button>
-                </footer>
-            </xc-panel>
+  <ng-container content>
+    @if (note) {
+      <note-component [note]="note" class="note"></note-component>
+    }
+    <xc-master-detail [xc-master-detail-opened]="testData" xc-master-detail-side-area-size="half">
+      <xc-panel master>
+        <section class="stretch scroll table-wrapper">
+          <xc-table [xc-table-datasource]="tableDataSource"
+            xc-table-allowsort
+            xc-table-allowfilter
+            xc-table-allowselect
+            xc-table-lazyupdate
+            xc-table-multiselect
+            >
+          </xc-table>
+        </section>
+        <footer>
+          <xc-button
+            (click)="delete(tableDataSource.selectionModel.selection)"
+            [disabled]="tableDataSource.selectionModel.isEmpty()"
+            class="items-right"
+            i18n
+          >Delete</xc-button>
+        </footer>
+      </xc-panel>
 
-            <xc-panel detail>
-                <section class="stretch scroll">
-                    <xc-tree
-                        [xc-tree-datasource]="treeDataSource"
-                        [xc-tree-observer]="treeObserver"
-                        xc-tree-autoexpand="all"
-                    ></xc-tree>
-                </section>
-                <footer>
-                    <xc-button (click)="cancel()" class="items-left" i18n>Cancel</xc-button>
-                    <xc-button (click)="apply()" class="items-right" i18n>Apply</xc-button>
-                </footer>
-            </xc-panel>
-        </xc-master-detail>
-    </ng-container>
-    <ng-container footer>
-        <xc-button (click)="dismiss()" i18n>Close</xc-button>
-    </ng-container>
+      <xc-panel detail>
+        <section class="stretch scroll">
+          <xc-tree
+            [xc-tree-datasource]="treeDataSource"
+            [xc-tree-observer]="treeObserver"
+            xc-tree-autoexpand="all"
+          ></xc-tree>
+        </section>
+        <footer>
+          <xc-button (click)="cancel()" class="items-left" i18n>Cancel</xc-button>
+          <xc-button (click)="apply()" class="items-right" i18n>Apply</xc-button>
+        </footer>
+      </xc-panel>
+    </xc-master-detail>
+  </ng-container>
+  <ng-container footer>
+    <xc-button (click)="dismiss()" i18n>Close</xc-button>
+  </ng-container>
 </xc-dialog-wrapper>
