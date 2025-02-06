@@ -31,7 +31,7 @@ import { XoTestData, XoTestDataArray } from '../xo/test-data.model';
     styleUrls: ['./get-test-data-complex.component.scss'],
     standalone: false
 })
-export class GetTestDataComplexComponent extends XcDialogComponent<{value: string; label?: any}, XoTestDataSelectorInstance> {
+export class GetTestDataComplexComponent extends XcDialogComponent<{ value: string; label?: any }, XoTestDataSelectorInstance> {
 
     dataSource: XcRemoteTableDataSource;
 
@@ -53,6 +53,6 @@ export class GetTestDataComplexComponent extends XcDialogComponent<{value: strin
     choose() {
         const firstColumn = this.dataSource.columns[0];
         const selection = this.dataSource.selectionModel.selection[0] as XoTestData;
-        this.dismiss({value: String(selection.iD), label: selection.resolve(firstColumn.path)});
+        this.dismiss({ value: String(selection.iD), label: selection.resolve(firstColumn.path) });
     }
 }

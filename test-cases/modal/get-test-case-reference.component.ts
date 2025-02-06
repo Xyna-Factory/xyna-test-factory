@@ -30,7 +30,7 @@ import { XoTestCaseEntry, XoTestCaseEntryArray } from '../xo/test-case-entry.mod
     styleUrls: ['./get-test-case-reference.component.scss'],
     standalone: false
 })
-export class GetTestCaseReferenceComponent extends XcDialogComponent<{value: string; label?: string}> {
+export class GetTestCaseReferenceComponent extends XcDialogComponent<{ value: string; label?: string }> {
 
     dataSource: XcRemoteTableDataSource;
 
@@ -51,6 +51,6 @@ export class GetTestCaseReferenceComponent extends XcDialogComponent<{value: str
     choose() {
         const firstColumn = this.dataSource.columns[0];
         const selection = this.dataSource.selectionModel.selection[0] as XoTestCaseEntry;
-        this.dismiss({value: String(selection.iD), label: selection.resolve(firstColumn.path)});
+        this.dismiss({ value: String(selection.iD), label: selection.resolve(firstColumn.path) });
     }
 }
