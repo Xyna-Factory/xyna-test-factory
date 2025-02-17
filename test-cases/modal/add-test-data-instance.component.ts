@@ -26,7 +26,8 @@ import { XoTestDataSelectorInstance, XoTestDataSelectorInstanceArray } from '../
 
 @Component({
     templateUrl: './add-test-data-instance.component.html',
-    styleUrls: ['./add-test-data-instance.component.scss']
+    styleUrls: ['./add-test-data-instance.component.scss'],
+    standalone: false
 })
 export class AddTestDataInstanceComponent extends XcDialogComponent<XoTestDataSelectorInstance> {
 

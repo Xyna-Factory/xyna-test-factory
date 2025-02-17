@@ -34,8 +34,10 @@ export interface AddTestCaseComponentModalData {
 }
 
 @Component({
+    selector: 'add-test-case',
     templateUrl: './add-test-case.component.html',
-    styleUrls: ['./add-test-case.component.scss']
+    styleUrls: ['./add-test-case.component.scss'],
+    standalone: false
 })
 export class AddTestCaseComponent extends XcDialogComponent<XoTestCaseEntry, AddTestCaseComponentModalData> {
 

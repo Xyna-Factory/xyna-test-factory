@@ -21,7 +21,7 @@ import { I18nParam, I18nService } from '@zeta/i18n';
 
 export const RIGHT_TEST_FACTORY = 'xmcp.xfm.testFactory';
 
-export function extractError(err: StartOrderResult | string | {message: string; [key: string]: any}, i18nService?: I18nService): string {
+export function extractError(err: StartOrderResult | string | { message: string;[key: string]: any }, i18nService?: I18nService): string {
 
     let msg = i18nService ? i18nService.translate('unexpected error') : 'unexpected error';
 
@@ -34,8 +34,8 @@ export function extractError(err: StartOrderResult | string | {message: string; 
         return msg;
     }
 
-    if (err && (err as {message: string}).message) {
-        return (err as {message: string}).message;
+    if (err && (err as { message: string }).message) {
+        return (err as { message: string }).message;
     }
 
     return msg;
@@ -46,8 +46,8 @@ export const OPTIONS_WITH_ERROR: StartOrderOptions = {
     withErrorMessage: true
 };
 
-export function GET_IMPORT_TEST_PROJECT_MSG(i18n: I18nService, orderId: string): {message: string; header: string} {
-    const param: I18nParam = {key: '${orderId}', value: orderId};
+export function GET_IMPORT_TEST_PROJECT_MSG(i18n: I18nService, orderId: string): { message: string; header: string } {
+    const param: I18nParam = { key: '${orderId}', value: orderId };
     const msg = 'The import may take a while. Please check the Process Monitor (${orderId}). Test Project is selectable after the process.';
     return {
         message: i18n.translate(msg, param),
@@ -55,8 +55,8 @@ export function GET_IMPORT_TEST_PROJECT_MSG(i18n: I18nService, orderId: string):
     };
 }
 
-export function GET_DUPLICATE_TEST_PROJECT_MSG(i18n: I18nService, orderId: string): {message: string; header: string} {
-    const param: I18nParam = {key: '${orderId}', value: orderId};
+export function GET_DUPLICATE_TEST_PROJECT_MSG(i18n: I18nService, orderId: string): { message: string; header: string } {
+    const param: I18nParam = { key: '${orderId}', value: orderId };
     const msg = 'The duplication may take a while. Please check the Process Monitor (${orderId}). Test Project is selectable after the process.';
     return {
         message: i18n.translate(msg, param),

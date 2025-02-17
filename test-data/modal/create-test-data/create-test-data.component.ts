@@ -39,7 +39,8 @@ export interface CreateTestDataComponentData {
 @Component({
     selector: 'create-test-data',
     templateUrl: './create-test-data.component.html',
-    styleUrls: ['./create-test-data.component.scss']
+    styleUrls: ['./create-test-data.component.scss'],
+    standalone: false
 })
 export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTestDataComponentData> {
 

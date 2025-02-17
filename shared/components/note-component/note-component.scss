@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-@import 'const';
+@use '../../../const' as *;
 
 :host {
     margin: 0px 5px 5px 5px;

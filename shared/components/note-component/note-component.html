@@ -1,12 +1,13 @@
 
-<div
+@if (note) {
+  <div
     [xtf-focus-candidate]="noteBoxFocusCandidateRef"
     xtf-focus-candidate-focus-onload
     class="note-msg"
-    *ngIf="note"
->
+    >
     <div class="icon-div">
-        <xc-icon [xc-icon-name]="iconName"></xc-icon>
+      <xc-icon [xc-icon-name]="iconName"></xc-icon>
     </div>
     <div>{{note}}</div>
-</div>
+  </div>
+}

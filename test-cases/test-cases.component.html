@@ -1,159 +1,162 @@
-<xc-master-detail [xc-master-detail-opened]="testCase" *ngIf="isTestprojectSelected">
+@if (isTestprojectSelected) {
+  <xc-master-detail [xc-master-detail-opened]="testCase">
     <xc-panel master>
-        <header>
-            <h1 i18n>Test Cases</h1>
-            <div class="items-right">
-                <xc-button [busy]="exportStarted" [disabled]="exportStarted" (click)="exportTestCase()">
-                    <xc-icon xc-icon-name="file" i18n>Export</xc-icon>
-                </xc-button>
-                <xc-icon-button (click)="refresh()" xc-icon-name="reload" color="normal" xc-icon-style="xds"
-                    xc-tooltip="Refresh" i18n-xc-tooltip></xc-icon-button>
-                <xc-icon-button (click)="createTestCase()" [disabled]="!validTestProject" xc-icon-name="add"
-                    color="normal" xc-icon-style="xds" xc-tooltip="Add Test Case" i18n-xc-tooltip></xc-icon-button>
-            </div>
-        </header>
-        <section class="stretch scroll">
-            <xc-table [xc-table-datasource]="dsTestCases"
-                xc-table-allowsort
-                xc-table-allowfilter
-                xc-table-allowselect
-                xc-table-lazyupdate
-                xc-table-multiselect
-                i18n-label
-            ></xc-table>
-        </section>
-        <footer>
-            <xc-button
-                (click)="deleteSelected()"
-                [disabled]="dsTestCases.selectionModel.isEmpty()"
-                class="items-right"
-                i18n
-            >Delete</xc-button>
-        </footer>
+      <header>
+        <h1 i18n>Test Cases</h1>
+        <div class="items-right">
+          <xc-button [busy]="exportStarted" [disabled]="exportStarted" (click)="exportTestCase()">
+            <xc-icon xc-icon-name="file" i18n>Export</xc-icon>
+          </xc-button>
+          <xc-icon-button (click)="refresh()" xc-icon-name="reload" color="normal" xc-icon-style="xds"
+          xc-tooltip="Refresh" i18n-xc-tooltip></xc-icon-button>
+          <xc-icon-button (click)="createTestCase()" [disabled]="!validTestProject" xc-icon-name="add"
+          color="normal" xc-icon-style="xds" xc-tooltip="Add Test Case" i18n-xc-tooltip></xc-icon-button>
+        </div>
+      </header>
+      <section class="stretch scroll">
+        <xc-table [xc-table-datasource]="dsTestCases"
+          xc-table-allowsort
+          xc-table-allowfilter
+          xc-table-allowselect
+          xc-table-lazyupdate
+          xc-table-multiselect
+          i18n-label
+        ></xc-table>
+      </section>
+      <footer>
+        <xc-button
+          (click)="deleteSelected()"
+          [disabled]="dsTestCases.selectionModel.isEmpty()"
+          class="items-right"
+          i18n
+        >Delete</xc-button>
+      </footer>
     </xc-panel>
-
     <xc-panel detail>
-        <header *ngIf="testCase">
-            <h2>{{testCaseEntry.name}}</h2>
-
-            <span class="meta-info">
-                <span class="test-case-author" i18n="test-case-author">Author</span>
-                <span>{{testCaseEntry.author}}</span>
-                <span class="test-case-id" i18n="test-case-id">ID</span>
-                <span>{{testCaseEntry.iD}}</span>
-            </span>
-
+      @if (testCase) {
+        <header>
+          <h2>{{testCaseEntry.name}}</h2>
+          <span class="meta-info">
+            <span class="test-case-author" i18n="test-case-author">Author</span>
+            <span>{{testCaseEntry.author}}</span>
+            <span class="test-case-id" i18n="test-case-id">ID</span>
+            <span>{{testCaseEntry.iD}}</span>
+          </span>
         </header>
-        <section *ngIf="testCaseEntry" class="stretch scroll" xc-form>
-
-            <section>
-                <xc-form-textarea label="Description" [(value)]="testCaseEntry.description" xc-form-textarea-lines="10"
-                    xc-form-field-indicatechanges xc-form-field-compact
-                    i18n-label="label for Description in test-case component"></xc-form-textarea>
-            </section>
-
-            <section>
-                <xc-form-label i18n>Execution</xc-form-label>
-                <div class="items-row">
-                    <xc-button (click)="startTestCase()" [busy]="startOrderBusy" [disabled]="startOrderBusy">
-                        <xc-icon xc-icon-name="arrowright" i18n>Start Test Case</xc-icon>
-                    </xc-button>
-                    <xc-button (click)="manageExecutionDetails()" [disabled]="!(testCase?.testProcessReference)">
-                        <xc-icon xc-icon-name="settings" i18n>Manage Execution Details</xc-icon>
-                    </xc-button>
-                </div>
-                <div *ngIf="testCaseOrderId" class="items-row test-case-result">
-                    <label class="order-id">Order Id: {{testCaseOrderId}}</label>
-                    <xc-button (click)="openAudit(testCaseOrderId)" [disabled]="!testCaseOrderId" i18n>Show Details</xc-button>
-                </div>
-            </section>
-
+      }
+      @if (testCaseEntry) {
+        <section class="stretch scroll" xc-form>
+          <section>
+            <xc-form-textarea label="Description" [(value)]="testCaseEntry.description" xc-form-textarea-lines="10"
+              xc-form-field-indicatechanges xc-form-field-compact
+            i18n-label="label for Description in test-case component"></xc-form-textarea>
+          </section>
+          <section>
+            <xc-form-label i18n>Execution</xc-form-label>
+            <div class="items-row">
+              <xc-button (click)="startTestCase()" [busy]="startOrderBusy" [disabled]="startOrderBusy">
+                <xc-icon xc-icon-name="arrowright" i18n>Start Test Case</xc-icon>
+              </xc-button>
+              <xc-button (click)="manageExecutionDetails()" [disabled]="!(testCase?.testProcessReference)">
+                <xc-icon xc-icon-name="settings" i18n>Manage Execution Details</xc-icon>
+              </xc-button>
+            </div>
+            @if (testCaseOrderId) {
+              <div class="items-row test-case-result">
+                <label class="order-id">Order Id: {{testCaseOrderId}}</label>
+                <xc-button (click)="openAudit(testCaseOrderId)" [disabled]="!testCaseOrderId" i18n>Show Details</xc-button>
+              </div>
+            }
+          </section>
+          <section class="items-row">
+            <xc-form-input label="Priority" i18n-label="label for Priority in test-case component"
+              [(value)]="testCaseEntry.priorityDataWrapper.value" xc-form-validator-number
+              xc-form-validator-minvalue="0" xc-form-validator-maxvalue="10" xc-form-field-indicatechanges
+            xc-form-field-compact></xc-form-input>
+            <xc-form-input label="Responsible User" i18n-label="label for ResponsibleUser in test-case component"
+              [(value)]="testCaseEntry.responsibleUser" xc-form-field-indicatechanges xc-form-field-compact>
+            </xc-form-input>
+          </section>
+          <section>
+            <xc-form-autocomplete label="Type" i18n-label="label for Type in test-case component"
+              [(xc-form-autocomplete-option)]="testCaseEntry.typeDataWrapper.value"
+              [xc-form-autocomplete-options]="testCaseEntry.typeDataWrapper.values"
+              xc-form-autocomplete-asdropdown
+              xc-form-field-suffix="clear"
+              xc-form-autocomplete-fulltextsearch
+              xc-form-field-indicatechanges
+              xc-form-field-compact
+            ></xc-form-autocomplete>
+          </section>
+          @if (testCaseEntry.isRate()) {
             <section class="items-row">
-                <xc-form-input label="Priority" i18n-label="label for Priority in test-case component"
-                    [(value)]="testCaseEntry.priorityDataWrapper.value" xc-form-validator-number
-                    xc-form-validator-minvalue="0" xc-form-validator-maxvalue="10" xc-form-field-indicatechanges
-                    xc-form-field-compact></xc-form-input>
-                <xc-form-input label="Responsible User" i18n-label="label for ResponsibleUser in test-case component"
-                    [(value)]="testCaseEntry.responsibleUser" xc-form-field-indicatechanges xc-form-field-compact>
-                </xc-form-input>
+              <xc-form-input label="Rate [Hz]" i18n-label="label for Rate in test-case component"
+                [(value)]="testCaseEntry.rateDataWrapper.value" xc-form-validator-number="float"
+              xc-form-field-indicatechanges xc-form-field-compact></xc-form-input>
+              <xc-form-input label="Duration [sec]" i18n-label="label for Duration in test-case component"
+                [(value)]="testCaseEntry.rateDurationDataWrapper.value" xc-form-validator-number
+              xc-form-field-indicatechanges xc-form-field-compact></xc-form-input>
             </section>
-
-            <section>
-                <xc-form-autocomplete label="Type" i18n-label="label for Type in test-case component"
-                    [(xc-form-autocomplete-option)]="testCaseEntry.typeDataWrapper.value"
-                    [xc-form-autocomplete-options]="testCaseEntry.typeDataWrapper.values"
-                    xc-form-autocomplete-asdropdown
-                    xc-form-field-suffix="clear"
-                    xc-form-autocomplete-fulltextsearch
-                    xc-form-field-indicatechanges
-                    xc-form-field-compact
-                ></xc-form-autocomplete>
+          }
+          @if (testCaseEntry.isLoad()) {
+            <section class="items-row">
+              <xc-form-input label="Load" i18n-label="label for Load in test-case component"
+                [(value)]="testCaseEntry.loadDataWrapper.value" xc-form-validator-number
+              xc-form-field-indicatechanges xc-form-field-compact></xc-form-input>
+              <xc-form-input label="Count" i18n-label="label for Count in test-case component"
+                [(value)]="testCaseEntry.loadCount" xc-form-validator-number xc-form-field-indicatechanges
+              xc-form-field-compact></xc-form-input>
             </section>
-
-            <section class="items-row" *ngIf="testCaseEntry.isRate()">
-                <xc-form-input label="Rate [Hz]" i18n-label="label for Rate in test-case component"
-                    [(value)]="testCaseEntry.rateDataWrapper.value" xc-form-validator-number="float"
-                    xc-form-field-indicatechanges xc-form-field-compact></xc-form-input>
-                <xc-form-input label="Duration [sec]" i18n-label="label for Duration in test-case component"
-                    [(value)]="testCaseEntry.rateDurationDataWrapper.value" xc-form-validator-number
-                    xc-form-field-indicatechanges xc-form-field-compact></xc-form-input>
-            </section>
-
-            <section class="items-row" *ngIf="testCaseEntry.isLoad()">
-                <xc-form-input label="Load" i18n-label="label for Load in test-case component"
-                    [(value)]="testCaseEntry.loadDataWrapper.value" xc-form-validator-number
-                    xc-form-field-indicatechanges xc-form-field-compact></xc-form-input>
-                <xc-form-input label="Count" i18n-label="label for Count in test-case component"
-                    [(value)]="testCaseEntry.loadCount" xc-form-validator-number xc-form-field-indicatechanges
-                    xc-form-field-compact></xc-form-input>
-            </section>
-
-            <section>
-                <xc-form-label i18n>Test Data Selectors</xc-form-label>
-                <xc-table [xc-table-datasource]="dsTestDataSelectors" xc-table-allowselect xc-table-lazyupdate>
-                </xc-table>
-                <footer class="items-right">
-                    <xc-button (click)="deleteTestDataSelector()"
-                        [disabled]="dsTestDataSelectors.selectionModel.isEmpty()" i18n>Delete</xc-button>
-                    <xc-button (click)="addTestDataSelector()" i18n>Add</xc-button>
-                </footer>
-            </section>
-
-            <xc-panel *ngIf="testCase?.testDateSelector">
-                <header>
-                    <h2 i18n>Untyped Selectors (Deprecated)</h2>
-                </header>
-                <section>
-                    <xc-form-input label="Selector 1" i18n-label [(value)]="testCase?.testDateSelector.selector1" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 2" i18n-label [(value)]="testCase?.testDateSelector.selector2" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 3" i18n-label [(value)]="testCase?.testDateSelector.selector3" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 4" i18n-label [(value)]="testCase?.testDateSelector.selector4" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 5" i18n-label [(value)]="testCase?.testDateSelector.selector5" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 6" i18n-label [(value)]="testCase?.testDateSelector.selector6" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 7" i18n-label [(value)]="testCase?.testDateSelector.selector7" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 8" i18n-label [(value)]="testCase?.testDateSelector.selector8" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 9" i18n-label [(value)]="testCase?.testDateSelector.selector9" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 10" i18n-label [(value)]="testCase?.testDateSelector.selector10" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 11" i18n-label [(value)]="testCase?.testDateSelector.selector11" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 12" i18n-label [(value)]="testCase?.testDateSelector.selector12" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 13" i18n-label [(value)]="testCase?.testDateSelector.selector13" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 14" i18n-label [(value)]="testCase?.testDateSelector.selector14" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 15" i18n-label [(value)]="testCase?.testDateSelector.selector15" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 16" i18n-label [(value)]="testCase?.testDateSelector.selector16" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 17" i18n-label [(value)]="testCase?.testDateSelector.selector17" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 18" i18n-label [(value)]="testCase?.testDateSelector.selector18" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 19" i18n-label [(value)]="testCase?.testDateSelector.selector19" xc-form-field-compact></xc-form-input>
-                    <xc-form-input label="Selector 20" i18n-label [(value)]="testCase?.testDateSelector.selector20" xc-form-field-compact></xc-form-input>
-                </section>
+          }
+          <section>
+            <xc-form-label i18n>Test Data Selectors</xc-form-label>
+            <xc-table [xc-table-datasource]="dsTestDataSelectors" xc-table-allowselect xc-table-lazyupdate>
+            </xc-table>
+            <footer class="items-right">
+              <xc-button (click)="deleteTestDataSelector()"
+              [disabled]="dsTestDataSelectors.selectionModel.isEmpty()" i18n>Delete</xc-button>
+              <xc-button (click)="addTestDataSelector()" i18n>Add</xc-button>
+            </footer>
+          </section>
+          @if (testCase?.testDateSelector) {
+            <xc-panel>
+              <header>
+                <h2 i18n>Untyped Selectors (Deprecated)</h2>
+              </header>
+              <section>
+                <xc-form-input label="Selector 1" i18n-label [(value)]="testCase?.testDateSelector.selector1" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 2" i18n-label [(value)]="testCase?.testDateSelector.selector2" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 3" i18n-label [(value)]="testCase?.testDateSelector.selector3" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 4" i18n-label [(value)]="testCase?.testDateSelector.selector4" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 5" i18n-label [(value)]="testCase?.testDateSelector.selector5" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 6" i18n-label [(value)]="testCase?.testDateSelector.selector6" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 7" i18n-label [(value)]="testCase?.testDateSelector.selector7" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 8" i18n-label [(value)]="testCase?.testDateSelector.selector8" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 9" i18n-label [(value)]="testCase?.testDateSelector.selector9" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 10" i18n-label [(value)]="testCase?.testDateSelector.selector10" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 11" i18n-label [(value)]="testCase?.testDateSelector.selector11" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 12" i18n-label [(value)]="testCase?.testDateSelector.selector12" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 13" i18n-label [(value)]="testCase?.testDateSelector.selector13" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 14" i18n-label [(value)]="testCase?.testDateSelector.selector14" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 15" i18n-label [(value)]="testCase?.testDateSelector.selector15" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 16" i18n-label [(value)]="testCase?.testDateSelector.selector16" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 17" i18n-label [(value)]="testCase?.testDateSelector.selector17" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 18" i18n-label [(value)]="testCase?.testDateSelector.selector18" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 19" i18n-label [(value)]="testCase?.testDateSelector.selector19" xc-form-field-compact></xc-form-input>
+                <xc-form-input label="Selector 20" i18n-label [(value)]="testCase?.testDateSelector.selector20" xc-form-field-compact></xc-form-input>
+              </section>
             </xc-panel>
+          }
         </section>
-        <footer>
-            <div class="items-left">
-                <xc-button (click)="close()" i18n>Cancel</xc-button>
-            </div>
-            <div class="items-right">
-                <xc-button (click)="saveTestCase()" color="primary" i18n>Save</xc-button>
-            </div>
-        </footer>
+      }
+      <footer>
+        <div class="items-left">
+          <xc-button (click)="close()" i18n>Cancel</xc-button>
+        </div>
+        <div class="items-right">
+          <xc-button (click)="saveTestCase()" color="primary" i18n>Save</xc-button>
+        </div>
+      </footer>
     </xc-panel>
-</xc-master-detail>
+  </xc-master-detail>
+}

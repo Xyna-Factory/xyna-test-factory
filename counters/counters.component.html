@@ -1,49 +1,51 @@
-<xc-master-detail [xc-master-detail-opened]="counterEdit !== null" *ngIf="isTestprojectSelected">
+@if (isTestprojectSelected) {
+  <xc-master-detail [xc-master-detail-opened]="counterEdit !== null">
     <xc-panel master>
-        <header>
-            <h2 i18n>Counters</h2>
-            <div class="items-right">
-                <xc-icon-button (click)="refresh()" xc-icon-name="reload" color="normal" xc-icon-style="xds"
-                    xc-tooltip="Refresh" i18n-xc-tooltip></xc-icon-button>
-                <xc-icon-button (click)="createCounter()" xc-icon-name="add" color="normal" xc-icon-style="xds"
-                    xc-tooltip="Add Counter" i18n-xc-tooltip></xc-icon-button>
-            </div>
-        </header>
-        <section class="stretch scroll">
-            <xc-table [xc-table-datasource]="dsCounters" xc-table-allowsort xc-table-allowfilter xc-table-allowselect
-                xc-table-lazyupdate></xc-table>
-        </section>
+      <header>
+        <h2 i18n>Counters</h2>
+        <div class="items-right">
+          <xc-icon-button (click)="refresh()" xc-icon-name="reload" color="normal" xc-icon-style="xds"
+          xc-tooltip="Refresh" i18n-xc-tooltip></xc-icon-button>
+          <xc-icon-button (click)="createCounter()" xc-icon-name="add" color="normal" xc-icon-style="xds"
+          xc-tooltip="Add Counter" i18n-xc-tooltip></xc-icon-button>
+        </div>
+      </header>
+      <section class="stretch scroll">
+        <xc-table [xc-table-datasource]="dsCounters" xc-table-allowsort xc-table-allowfilter xc-table-allowselect
+        xc-table-lazyupdate></xc-table>
+      </section>
     </xc-panel>
-
-    <xc-panel detail *ngIf="counterEdit">
+    @if (counterEdit) {
+      <xc-panel detail>
         <section class="stretch scroll" xc-form>
-            <xc-form-input label="Name" i18n-label="label for Name in counters component"
-                [(value)]="counterEdit.name"
-                xc-form-validator-required
-            ></xc-form-input>
-            <xc-form-input label="Next Value" i18n-label="label for NextValue in counters component"
-                [(value)]="counterEdit.nextValue"
-                xc-form-validator-required
-                xc-form-validator-number
-                xc-form-validator-maxvalue="9223372036854775807"
-            ></xc-form-input>
-            <xc-form-input label="Increment" i18n-label="label for Increment in counters component"
-                [(value)]="counterEdit.increment"
-                xc-form-validator-required
-                xc-form-validator-number
-            ></xc-form-input>
-            <xc-form-textarea label="Description" i18n-label="label for Description in counters component"
-                [(value)]="counterEdit.description"
-            ></xc-form-textarea>
+          <xc-form-input label="Name" i18n-label="label for Name in counters component"
+            [(value)]="counterEdit.name"
+            xc-form-validator-required
+          ></xc-form-input>
+          <xc-form-input label="Next Value" i18n-label="label for NextValue in counters component"
+            [(value)]="counterEdit.nextValue"
+            xc-form-validator-required
+            xc-form-validator-number
+            xc-form-validator-maxvalue="9223372036854775807"
+          ></xc-form-input>
+          <xc-form-input label="Increment" i18n-label="label for Increment in counters component"
+            [(value)]="counterEdit.increment"
+            xc-form-validator-required
+            xc-form-validator-number
+          ></xc-form-input>
+          <xc-form-textarea label="Description" i18n-label="label for Description in counters component"
+            [(value)]="counterEdit.description"
+          ></xc-form-textarea>
         </section>
         <footer>
-            <div class="items-left">
-                <xc-button (click)="close()" i18n>Cancel</xc-button>
-            </div>
-            <div class="items-right">
-                <xc-button (click)="updateCounter()" [disabled]="invalid" color="primary" i18n>Save</xc-button>
-            </div>
+          <div class="items-left">
+            <xc-button (click)="close()" i18n>Cancel</xc-button>
+          </div>
+          <div class="items-right">
+            <xc-button (click)="updateCounter()" [disabled]="invalid" color="primary" i18n>Save</xc-button>
+          </div>
         </footer>
-    </xc-panel>
-
-</xc-master-detail>
+      </xc-panel>
+    }
+  </xc-master-detail>
+}

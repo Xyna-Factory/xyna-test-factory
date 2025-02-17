@@ -26,10 +26,12 @@ import { XoTestData, XoTestDataArray } from '../xo/test-data.model';
 
 
 @Component({
+    selector: 'get-test-data-mc',
     templateUrl: './get-test-data-mc.component.html',
-    styleUrls: ['./get-test-data-mc.component.scss']
+    styleUrls: ['./get-test-data-mc.component.scss'],
+    standalone: false
 })
-export class GetTestDataMcComponent extends XcDialogComponent<{value: string; label?: string}, XoTestDataSelectorInstance> {
+export class GetTestDataMcComponent extends XcDialogComponent<{ value: string; label?: string }, XoTestDataSelectorInstance> {
 
     dataSource: XcRemoteTableDataSource;
 
@@ -56,6 +58,6 @@ export class GetTestDataMcComponent extends XcDialogComponent<{value: string; la
                 this.dataSource.selectionModel.getSubs(selection).map(sub => selection.resolve(sub))
             )
         );
-        this.dismiss({value: values.join(', ')});
+        this.dismiss({ value: values.join(', ') });
     }
 }

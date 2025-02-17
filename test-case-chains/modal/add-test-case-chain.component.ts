@@ -32,7 +32,8 @@ export interface AddTestCaseChainComponentModalData {
 
 @Component({
     templateUrl: './add-test-case-chain.component.html',
-    styleUrls: ['./add-test-case-chain.component.scss']
+    styleUrls: ['./add-test-case-chain.component.scss'],
+    standalone: false
 })
 export class AddTestCaseChainComponent extends XcDialogComponent<string, AddTestCaseChainComponentModalData> {
 

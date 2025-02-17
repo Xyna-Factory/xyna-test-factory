@@ -36,7 +36,8 @@ import { XoCounterId } from './xo/counter-id.model';
 @Component({
     selector: 'app-counters',
     templateUrl: './counters.component.html',
-    styleUrls: ['./counters.component.scss']
+    styleUrls: ['./counters.component.scss'],
+    standalone: false
 })
 export class CountersComponent extends RouteComponent {
 

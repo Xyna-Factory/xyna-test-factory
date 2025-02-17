@@ -34,7 +34,8 @@ import { TestProjectMenuComponent, TestProjectMenuData } from './usermenu/testpr
 
 @Component({
     templateUrl: './testfactory.component.html',
-    styleUrls: ['./testfactory.component.scss']
+    styleUrls: ['./testfactory.component.scss'],
+    standalone: false
 })
 export class TestfactoryComponent extends RouteComponent {
 

@@ -1,20 +1,22 @@
 <xc-dialog-wrapper>
-    <ng-container header i18n>Choose Test Data</ng-container>
-    <ng-container content>
-        <note-component [note]="note" *ngIf="note"></note-component>
-        <xc-table
-            [xc-table-datasource]="dataSource"
-            xc-table-allowsort
-            xc-table-allowfilter
-            xc-table-allowselect
-            xc-table-multiselect
-            xc-table-cellselect
-            xc-table-lazyupdate
-            i18n-label
-        ></xc-table>
-    </ng-container>
-    <ng-container footer>
-        <xc-button (click)="dismiss()" i18n>Cancel</xc-button>
-        <xc-button (click)="choose()" [disabled]="dataSource.selectionModel.isEmpty()" i18n>Choose</xc-button>
-    </ng-container>
+  <ng-container header i18n>Choose Test Data</ng-container>
+  <ng-container content>
+    @if (note) {
+      <note-component [note]="note"></note-component>
+    }
+    <xc-table
+      [xc-table-datasource]="dataSource"
+      xc-table-allowsort
+      xc-table-allowfilter
+      xc-table-allowselect
+      xc-table-multiselect
+      xc-table-cellselect
+      xc-table-lazyupdate
+      i18n-label
+    ></xc-table>
+  </ng-container>
+  <ng-container footer>
+    <xc-button (click)="dismiss()" i18n>Cancel</xc-button>
+    <xc-button (click)="choose()" [disabled]="dataSource.selectionModel.isEmpty()" i18n>Choose</xc-button>
+  </ng-container>
 </xc-dialog-wrapper>

@@ -21,7 +21,8 @@ import { coerceBoolean } from '@zeta/base';
 
 
 @Directive({
-    selector: '[xtf-focus-candidate]'
+    selector: '[xtf-focus-candidate]',
+    standalone: false
 })
 export class XTFFocusCandidateDirective implements OnInit, OnDestroy {
 
