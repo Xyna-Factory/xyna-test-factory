@@ -25,7 +25,8 @@ import { XTFFocusCandidateRef } from '../../directives/xtf-focus-candidate.direc
 @Component({
     selector: 'note-component',
     templateUrl: './note-component.html',
-    styleUrls: ['./note-component.scss']
+    styleUrls: ['./note-component.scss'],
+    standalone: false
 })
 export class NoteComponent {
 

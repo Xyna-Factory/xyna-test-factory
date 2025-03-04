@@ -41,7 +41,8 @@ import { XoTestDataMetaData } from './xo/test-data-meta-data.model';
 @Component({
     selector: 'app-test-data',
     templateUrl: './test-data.component.html',
-    styleUrls: ['./test-data.component.scss']
+    styleUrls: ['./test-data.component.scss'],
+    standalone: false
 })
 export class TestDataComponent extends RouteComponent {
 

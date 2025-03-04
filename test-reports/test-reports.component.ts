@@ -35,7 +35,8 @@ import { XoFCTReport } from './xo/xo-fctreport.model';
 @Component({
     selector: 'app-test-reports',
     templateUrl: './test-reports.component.html',
-    styleUrls: ['./test-reports.component.scss']
+    styleUrls: ['./test-reports.component.scss'],
+    standalone: false
 })
 export class TestReportsComponent {
 

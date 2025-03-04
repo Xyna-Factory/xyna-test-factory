@@ -39,7 +39,8 @@ const FOLLOW_UP_WF = 'xdev.xtestfactory.infrastructure.gui.GetFollowupTestCases'
 
 @Component({
     templateUrl: './test-case-chains.component.html',
-    styleUrls: ['./test-case-chains.component.scss']
+    styleUrls: ['./test-case-chains.component.scss'],
+    standalone: false
 })
 export class TestCaseChainsComponent extends RouteComponent {
 

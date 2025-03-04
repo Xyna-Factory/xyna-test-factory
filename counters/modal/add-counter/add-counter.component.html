@@ -1,31 +1,33 @@
 <xc-dialog-wrapper>
-    <ng-container header i18n>Add Counter</ng-container>
-    <section content xc-form #form="xc-form">
-        <span *ngIf="errorMessage" style="margin-bottom: 24px; display: flex;">
-            <xc-icon xc-icon-name="info"></xc-icon>&nbsp;{{errorMessage}}
-        </span>
+  <ng-container header i18n>Add Counter</ng-container>
+  <section content xc-form #form="xc-form">
+    @if (errorMessage) {
+      <span style="margin-bottom: 24px; display: flex;">
+        <xc-icon xc-icon-name="info"></xc-icon>&nbsp;{{errorMessage}}
+      </span>
+    }
 
-        <xc-form-input label="Name" i18n-label="label for Name in add-counter component"
-            [(value)]="counterEntry.name"
-            xc-form-validator-required
-        ></xc-form-input>
-        <xc-form-input label="Next Value" i18n-label="label for NextValue in add-counter component"
-            [(value)]="counterEntry.nextValue"
-            xc-form-validator-required
-            xc-form-validator-number
-            xc-form-validator-maxvalue="9223372036854775807"
-        ></xc-form-input>
-        <xc-form-input label="Increment" i18n-label="label for Increment in add-counter component"
-            [(value)]="counterEntry.increment"
-            xc-form-validator-required
-            xc-form-validator-number
-        ></xc-form-input>
-        <xc-form-textarea label="Description" i18n-label="label for Description in add-counter component"
-            [(value)]="counterEntry.description"
-        ></xc-form-textarea>
-    </section>
-    <ng-container footer>
-        <xc-button (click)="dismiss(false)" i18n>Cancel</xc-button>
-        <xc-button (click)="add()" [disabled]="form.invalid" color="primary" i18n>Add</xc-button>
-    </ng-container>
+    <xc-form-input label="Name" i18n-label="label for Name in add-counter component"
+      [(value)]="counterEntry.name"
+      xc-form-validator-required
+    ></xc-form-input>
+    <xc-form-input label="Next Value" i18n-label="label for NextValue in add-counter component"
+      [(value)]="counterEntry.nextValue"
+      xc-form-validator-required
+      xc-form-validator-number
+      xc-form-validator-maxvalue="9223372036854775807"
+    ></xc-form-input>
+    <xc-form-input label="Increment" i18n-label="label for Increment in add-counter component"
+      [(value)]="counterEntry.increment"
+      xc-form-validator-required
+      xc-form-validator-number
+    ></xc-form-input>
+    <xc-form-textarea label="Description" i18n-label="label for Description in add-counter component"
+      [(value)]="counterEntry.description"
+    ></xc-form-textarea>
+  </section>
+  <ng-container footer>
+    <xc-button (click)="dismiss(false)" i18n>Cancel</xc-button>
+    <xc-button (click)="add()" [disabled]="form.invalid" color="primary" i18n>Add</xc-button>
+  </ng-container>
 </xc-dialog-wrapper>

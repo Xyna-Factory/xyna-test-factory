@@ -1,67 +1,68 @@
-<xc-master-detail [xc-master-detail-opened]="testDataEdit !== null" *ngIf="isTestprojectSelected">
+@if (isTestprojectSelected) {
+  <xc-master-detail [xc-master-detail-opened]="testDataEdit !== null">
     <xc-panel master>
-        <header>
-            <h2 i18n>Test Data Lists</h2>
-            <div class="items-right">
-                <xc-button (click)="importTestData()">
-                    <xc-icon xc-icon-name="fileimport" i18n>Import</xc-icon>
-                </xc-button>
-                <xc-icon-button (click)="refresh()" xc-icon-name="reload" color="normal" xc-icon-style="xds"
-                    xc-tooltip="Refresh" i18n-xc-tooltip
-                ></xc-icon-button>
-                <xc-icon-button (click)="createTestData()" xc-icon-name="add"
-                    color="normal" xc-icon-style="xds"
-                    xc-tooltip="Add Test Data List" i18n-xc-tooltip
-                ></xc-icon-button>
-            </div>
-        </header>
-        <section class="stretch scroll">
-            <xc-table [xc-table-datasource]="dsTestData" xc-table-allowsort xc-table-allowfilter xc-table-allowselect
-                xc-table-lazyupdate></xc-table>
-        </section>
+      <header>
+        <h2 i18n>Test Data Lists</h2>
+        <div class="items-right">
+          <xc-button (click)="importTestData()">
+            <xc-icon xc-icon-name="fileimport" i18n>Import</xc-icon>
+          </xc-button>
+          <xc-icon-button (click)="refresh()" xc-icon-name="reload" color="normal" xc-icon-style="xds"
+            xc-tooltip="Refresh" i18n-xc-tooltip
+          ></xc-icon-button>
+          <xc-icon-button (click)="createTestData()" xc-icon-name="add"
+            color="normal" xc-icon-style="xds"
+            xc-tooltip="Add Test Data List" i18n-xc-tooltip
+          ></xc-icon-button>
+        </div>
+      </header>
+      <section class="stretch scroll">
+        <xc-table [xc-table-datasource]="dsTestData" xc-table-allowsort xc-table-allowfilter xc-table-allowselect
+        xc-table-lazyupdate></xc-table>
+      </section>
     </xc-panel>
-
     <xc-panel detail>
-        <header></header>
-        <section *ngIf="testDataEdit" class="stretch scroll" xc-form>
-            <xc-form-input label="Name" i18n-label="label for Name in test-data component"
-                [(value)]="testDataEdit.name"
-                xc-form-validator-required
-            ></xc-form-input>
-            <xc-form-textarea label="Description" i18n-label="label for Description in test-data component" [(value)]="testDataEdit.description"></xc-form-textarea>
-
-            <xc-form-autocomplete
-                label="Test Data Definition"
-                placeholder="Please select ..."
-                [(xc-form-autocomplete-option)]="testDataDefinitionDataWrapper.value"
-                [xc-form-autocomplete-options]="testDataDefinitionDataWrapper.values"
-                xc-form-field-suffix="clear"
-                xc-form-autocomplete-fulltextsearch
-                xc-form-validator-required
-                i18n-label
-                i18n-placeholder
-            ></xc-form-autocomplete>
-
-            <xc-checkbox label="One Time Test Data" i18n-label="label for One Time Test Data in test-data component"
-                [(checked)]="testDataEdit.oneTimeTestData"
-            ></xc-checkbox>
-            <xc-button
-                [disabled]="!testDataEdit.testDataFullQualifiedStorableName || testDataEdit.testDataFullQualifiedStorableName.length === 0"
-                (click)="showTestData()"
-                i18n
-            >Show Corresponding Test Data</xc-button>
-            <!-- <xc-button (click)="showTestDataType()">Show Test Data Type</xc-button> -->
+      <header></header>
+      @if (testDataEdit) {
+        <section class="stretch scroll" xc-form>
+          <xc-form-input label="Name" i18n-label="label for Name in test-data component"
+            [(value)]="testDataEdit.name"
+            xc-form-validator-required
+          ></xc-form-input>
+          <xc-form-textarea label="Description" i18n-label="label for Description in test-data component" [(value)]="testDataEdit.description"></xc-form-textarea>
+          <xc-form-autocomplete
+            label="Test Data Definition"
+            placeholder="Please select ..."
+            [(xc-form-autocomplete-option)]="testDataDefinitionDataWrapper.value"
+            [xc-form-autocomplete-options]="testDataDefinitionDataWrapper.values"
+            xc-form-field-suffix="clear"
+            xc-form-autocomplete-fulltextsearch
+            xc-form-validator-required
+            i18n-label
+            i18n-placeholder
+          ></xc-form-autocomplete>
+          <xc-checkbox label="One Time Test Data" i18n-label="label for One Time Test Data in test-data component"
+            [(checked)]="testDataEdit.oneTimeTestData"
+          ></xc-checkbox>
+          <xc-button
+            [disabled]="!testDataEdit.testDataFullQualifiedStorableName || testDataEdit.testDataFullQualifiedStorableName.length === 0"
+            (click)="showTestData()"
+            i18n
+          >Show Corresponding Test Data</xc-button>
+          <!-- <xc-button (click)="showTestDataType()">Show Test Data Type</xc-button> -->
         </section>
-        <footer>
-            <div class="items-left">
-                <xc-button (click)="close()" i18n>Cancel</xc-button>
-            </div>
-            <div class="items-right">
-                <xc-button [busy]="exportStarted" [disabled]="exportStarted" (click)="exportTestData()">
-                    <xc-icon xc-icon-name="file" i18n>Export</xc-icon>
-                </xc-button>
-                <xc-button (click)="save()" [disabled]="form && form.invalid || saving" [busy]="saving" color="primary" i18n>Save</xc-button>
-            </div>
-        </footer>
+      }
+      <footer>
+        <div class="items-left">
+          <xc-button (click)="close()" i18n>Cancel</xc-button>
+        </div>
+        <div class="items-right">
+          <xc-button [busy]="exportStarted" [disabled]="exportStarted" (click)="exportTestData()">
+            <xc-icon xc-icon-name="file" i18n>Export</xc-icon>
+          </xc-button>
+          <xc-button (click)="save()" [disabled]="form && form.invalid || saving" [busy]="saving" color="primary" i18n>Save</xc-button>
+        </div>
+      </footer>
     </xc-panel>
-</xc-master-detail>
+  </xc-master-detail>
+}

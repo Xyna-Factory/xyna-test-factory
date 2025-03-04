@@ -31,7 +31,8 @@ import { XoProjectDetails } from './xo/xo-project-details.model';
 @Component({
     selector: 'app-project-details',
     templateUrl: './project-details.component.html',
-    styleUrls: ['./project-details.component.scss']
+    styleUrls: ['./project-details.component.scss'],
+    standalone: false
 })
 export class ProjectDetailsComponent {
 

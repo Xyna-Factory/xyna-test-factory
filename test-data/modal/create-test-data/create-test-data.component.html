@@ -1,34 +1,36 @@
 <xc-dialog-wrapper>
-    <ng-container header i18n>Create Test Data List</ng-container>
-    <section content xc-form #form="xc-form">
+  <ng-container header i18n>Create Test Data List</ng-container>
+  <section content xc-form #form="xc-form">
 
-        <note-component [note]="note" *ngIf="note"></note-component>
+    @if (note) {
+      <note-component [note]="note"></note-component>
+    }
 
-        <xc-form-input label="Name" i18n-label="label for Name in create-test-data component"
-            [(value)]="testData.name"
-            xc-form-validator-required
-        ></xc-form-input>
-        <xc-form-textarea label="Description" i18n-label="label for Description in create-test-data component"
-            [(value)]="testData.description"
-        ></xc-form-textarea>
+    <xc-form-input label="Name" i18n-label="label for Name in create-test-data component"
+      [(value)]="testData.name"
+      xc-form-validator-required
+    ></xc-form-input>
+    <xc-form-textarea label="Description" i18n-label="label for Description in create-test-data component"
+      [(value)]="testData.description"
+    ></xc-form-textarea>
 
-        <xc-form-autocomplete
-            label="Test Data Object"
-            [placeholder]="testDataObjectPlaceHolder"
-            [(xc-form-autocomplete-option)]="testDataDefinitionDataWrapper.value"
-            [xc-form-autocomplete-options]="testDataDefinitionDataWrapper.values"
-            xc-form-autocomplete-showtooltip
-            xc-form-field-suffix="clear"
-            xc-form-autocomplete-fulltextsearch
-            xc-form-validator-required
-            i18n-label
-            i18n-placeholder
-        ></xc-form-autocomplete>
+    <xc-form-autocomplete
+      label="Test Data Object"
+      [placeholder]="testDataObjectPlaceHolder"
+      [(xc-form-autocomplete-option)]="testDataDefinitionDataWrapper.value"
+      [xc-form-autocomplete-options]="testDataDefinitionDataWrapper.values"
+      xc-form-autocomplete-showtooltip
+      xc-form-field-suffix="clear"
+      xc-form-autocomplete-fulltextsearch
+      xc-form-validator-required
+      i18n-label
+      i18n-placeholder
+    ></xc-form-autocomplete>
 
-        <xc-checkbox [(checked)]="testData.oneTimeTestData" label="One Time Test Data" i18n-label></xc-checkbox>
-    </section>
-    <ng-container footer>
-        <xc-button (click)="dismiss()" i18n>Cancel</xc-button>
-        <xc-button (click)="save()" [disabled]="form.invalid || saving" [busy]="saving" i18n>Create</xc-button>
-    </ng-container>
+    <xc-checkbox [(checked)]="testData.oneTimeTestData" label="One Time Test Data" i18n-label></xc-checkbox>
+  </section>
+  <ng-container footer>
+    <xc-button (click)="dismiss()" i18n>Cancel</xc-button>
+    <xc-button (click)="save()" [disabled]="form.invalid || saving" [busy]="saving" i18n>Create</xc-button>
+  </ng-container>
 </xc-dialog-wrapper>
