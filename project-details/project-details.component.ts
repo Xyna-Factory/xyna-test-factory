@@ -160,8 +160,6 @@ export class ProjectDetailsComponent {
 
         const orderType = 'xdev.xtestfactory.infrastructure.gui.GetProjectDetails';
 
-// TODO: migrate subscribe(...) to object-based syntax for RxJS 8
-
         this.apiService.startOrder(
             this.settingsService.testProjectRtc,
             orderType,
