@@ -97,17 +97,17 @@ export class TestCaseChainsComponent extends RouteComponent {
 
 
         this.dsInitialTestCases = new XcTableInfoRemoteTableDataSource(apiService, this.i18nService, this.settingsService.testProjectRtc, INIT_WF);
-        this.dsInitialTestCases.selectionModel.selectionChange.subscribe(
-            model => this.initialTestCase = model.selection[0],
-            err => console.log(err)
-        );
+        this.dsInitialTestCases.selectionModel.selectionChange.subscribe({
+            next: model => this.initialTestCase = model.selection[0],
+            error: err => console.log(err)
+        });
         this.dsInitialTestCases.output = XoInitialTestCaseEntryArray;
 
         this.dsFollowupTestCases = new XcTableInfoRemoteTableDataSource(apiService, this.i18nService, this.settingsService.testProjectRtc, FOLLOW_UP_WF);
-        this.dsFollowupTestCases.selectionModel.selectionChange.subscribe(
-            model => this.followupTestCase = model.selection[0],
-            err => console.log(err)
-        );
+        this.dsFollowupTestCases.selectionModel.selectionChange.subscribe({
+            next: model => this.followupTestCase = model.selection[0],
+            error: err => console.log(err)
+        });
         this.dsFollowupTestCases.output = XoTestCaseEntryArray;
 
         // test project rtc changes

@@ -17,10 +17,10 @@
  */
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { OrderInputSourceDetailsModalComponent, OrderInputSourceDetailsModalComponentData } from '@fman/order-input-sources/modal/order-input-source-details-modal/order-input-source-details-modal.component';
 import { FrequencyControlledTaskLoadPreset, FrequencyControlledTaskPreset, FrequencyControlledTaskRatePreset } from '@fman/order-input-sources/order-input-source-details/order-input-source-details.component';
 import { XoOrderInputSource } from '@fman/order-input-sources/xo/xo-order-input-source.model';
-
 import { ApiService, RuntimeContextType } from '@zeta/api';
 import { stringToInteger } from '@zeta/base';
 import { I18nService } from '@zeta/i18n';
@@ -335,8 +335,8 @@ export class TestCasesComponent extends RouteComponent {
         // 270814
         this.settingsService.startTestCase(this.testCase.name, this.testCaseEntry.iD).pipe(
             finalize(() => this.startOrderBusy = false)
-        ).subscribe(
-            result => {
+        ).subscribe({
+            next: result => {
                 if (result.errorMessage) {
                     this.dialogService.error(result.errorMessage);
                     this.testCaseOrderId = '';
@@ -344,7 +344,7 @@ export class TestCasesComponent extends RouteComponent {
                     this.testCaseOrderId = result.orderId;
                 }
             },
-            error => {
+            error: error => {
                 const response = error as StartTestCaseError;
                 let handled = false;
                 let message: string;
@@ -367,20 +367,20 @@ export class TestCasesComponent extends RouteComponent {
                 this.dialogService.error(message);
                 this.testCaseOrderId = '';
             }
-        );
+        });
     }
 
     exportTestCase() {
         this.exportStarted = true;
-        this.imexService.export(this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.ExportTestCases', [this.settingsService.testProjectSelector]).subscribe(
-            res => {
+        this.imexService.export(this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.ExportTestCases', [this.settingsService.testProjectSelector]).subscribe({
+            next: res => {
                 if (res.errorMessage) {
                     this.dialogService.error(this.i18nService.translateErrorCode(res.errorMessage));
                 }
             },
-            err => this.dialogService.error(extractError(err)),
-            () => this.exportStarted = false
-        );
+            error: err => this.dialogService.error(extractError(err)),
+            complete: () => this.exportStarted = false
+        });
     }
 
 

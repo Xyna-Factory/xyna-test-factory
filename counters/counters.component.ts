@@ -188,8 +188,8 @@ export class CountersComponent extends RouteComponent {
         input.nextValue = this.counterEdit.nextValue;
         input.description = this.counterEdit.description;
 
-        this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, input, null, OPTIONS_WITH_ERROR).subscribe(
-            result => {
+        this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, input, null, OPTIONS_WITH_ERROR).subscribe({
+            next: result => {
                 if (result.errorMessage) {
                     this.dialogService.error(this.i18nService.translateErrorCode(result.errorMessage));
                 } else {
@@ -197,9 +197,9 @@ export class CountersComponent extends RouteComponent {
                     this.dsCounters.refresh();
                 }
             },
-            error => {
+            error: error => {
                 this.dialogService.error(error);
             }
-        );
+        });
     }
 }

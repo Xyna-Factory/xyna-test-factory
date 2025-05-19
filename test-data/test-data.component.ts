@@ -85,10 +85,10 @@ export class TestDataComponent extends RouteComponent {
                 iconName: XDSIconName.COPY,
                 tooltip: this.i18n.translate('Duplicate'),
                 onAction: data =>
-                    this.getTestDataMetaData(data).subscribe(
-                        meta => this.createTestData(meta),
-                        err => dialogService.error(err)
-                    )
+                    this.getTestDataMetaData(data).subscribe({
+                        next: meta => this.createTestData(meta),
+                        error: err => dialogService.error(err)
+                    })
             },
             {
                 iconName: XDSIconName.DELETE,
@@ -124,8 +124,8 @@ export class TestDataComponent extends RouteComponent {
         const resArr = [];
         const payload = [];
         this.imexService.import(this.settings.testProjectRtc, 'xdev.xtestfactory.infrastructure.actions.ImportTestDataFromCSV', payload, resArr)
-            .subscribe(
-                res => {
+            .subscribe({
+                next: res => {
                     if (res.errorMessage) {
                         this.dialogService.error(this.i18n.translateErrorCode(res.errorMessage));
                     } else {
@@ -133,8 +133,8 @@ export class TestDataComponent extends RouteComponent {
                         this.dsTestData.refresh();
                     }
                 },
-                err => this.dialogService.error(extractError(err))
-            );
+                error: err => this.dialogService.error(extractError(err))
+            });
     }
 
     createTestData(testDataMetaData?: XoTestDataMetaData) {
@@ -152,15 +152,15 @@ export class TestDataComponent extends RouteComponent {
     exportTestData() {
         this.exportStarted = true;
         this.imexService.export(this.settings.testProjectRtc, 'xdev.xtestfactory.infrastructure.actions.ExportTestDataToCSV', [this.testDataEdit])
-            .subscribe(
-                res => {
+            .subscribe({
+                next: res => {
                     if (res.errorMessage) {
                         this.dialogService.error(this.i18n.translateErrorCode(res.errorMessage));
                     }
                 },
-                err => this.dialogService.error(extractError(err)),
-                () => this.exportStarted = false
-            );
+                error: err => this.dialogService.error(extractError(err)),
+                complete: () => this.exportStarted = false
+            });
     }
 
     close() {
@@ -170,8 +170,8 @@ export class TestDataComponent extends RouteComponent {
     save() {
         this.saving = true;
         const orderType = 'xdev.xtestfactory.infrastructure.actions.StoreTestDataMetaDataWithoutStoreParameter';
-        this.apiService.startOrder(this.settings.testProjectRtc, orderType, [this.testDataEdit], null, OPTIONS_WITH_ERROR).subscribe(
-            response => {
+        this.apiService.startOrder(this.settings.testProjectRtc, orderType, [this.testDataEdit], null, OPTIONS_WITH_ERROR).subscribe({
+            next: response => {
                 if (response.errorMessage) {
                     this.dialogService.error(this.i18n.translateErrorCode(response.errorMessage));
                 } else {
@@ -179,13 +179,14 @@ export class TestDataComponent extends RouteComponent {
                     this.close();
                 }
             },
-            err => this.dialogService.error(extractError(err)),
-            () => this.saving = false);
+            error: err => this.dialogService.error(extractError(err)),
+            complete: () => this.saving = false
+        });
     }
 
     showTestData() {
-        this.allTestDataChildrenSubscription = this.getAllTestDataChildren().subscribe(
-            st => {
+        this.allTestDataChildrenSubscription = this.getAllTestDataChildren().subscribe({
+            next: st => {
                 const fqn = st.typeFqn.encode();
                 const data: ShowTestDataComponentData = {
                     structureType: st,
@@ -195,9 +196,9 @@ export class TestDataComponent extends RouteComponent {
                     this.dialogService.custom(ShowTestDataComponent, data);
                 }
             },
-            err => this.dialogService.error(extractError(err)),
-            () => this.allTestDataChildrenSubscription.unsubscribe()
-        );
+            error: err => this.dialogService.error(extractError(err)),
+            complete: () => this.allTestDataChildrenSubscription.unsubscribe()
+        });
     }
 
     // TODO: finish this
@@ -236,19 +237,19 @@ export class TestDataComponent extends RouteComponent {
     private fillTestDataDefinitionDataWrapper() {
         this.testDataDefinitionDataWrapper.values = [];
         const describers = new XoTestData().getDescribers();
-        this.allTestDataChildrenSubscription = this.getAllTestDataChildren().subscribe(
-            st => {
+        this.allTestDataChildrenSubscription = this.getAllTestDataChildren().subscribe({
+            next: st => {
                 const val = st.typeFqn.encode();
                 if (describers[0].fqn.encode() !== val && !st.typeAbstract) {
                     this.testDataDefinitionDataWrapper.values.push({ name: val, value: val });
                 }
             },
-            err => console.error(err),
-            () => {
+            error: err => console.error(err),
+            complete: () => {
                 this.testDataDefinitionDataWrapper.update();
                 this.allTestDataChildrenSubscription.unsubscribe();
             }
-        );
+        });
     }
 
     private getAllTestDataChildren(): Observable<XoStructureType> {
@@ -258,8 +259,8 @@ export class TestDataComponent extends RouteComponent {
         describers[0].rtc = this.settings.testProjectRtc;
         this.apiService.getSubtypes(this.settings.testProjectRtc, describers)
             .forEach(obs => {
-                obs.subscribe(
-                    stArr => {
+                obs.subscribe({
+                    next: stArr => {
                         if (stArr) {
                             stArr.forEach(st => {
                                 const val = st.typeFqn.encode();
@@ -269,8 +270,8 @@ export class TestDataComponent extends RouteComponent {
                             });
                         }
                     },
-                    err => subj.error(err)
-                );
+                    error: err => subj.error(err)
+                });
             });
 
         return subj.asObservable();
@@ -283,14 +284,18 @@ export class TestDataComponent extends RouteComponent {
         testDataOrderId.iD = entry.iD;
 
         this.apiService.startOrder(this.settings.testProjectRtc, orderType, testDataOrderId, XoTestDataMetaData, OPTIONS_WITH_ERROR)
-            .subscribe(result => {
-                if (result && !result.errorMessage) {
-                    const metaData = result.output[0] as XoTestDataMetaData;
-                    subj.next(metaData);
-                } else {
-                    subj.error(this.i18n.translateErrorCode(result.errorMessage));
-                }
-            }, err => subj.error(extractError(err)), () => subj.complete());
+            .subscribe({
+                next: result => {
+                    if (result && !result.errorMessage) {
+                        const metaData = result.output[0] as XoTestDataMetaData;
+                        subj.next(metaData);
+                    } else {
+                        subj.error(this.i18n.translateErrorCode(result.errorMessage));
+                    }
+                },
+                error: err => subj.error(extractError(err)),
+                complete: () => subj.complete()
+            });
 
         return subj.asObservable();
     }

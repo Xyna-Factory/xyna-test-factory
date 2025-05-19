@@ -61,15 +61,15 @@ export class ProjectDetailsComponent {
     exportTestProject() {
         this.exportStarted = true;
         const orderType = 'xdev.xtestfactory.infrastructure.gui.ExportTestProject';
-        this.imexService.export(this.settingsService.testProjectRtc, orderType, [this.settingsService.testProjectSelector]).subscribe(
-            res => {
+        this.imexService.export(this.settingsService.testProjectRtc, orderType, [this.settingsService.testProjectSelector]).subscribe({
+            next: res => {
                 if (res.errorMessage) {
                     this.dialogService.error(this.i18nService.translateErrorCode(res.errorMessage));
                 }
             },
-            err => this.dialogService.error(extractError(err)),
-            () => this.exportStarted = false
-        );
+            error: err => this.dialogService.error(extractError(err)),
+            complete: () => this.exportStarted = false
+        });
     }
 
     delete() {
@@ -79,8 +79,8 @@ export class ProjectDetailsComponent {
                     const orderType = 'xdev.xtestfactory.infrastructure.gui.DeleteTestProject';
 
                     const sel = this.settingsService.testProjectSelector.clone();
-                    this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, sel, null, OPTIONS_WITH_ERROR)
-                        .subscribe(result => {
+                    this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, sel, null, OPTIONS_WITH_ERROR).subscribe({
+                        next: result => {
                             if (!result.errorMessage) {
                                 this.testProjectDetails.name = '';
                                 this.testProjectDetails.version = '';
@@ -92,7 +92,9 @@ export class ProjectDetailsComponent {
                             } else {
                                 this.dialogService.error(this.i18nService.translateErrorCode(result.errorMessage));
                             }
-                        }, err => this.dialogService.error(extractError(err)));
+                        }, 
+                        error: err => this.dialogService.error(extractError(err))
+                    });
                 }
             });
     }
@@ -125,8 +127,8 @@ export class ProjectDetailsComponent {
             [this.settingsService.testProjectSelector, this.testProjectDetails],
             null,
             optionsWithError
-        ).subscribe(
-            result => {
+        ).subscribe({
+            next: result => {
                 if (result.errorMessage) {
                     this.dialogService.error(this.i18nService.translateErrorCode(result.errorMessage));
                 } else {
@@ -135,9 +137,9 @@ export class ProjectDetailsComponent {
                     this.dialogService.info(this.i18nService.translate('Note'), this.i18nService.translate('Saved successful'));
                 }
             },
-            err => this.dialogService.error(extractError(err)),
-            () => this.saving = false
-        );
+            error: err => this.dialogService.error(extractError(err)),
+            complete: () => this.saving = false
+        });
     }
 
     reset() {
@@ -164,16 +166,16 @@ export class ProjectDetailsComponent {
             this.settingsService.testProjectSelector,
             XoProjectDetails,
             optionsWithError
-        ).subscribe(
-            result => {
+        ).subscribe({
+            next: result => {
                 if (!result.errorMessage) {
                     this.testProjectDetails = result.output[0] as XoProjectDetails;
                 } else {
                     this.dialogService.error(this.i18nService.translateErrorCode(result.errorMessage));
                 }
             },
-            err => this.dialogService.error(extractError(err))
-        );
+            error: err => this.dialogService.error(extractError(err))
+        });
     }
 
 }

@@ -108,18 +108,18 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
     }
 
     refreshTestProjectsDataWrapper() {
-        this.settingsService.retrieveTestProjects().subscribe(
-            selectors => {
+        this.settingsService.retrieveTestProjects().subscribe({
+            next: selectors => {
                 this.showTestProjectWrapper = true;
                 this.testProjectsDataWrapper.values = selectors.data.map(
                     item => <XcOptionItem>{ name: item.testProjectName + ' ' + item.testProjectVersion, value: item }
                 );
             },
-            err => {
+            error: err => {
                 this.showTestProjectWrapper = false;
                 this.note = extractError(err);
             }
-        );
+        });
         this.note = '';
     }
 
@@ -140,16 +140,20 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
             orderType,
             [this.settingsService.testProjectSelector, this.testProject],
             null, OPTIONS_WITH_ERROR)
-            .subscribe(res => {
-                if (res.errorMessage) {
-                    this.note = this.injectedData.i18nService.translateErrorCode(res.errorMessage);
-                } else if (res) {
-                    const msgObj = GET_DUPLICATE_TEST_PROJECT_MSG(this.injectedData.i18nService, res.orderId);
+            .subscribe({
+                next: res => {
+                    if (res.errorMessage) {
+                        this.note = this.injectedData.i18nService.translateErrorCode(res.errorMessage);
+                    } else if (res) {
+                        const msgObj = GET_DUPLICATE_TEST_PROJECT_MSG(this.injectedData.i18nService, res.orderId);
 
-                    this.beforeDismiss().subscribe(dismissed => this.dialogService.info(msgObj.header, msgObj.message));
-                    this.dismiss();
-                }
-            }, error => console.log(extractError(error)), () => this.okButtonBusyFlag = false);
+                        this.beforeDismiss().subscribe(dismissed => this.dialogService.info(msgObj.header, msgObj.message));
+                        this.dismiss();
+                    }
+                },
+                error: error => console.log(extractError(error)),
+                complete: () => this.okButtonBusyFlag = false
+            });
     }
 
     createTestProject() {
@@ -157,8 +161,8 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
         this.okButtonBusyFlag = true;
         this.note = '';
 
-        this.apiService.startOrder(this.settingsService.fallbackRtc, orderType, this.projectToCreate, null, OPTIONS_WITH_ERROR).subscribe(
-            res => {
+        this.apiService.startOrder(this.settingsService.fallbackRtc, orderType, this.projectToCreate, null, OPTIONS_WITH_ERROR).subscribe({
+            next: res => {
                 if (res.errorMessage) {
                     this.note = this.injectedData.i18nService.translateErrorCode(res.errorMessage);
                 } else {
@@ -178,11 +182,11 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
                     );
                 }
             },
-            error => {
+            error: error => {
                 this.note = extractError(error);
             },
-            () => this.okButtonBusyFlag = false
-        );
+            complete: () => this.okButtonBusyFlag = false
+        });
     }
 
     importTestProject() {
@@ -191,8 +195,8 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
         this.imexService.import(
             this.settingsService.fallbackRtc,
             'xdev.xtestfactory.infrastructure.actions.ImportTestProject', null, null, true
-        ).subscribe(
-            res => {
+        ).subscribe({
+            next: res => {
                 if (res && !res.errorMessage) {
                     const msgObj = GET_IMPORT_TEST_PROJECT_MSG(this.injectedData.i18nService, res.orderId);
                     this.note = msgObj.message;
@@ -200,9 +204,9 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
                     this.note = this.injectedData.i18nService.translateErrorCode(res.errorMessage);
                 }
             },
-            err => this.note = extractError(err),
-            () => {}
-        );
+            error: err => this.note = extractError(err),
+            complete: () => { }
+        });
     }
 
     abortCreation() {

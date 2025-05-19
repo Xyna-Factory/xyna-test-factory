@@ -16,8 +16,8 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Injectable } from '@angular/core';
-import { environment } from '@environments/environment';
 
+import { environment } from '@environments/environment';
 import { ApiService, RuntimeContext, StartOrderOptions, StartOrderResult, Xo, XoClassInterface, XoObject, XoObjectClass, XoProperty, XoUnique } from '@zeta/api';
 import { getSubdirectory } from '@zeta/base';
 import { XcDialogService } from '@zeta/xc';
@@ -41,7 +41,7 @@ export class ImportResult {
         public status: ImportStatus,
         public fileId: XoManagedFileID = null,
         public fileName = ''
-    ) {}
+    ) { }
 }
 
 
@@ -89,27 +89,28 @@ export class ImexService {
             withErrorMessage: true
         };
 
-        this.upload().subscribe(result => {
-            if (result.status === ImportStatus.ImportDone) {
-                const mfid = result.fileId;
-                input = input || ([] as Xo[]);
-                input.push(mfid);
-                this.apiService.startOrder(rtc, wf, input, output, optionsWithError).subscribe(
-                    sor => {
-                        if (sor && !sor.errorMessage) {
-                            subj.next(sor);
-                        } else {
-                            subj.error(sor.errorMessage);
-                        }
-                    },
-                    error => subj.error(error),
-                    () => subj.complete()
-                );
-            }
-        },
-        error => subj.error(error),
-        () => { /* DO NOT complete "subj" here, because the async startOrder needs to complete it. Here would be to soon. */ }
-        );
+        this.upload().subscribe({
+            next: result => {
+                if (result.status === ImportStatus.ImportDone) {
+                    const mfid = result.fileId;
+                    input = input || ([] as Xo[]);
+                    input.push(mfid);
+                    this.apiService.startOrder(rtc, wf, input, output, optionsWithError).subscribe({
+                        next: sor => {
+                            if (sor && !sor.errorMessage) {
+                                subj.next(sor);
+                            } else {
+                                subj.error(sor.errorMessage);
+                            }
+                        },
+                        error: error => subj.error(error),
+                        complete: () => subj.complete()
+                    });
+                }
+            },
+            error: error => subj.error(error),
+            complete: () => { /* DO NOT complete "subj" here, because the async startOrder needs to complete it. Here would be to soon. */ }
+        });
 
         return subj.asObservable();
     }
@@ -127,7 +128,7 @@ export class ImexService {
          * selected file was sucessfully uploaded and we start the workflow
          * @param {ProgressEvent} - EVENT
          */
-        const uploadHandler = function(event) {
+        const uploadHandler = (event) => {
             const result = event.currentTarget.responseText;
             const match = result.match(new RegExp('stored with id (\\d*)'));
             if (match && match.length > 1) {
@@ -145,7 +146,7 @@ export class ImexService {
         /**
          * error with the upload
          */
-        const uploadErrorHandler = function(event) {
+        const uploadErrorHandler = (event) => {
             subject.error('upload error');
             subject.complete();
         };
@@ -189,7 +190,7 @@ export class ImexService {
         const subject: Subject<File> = new Subject();
         const fileInput = document.createElement('INPUT');
 
-        const changeHandler = function(event) {
+        const changeHandler = (event) => {
             document.body.removeChild(fileInput);
 
             // selects the first file even if more than one file was selected
@@ -219,7 +220,7 @@ export class ImexService {
 
         const subj = new Subject<StartOrderResult>();
 
-        const winHandler = function(startOrderResult: StartOrderResult) {
+        const winHandler = (startOrderResult: StartOrderResult) => {
 
             if (startOrderResult && !startOrderResult.errorMessage) {
 
@@ -245,7 +246,7 @@ export class ImexService {
             subj.complete();
         };
 
-        const failHandler = function(EX) {
+        const failHandler = (EX) => {
             const ex = (EX && EX.cause && EX.name) ? EX.cause.replace(EX.name, '$') : '$';
             subj.error(ex);
             subj.complete();
@@ -256,11 +257,11 @@ export class ImexService {
             withErrorMessage: true
         };
 
-        this.apiService.startOrder(rtc, wf, input, output, optionsWithError).subscribe(
-            sor => winHandler(sor),
-            error => failHandler(error),
-            () => subj.complete()
-        );
+        this.apiService.startOrder(rtc, wf, input, output, optionsWithError).subscribe({
+            next: sor => winHandler(sor),
+            error: error => failHandler(error),
+            complete: () => subj.complete()
+        });
 
 
         return subj.asObservable();

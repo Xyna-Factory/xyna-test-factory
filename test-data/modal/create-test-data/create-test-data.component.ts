@@ -47,7 +47,7 @@ export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTe
     readonly testData: XoTestDataMetaData;
     readonly testDataDefinitionSubject = new Subject<XcOptionItem<string>[]>();
     readonly testDataDefinitionDataWrapper = new XcAutocompleteDataWrapper(
-        ()    => this.testData.testDataFullQualifiedStorableName,
+        () => this.testData.testDataFullQualifiedStorableName,
         value => this.testData.testDataFullQualifiedStorableName = value,
         this.testDataDefinitionSubject.asObservable()
     );
@@ -79,12 +79,12 @@ export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTe
                     this.loading = false;
                     this.testDataDefinitionSubject.next(subtypes);
                 })
-            ).subscribe(
-                structureTypeList => structureTypeList
+            ).subscribe({
+                next: structureTypeList => structureTypeList
                     .filter(structureType => !structureType.typeAbstract && !structureType.typeFqn.equals(XoTestData.fqn))
                     .forEach(structureType => subtypes.push(XcOptionItemString(structureType.typeFqn.encode()))),
-                error => console.error(error)
-            )
+                error: error => console.error(error)
+            })
         );
     }
 
@@ -102,15 +102,15 @@ export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTe
         const orderType = 'xdev.xtestfactory.infrastructure.actions.StoreTestDataMetaDataWithoutStoreParameter';
         this.apiService.startOrder(this.settings.testProjectRtc, orderType, this.testData, null, OPTIONS_WITH_ERROR).pipe(
             finalize(() => this.saving = false)
-        ).subscribe(
-            response => {
+        ).subscribe({
+            next: response => {
                 if (response.errorMessage) {
                     this.note = this.injectedData.i18nService.translateErrorCode(response.errorMessage);
                 } else {
                     this.dismiss(true);
                 }
             },
-            error => this.note = extractError(error)
-        );
+            error: error => this.note = extractError(error)
+        });
     }
 }
