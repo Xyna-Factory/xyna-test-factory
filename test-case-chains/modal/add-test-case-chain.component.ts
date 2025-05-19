@@ -57,15 +57,15 @@ export class AddTestCaseChainComponent extends XcDialogComponent<string, AddTest
             withErrorMessage: true
         };
         const orderType = 'xdev.xtestfactory.infrastructure.gui.CreateTestCaseChain';
-        this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, new XoBaseText(undefined, this.testCaseChainName), null, optionsWithError).subscribe(
-            res => {
+        this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, new XoBaseText(undefined, this.testCaseChainName), null, optionsWithError).subscribe({
+            next: res => {
                 if (!res.errorMessage) {
                     this.dismiss(this.testCaseChainName);
                 } else {
                     this.note = this.injectedData.i18nService.translateErrorCode(res.errorMessage);
                 }
             },
-            err => this.note = extractError(err)
-        );
+            error: err => this.note = extractError(err)
+        });
     }
 }

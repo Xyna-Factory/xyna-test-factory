@@ -55,18 +55,18 @@ export class AddCounterComponent extends XcDialogComponent<boolean, AddCounterCo
 
     add() {
         const orderType = 'xdev.xtestfactory.infrastructure.actions.UpsertCounterWithUniquenessCheck';
-        this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, this.counterEntry, null, OPTIONS_WITH_ERROR).subscribe(
-            response => {
+        this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, this.counterEntry, null, OPTIONS_WITH_ERROR).subscribe({
+            next: response => {
                 if (response.stackTrace) {
                     this.errorMessage = this.injectedData.i18nService.translateErrorCode(response.errorMessage);
                 } else {
                     this.dismiss(true);
                 }
             },
-            error => {
+            error: error => {
                 console.log(error);
                 this.dismiss();
             }
-        );
+        });
     }
 }

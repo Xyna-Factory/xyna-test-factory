@@ -71,15 +71,15 @@ export class AddTestCaseComponent extends XcDialogComponent<XoTestCaseEntry, Add
         const params = this.duplicateMode ? [this.testCase, XoTestCaseID.fromId(this.injectedData.caseEntry.iD)] : [this.testCase];
 
         this.note = '';
-        this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, params, null, OPTIONS_WITH_ERROR).subscribe(
-            result => {
+        this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, params, null, OPTIONS_WITH_ERROR).subscribe({
+            next: result => {
                 if (result.errorMessage) {
                     this.note = this.injectedData.i18nService.translateErrorCode(result.errorMessage);
                 } else {
                     this.dismiss(this.testCase);
                 }
             },
-            error => this.note = extractError(error)
-        );
+            error: error => this.note = extractError(error)
+        });
     }
 }

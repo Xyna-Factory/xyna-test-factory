@@ -82,28 +82,28 @@ export class TestReportsComponent {
     }
 
     refreshTestReports() {
-        this.apiSerivce.startOrder(this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.RefreshTestReports', null, null, OPTIONS_WITH_ERROR).subscribe(
-            result => {
+        this.apiSerivce.startOrder(this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.RefreshTestReports', null, null, OPTIONS_WITH_ERROR).subscribe({
+            next: result => {
                 if (result.errorMessage) {
                     this.dialogService.error(this.i18nService.translateErrorCode(result.errorMessage));
                 }
             },
-            err => this.dialogService.error(extractError(err))
-        );
+            error: err => this.dialogService.error(extractError(err))
+        });
     }
 
     save() {
         const xo = this.dsTestReportTree.container.data.length > 0 ? this.dsTestReportTree.container.data[0] : null;
         if (xo) {
-            this.apiSerivce.startOrder(this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.ChangeTestReport', xo, XoTestReportEntry, OPTIONS_WITH_ERROR).subscribe(
-                result => {
+            this.apiSerivce.startOrder(this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.ChangeTestReport', xo, XoTestReportEntry, OPTIONS_WITH_ERROR).subscribe({
+                next: result => {
                     if (result.errorMessage) {
                         this.dialogService.error(this.i18nService.translateErrorCode(result.errorMessage));
                     }
                 },
-                err => this.dialogService.error(extractError(err)),
-                () => this.refresh()
-            );
+                error: err => this.dialogService.error(extractError(err)),
+                complete: () => this.refresh()
+            });
         }
     }
 
@@ -115,15 +115,15 @@ export class TestReportsComponent {
         this.exporting = true;
         this.imexService.export(this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.ExportTestReport', [this.testReport]).pipe(
             finalize(() => this.exporting = false)
-        ).subscribe(
-            result => {
+        ).subscribe({
+            next: result => {
                 if (result.errorMessage) {
                     this.dialogService.error(this.i18nService.translateErrorCode(result.errorMessage));
                 }
             },
-            err => this.dialogService.error(extractError(err)),
-            () => this.exporting = false
-        );
+            error: err => this.dialogService.error(extractError(err)),
+            complete: () => this.exporting = false
+        });
     }
 
     private testReportSelectionChange(model: XcSelectionModel<XoTestReportEntry>) {
@@ -137,21 +137,20 @@ export class TestReportsComponent {
             this.dsTestReportEdit = selection ? selection.clone() : null;
 
             if (selection) {
-                this.apiSerivce.startOrder(this.settingsService.testProjectRtc, orderType, selection, XoFCTReport, OPTIONS_WITH_ERROR)
-                    .subscribe(response => {
-                        if (response.errorMessage) {
-                            this.dialogService.error(this.i18nService.translateErrorCode(response.errorMessage));
-                        } else {
-                            dsContainer.data.push(response.output[0]);
-                            descContainer.push(response.output[0]);
-                            dsContainer.rtc = this.settingsService.testProjectRtc;
+                this.apiSerivce.startOrder(this.settingsService.testProjectRtc, orderType, selection, XoFCTReport, OPTIONS_WITH_ERROR).subscribe(response => {
+                    if (response.errorMessage) {
+                        this.dialogService.error(this.i18nService.translateErrorCode(response.errorMessage));
+                    } else {
+                        dsContainer.data.push(response.output[0]);
+                        descContainer.push(response.output[0]);
+                        dsContainer.rtc = this.settingsService.testProjectRtc;
 
-                            this.dsTestReportTree.rtc = this.settingsService.testProjectRtc;
-                            this.dsTestReportTree.describers = descContainer;
-                            this.dsTestReportTree.container = dsContainer;
-                            this.dsTestReportTree.refresh();
-                        }
-                    });
+                        this.dsTestReportTree.rtc = this.settingsService.testProjectRtc;
+                        this.dsTestReportTree.describers = descContainer;
+                        this.dsTestReportTree.container = dsContainer;
+                        this.dsTestReportTree.refresh();
+                    }
+                });
             }
             this.navigateToId();
         }
