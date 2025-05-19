@@ -2,18 +2,17 @@
   <ng-container header i18n>{{dataLabel}}</ng-container>
 
   <ng-container aside>
-    <xc-icon-button
-      color="normal"
+    <xc-icon-button color="normal"
       (click)="add()"
       xc-icon-name="add"
       xc-tooltip="Add New Test Data Instance"
       i18n-xc-tooltip
-    ></xc-icon-button>
+     />
   </ng-container>
 
   <ng-container content>
     @if (note) {
-      <note-component [note]="note" class="note"></note-component>
+      <note-component [note]="note" class="note" />
     }
     <xc-master-detail [xc-master-detail-opened]="testData" xc-master-detail-side-area-size="half">
       <xc-panel master>
