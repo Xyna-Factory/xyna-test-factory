@@ -62,7 +62,9 @@ export class XoManagedFileID extends XoObject {
 
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 /**
  * ImexService delivers a possibility to export from, import or just upload files to the
  * Xyna Black Edition File-WebService

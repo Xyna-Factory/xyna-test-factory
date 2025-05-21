@@ -23,13 +23,15 @@ import { XcDialogComponent, XcRemoteTableDataSource } from '@zeta/xc';
 import { SettingsService } from '../../shared/settings.service';
 import { XoTestDataSelectorInstance } from '../xo/test-data-selector-instance.model';
 import { XoTestData, XoTestDataArray } from '../xo/test-data.model';
+import { XcModule } from '../../../../zeta/xc/xc.module';
+import { NoteComponent } from '../../shared/components/note-component/note-component';
 
 
 @Component({
     selector: 'get-test-data-mc',
     templateUrl: './get-test-data-mc.component.html',
     styleUrls: ['./get-test-data-mc.component.scss'],
-    standalone: false
+    imports: [XcModule, NoteComponent]
 })
 export class GetTestDataMcComponent extends XcDialogComponent<{ value: string; label?: string }, XoTestDataSelectorInstance> {
 

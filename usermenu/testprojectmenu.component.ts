@@ -26,6 +26,8 @@ import { XoProjectDetails } from '../project-details/xo/xo-project-details.model
 import { ImexService } from '../shared/imex.service';
 import { SettingsService } from '../shared/settings.service';
 import { XoTestProjectSelector } from './xo/test-project-selector';
+import { XcModule } from '../../../zeta/xc/xc.module';
+import { NoteComponent } from '../shared/components/note-component/note-component';
 
 
 export interface TestProjectMenuData {
@@ -39,7 +41,7 @@ export interface TestProjectMenuData {
 @Component({
     templateUrl: './testprojectmenu.component.html',
     styleUrls: ['./testprojectmenu.component.scss'],
-    standalone: false
+    imports: [XcModule, NoteComponent]
 })
 
 export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSelector, TestProjectMenuData> {

@@ -42,6 +42,7 @@ import { XoSimpleTestDataInstanceArray } from './xo/simple-test-data-instance.mo
 import { XoTestCaseEntry, XoTestCaseEntryArray } from './xo/test-case-entry.model';
 import { XoTestCase } from './xo/test-case.model';
 import { XoTestDataSelectorInstance, XoTestDataSelectorInstanceArray, XoTestDataSelectorTableInfo } from './xo/test-data-selector-instance.model';
+import { XcModule } from '../../../zeta/xc/xc.module';
 
 
 interface StartTestCaseError {
@@ -59,7 +60,7 @@ interface StartTestCaseError {
 @Component({
     templateUrl: './test-cases.component.html',
     styleUrls: ['./test-cases.component.scss'],
-    standalone: false
+    imports: [XcModule]
 })
 export class TestCasesComponent extends RouteComponent {
 

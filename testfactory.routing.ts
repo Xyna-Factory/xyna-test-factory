@@ -28,7 +28,6 @@ import { TestCasesComponent } from './test-cases/test-cases.component';
 import { TestDataComponent } from './test-data/test-data.component';
 import { TestReportsComponent } from './test-reports/test-reports.component';
 import { TestfactoryComponent } from './testfactory.component';
-import { TestfactoryModule } from './testfactory.module';
 
 
 const root = 'Test-Factory';
@@ -120,8 +119,7 @@ export const TestfactoryRoutes: XynaRoutes = [
 ];
 
 export const TestfactoryRoutingModules = [
-    RouterModule.forChild(TestfactoryRoutes),
-    TestfactoryModule
+    RouterModule.forChild(TestfactoryRoutes)   
 ];
 
 export const TestfactoryRoutingProviders = [

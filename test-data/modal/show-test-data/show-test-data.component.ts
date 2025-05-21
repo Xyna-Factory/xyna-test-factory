@@ -28,6 +28,8 @@ import { SettingsService } from '../../../shared/settings.service';
 import { XcTableInfoRemoteTableDataSource } from '../../../shared/table-info-remote-table-data-source';
 import { XoBaseText } from '../../../shared/xo/base-text.model';
 import { XoTestData, XoTestDataArray } from '../../../test-cases/xo/test-data.model';
+import { XcModule } from '../../../../../zeta/xc/xc.module';
+import { NoteComponent } from '../../../shared/components/note-component/note-component';
 
 
 export interface ShowTestDataComponentData {
@@ -39,7 +41,7 @@ export interface ShowTestDataComponentData {
     selector: 'app-show-test-data',
     templateUrl: './show-test-data.component.html',
     styleUrls: ['./show-test-data.component.scss'],
-    standalone: false
+    imports: [XcModule, NoteComponent]
 })
 export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataComponentData> {
 

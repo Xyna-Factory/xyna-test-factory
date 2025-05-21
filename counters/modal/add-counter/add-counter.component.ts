@@ -24,6 +24,7 @@ import { XcDialogComponent } from '@zeta/xc';
 import { OPTIONS_WITH_ERROR } from '../../../const';
 import { SettingsService } from '../../../shared/settings.service';
 import { XoCounterEntry } from '../../xo/counter-entry.model';
+import { XcModule } from '../../../../../zeta/xc/xc.module';
 
 
 export interface AddCounterComponentData {
@@ -36,7 +37,7 @@ export interface AddCounterComponentData {
     selector: 'add-counter',
     templateUrl: './add-counter.component.html',
     styleUrls: ['./add-counter.component.scss'],
-    standalone: false
+    imports: [XcModule]
 })
 export class AddCounterComponent extends XcDialogComponent<boolean, AddCounterComponentData> {
 

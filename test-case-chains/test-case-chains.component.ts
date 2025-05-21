@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -32,6 +32,7 @@ import { AddTestCaseChainComponent, AddTestCaseChainComponentModalData } from '.
 import { XoInitialTestCaseEntry, XoInitialTestCaseEntryArray } from './xo/initial-test-case-entry.model';
 import { XoTestCaseChainEntry, XoTestCaseChainEntryArray } from './xo/test-case-chain-entry.model';
 import { XoTestObjectEntry, XoTestObjectEntryArray } from './xo/test-object-entry.model';
+import { XcModule } from '../../../zeta/xc/xc.module';
 
 
 const INIT_WF = 'xdev.xtestfactory.infrastructure.gui.GetInitialTestCases';
@@ -40,7 +41,7 @@ const FOLLOW_UP_WF = 'xdev.xtestfactory.infrastructure.gui.GetFollowupTestCases'
 @Component({
     templateUrl: './test-case-chains.component.html',
     styleUrls: ['./test-case-chains.component.scss'],
-    standalone: false
+    imports: [XcModule, RouterLink]
 })
 export class TestCaseChainsComponent extends RouteComponent {
 

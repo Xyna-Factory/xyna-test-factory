@@ -22,12 +22,13 @@ import { XcDialogComponent, XcRemoteTableDataSource } from '@zeta/xc';
 
 import { SettingsService } from '../../shared/settings.service';
 import { XoTestDataSelectorInstance, XoTestDataSelectorInstanceArray } from '../xo/test-data-selector-instance.model';
+import { XcModule } from '../../../../zeta/xc/xc.module';
 
 
 @Component({
     templateUrl: './add-test-data-instance.component.html',
     styleUrls: ['./add-test-data-instance.component.scss'],
-    standalone: false
+    imports: [XcModule]
 })
 export class AddTestDataInstanceComponent extends XcDialogComponent<XoTestDataSelectorInstance> {
 
