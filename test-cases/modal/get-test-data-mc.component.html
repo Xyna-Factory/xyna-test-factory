@@ -1,5 +1,5 @@
 <xc-dialog-wrapper>
-  <ng-container header i18n>Choose Test Data</ng-container>
+  <ng-container header xc-i18n>Choose Test Data</ng-container>
   <ng-container content>
     @if (note) {
       <note-component [note]="note" />
@@ -11,11 +11,10 @@
       xc-table-multiselect
       xc-table-cellselect
       xc-table-lazyupdate
-      i18n-label
      />
   </ng-container>
   <ng-container footer>
-    <xc-button (click)="dismiss()" i18n>Cancel</xc-button>
-    <xc-button (click)="choose()" [disabled]="dataSource.selectionModel.isEmpty()" i18n>Choose</xc-button>
+    <xc-button (click)="dismiss()" xc-i18n>Cancel</xc-button>
+    <xc-button (click)="choose()" [disabled]="dataSource.selectionModel.isEmpty()" xc-i18n>Choose</xc-button>
   </ng-container>
 </xc-dialog-wrapper>
