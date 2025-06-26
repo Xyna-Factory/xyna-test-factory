@@ -1,13 +1,13 @@
 @if (isTestprojectSelected) {
   <xc-panel xc-form #detailForm>
     <header>
-      <h2 i18n>Project Details</h2>
+      <h2 xc-i18n>Project Details</h2>
       <div class="items-right">
         <xc-button [busy]="exportStarted" [disabled]="exportStarted">
           <xc-icon
             xc-icon-name="file" color="normal" xc-icon-style="xds"
             (click)="exportTestProject()"
-            i18n
+            xc-i18n
             >
                     Export Test Project
                 </xc-icon>
@@ -15,20 +15,20 @@
       </div>
     </header>
     <section class="stretch scroll">
-      <xc-form-input label="Name" i18n-label="label for Name in project-details component" readonly [value]="testProjectDetails.name"></xc-form-input>
-      <xc-form-input label="Version" i18n-label="label for Version in project-details component" readonly [value]="testProjectDetails.version"></xc-form-input>
-      <xc-form-textarea label="Description" i18n-label="label for Description in project-details component" [(value)]="testProjectDetails.description"></xc-form-textarea>
+      <xc-form-input label="Name" xc-i18n readonly [value]="testProjectDetails.name"></xc-form-input>
+      <xc-form-input label="Version" xc-i18n readonly [value]="testProjectDetails.version"></xc-form-input>
+      <xc-form-textarea label="Description" xc-i18n [(value)]="testProjectDetails.description"></xc-form-textarea>
     </section>
     <footer>
       <div class="items-right">
         <xc-button>
-          <xc-icon xc-icon-name="delete" i18n (click)="delete()">Delete Test Project</xc-icon>
+          <xc-icon xc-icon-name="delete" xc-i18n (click)="delete()">Delete Test Project</xc-icon>
         </xc-button>
         <xc-button>
-          <xc-icon xc-icon-name="copy" i18n (click)="duplicate()">Duplicate Test Project</xc-icon>
+          <xc-icon xc-icon-name="copy" xc-i18n (click)="duplicate()">Duplicate Test Project</xc-icon>
         </xc-button>
-        <xc-button i18n (click)="reset()">Undo Changes</xc-button>
-        <xc-button i18n (click)="save()" [disabled]="saving" [busy]="saving">Save Changes</xc-button>
+        <xc-button xc-i18n (click)="reset()">Undo Changes</xc-button>
+        <xc-button xc-i18n (click)="save()" [disabled]="saving" [busy]="saving">Save Changes</xc-button>
       </div>
     </footer>
   </xc-panel>
