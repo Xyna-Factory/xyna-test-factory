@@ -46,7 +46,9 @@
           <xc-button (click)="startTestCase()" [busy]="startOrderBusy" [disabled]="startOrderBusy">
             <xc-icon xc-icon-name="arrowright" xc-i18n>Start Test Case</xc-icon>
           </xc-button>
-          <xc-button (click)="manageExecutionDetails()" [disabled]="!(testCase?.testProcessReference)">
+          <xc-button
+            (click)="manageExecutionDetails()"
+            [disabled]="!testCase || !testCase.testProcessReference">
             <xc-icon xc-icon-name="settings" xc-i18n>Manage Execution Details</xc-icon>
           </xc-button>
         </div>
@@ -107,45 +109,45 @@
           <h2 xc-i18n>Untyped Selectors (Deprecated)</h2>
         </header>
         <section>
-          <xc-form-input label="Selector 1" xc-i18n [(value)]="testCase?.testDateSelector.selector1"
+          <xc-form-input label="Selector 1" xc-i18n [(value)]="testCase.testDateSelector.selector1"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 2" xc-i18n [(value)]="testCase?.testDateSelector.selector2"
+          <xc-form-input label="Selector 2" xc-i18n [(value)]="testCase.testDateSelector.selector2"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 3" xc-i18n [(value)]="testCase?.testDateSelector.selector3"
+          <xc-form-input label="Selector 3" xc-i18n [(value)]="testCase.testDateSelector.selector3"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 4" xc-i18n [(value)]="testCase?.testDateSelector.selector4"
+          <xc-form-input label="Selector 4" xc-i18n [(value)]="testCase.testDateSelector.selector4"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 5" xc-i18n [(value)]="testCase?.testDateSelector.selector5"
+          <xc-form-input label="Selector 5" xc-i18n [(value)]="testCase.testDateSelector.selector5"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 6" xc-i18n [(value)]="testCase?.testDateSelector.selector6"
+          <xc-form-input label="Selector 6" xc-i18n [(value)]="testCase.testDateSelector.selector6"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 7" xc-i18n [(value)]="testCase?.testDateSelector.selector7"
+          <xc-form-input label="Selector 7" xc-i18n [(value)]="testCase.testDateSelector.selector7"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 8" xc-i18n [(value)]="testCase?.testDateSelector.selector8"
+          <xc-form-input label="Selector 8" xc-i18n [(value)]="testCase.testDateSelector.selector8"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 9" xc-i18n [(value)]="testCase?.testDateSelector.selector9"
+          <xc-form-input label="Selector 9" xc-i18n [(value)]="testCase.testDateSelector.selector9"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 10" xc-i18n [(value)]="testCase?.testDateSelector.selector10"
+          <xc-form-input label="Selector 10" xc-i18n [(value)]="testCase.testDateSelector.selector10"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 11" xc-i18n [(value)]="testCase?.testDateSelector.selector11"
+          <xc-form-input label="Selector 11" xc-i18n [(value)]="testCase.testDateSelector.selector11"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 12" xc-i18n [(value)]="testCase?.testDateSelector.selector12"
+          <xc-form-input label="Selector 12" xc-i18n [(value)]="testCase.testDateSelector.selector12"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 13" xc-i18n [(value)]="testCase?.testDateSelector.selector13"
+          <xc-form-input label="Selector 13" xc-i18n [(value)]="testCase.testDateSelector.selector13"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 14" xc-i18n [(value)]="testCase?.testDateSelector.selector14"
+          <xc-form-input label="Selector 14" xc-i18n [(value)]="testCase.testDateSelector.selector14"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 15" xc-i18n [(value)]="testCase?.testDateSelector.selector15"
+          <xc-form-input label="Selector 15" xc-i18n [(value)]="testCase.testDateSelector.selector15"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 16" xc-i18n [(value)]="testCase?.testDateSelector.selector16"
+          <xc-form-input label="Selector 16" xc-i18n [(value)]="testCase.testDateSelector.selector16"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 17" xc-i18n [(value)]="testCase?.testDateSelector.selector17"
+          <xc-form-input label="Selector 17" xc-i18n [(value)]="testCase.testDateSelector.selector17"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 18" xc-i18n [(value)]="testCase?.testDateSelector.selector18"
+          <xc-form-input label="Selector 18" xc-i18n [(value)]="testCase.testDateSelector.selector18"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 19" xc-i18n [(value)]="testCase?.testDateSelector.selector19"
+          <xc-form-input label="Selector 19" xc-i18n [(value)]="testCase.testDateSelector.selector19"
             xc-form-field-compact></xc-form-input>
-          <xc-form-input label="Selector 20" xc-i18n [(value)]="testCase?.testDateSelector.selector20"
+          <xc-form-input label="Selector 20" xc-i18n [(value)]="testCase.testDateSelector.selector20"
             xc-form-field-compact></xc-form-input>
         </section>
       </xc-panel>
