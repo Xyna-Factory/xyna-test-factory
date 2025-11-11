@@ -20,6 +20,7 @@ import { I18nParam, I18nService } from '@zeta/i18n';
 
 
 export const RIGHT_TEST_FACTORY = 'xmcp.xfm.testFactory';
+export const APPLICATION_TEST_FACTORY = 'XynaTestFactoryInfrastructure';
 
 export function extractError(err: StartOrderResult | string | { message: string;[key: string]: any }, i18nService?: I18nService): string {
 

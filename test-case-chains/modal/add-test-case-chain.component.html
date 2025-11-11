@@ -1,13 +1,13 @@
 <xc-dialog-wrapper>
-  <ng-container header i18n>Add Test Case Chain</ng-container>
+  <ng-container header xc-i18n>Add Test Case Chain</ng-container>
   <section content>
     @if (note) {
       <note-component [note]="note"></note-component>
     }
-    <xc-form-input label="Name" i18n-label [(value)]="testCaseChainName"></xc-form-input>
+    <xc-form-input label="Name" xc-i18n [(value)]="testCaseChainName"></xc-form-input>
   </section>
   <ng-container footer>
-    <xc-button (click)="dismiss()" i18n>Cancel</xc-button>
-    <xc-button (click)="add()" [disabled]="!valid" color="primary" i18n>Add</xc-button>
+    <xc-button (click)="dismiss()" xc-i18n>Cancel</xc-button>
+    <xc-button (click)="add()" [disabled]="!valid" color="primary" xc-i18n>Add</xc-button>
   </ng-container>
 </xc-dialog-wrapper>

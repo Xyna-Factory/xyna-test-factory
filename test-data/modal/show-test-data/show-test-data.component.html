@@ -1,19 +1,18 @@
 <xc-dialog-wrapper>
-  <ng-container header i18n>{{dataLabel}}</ng-container>
+  <ng-container header xc-i18n>{{dataLabel}}</ng-container>
 
   <ng-container aside>
-    <xc-icon-button
-      color="normal"
+    <xc-icon-button color="normal"
       (click)="add()"
       xc-icon-name="add"
       xc-tooltip="Add New Test Data Instance"
-      i18n-xc-tooltip
-    ></xc-icon-button>
+      xc-i18n
+     />
   </ng-container>
 
   <ng-container content>
     @if (note) {
-      <note-component [note]="note" class="note"></note-component>
+      <note-component [note]="note" class="note" />
     }
     <xc-master-detail [xc-master-detail-opened]="testData" xc-master-detail-side-area-size="half">
       <xc-panel master>
@@ -32,7 +31,7 @@
             (click)="delete(tableDataSource.selectionModel.selection)"
             [disabled]="tableDataSource.selectionModel.isEmpty()"
             class="items-right"
-            i18n
+            xc-i18n
           >Delete</xc-button>
         </footer>
       </xc-panel>
@@ -46,13 +45,13 @@
           ></xc-tree>
         </section>
         <footer>
-          <xc-button (click)="cancel()" class="items-left" i18n>Cancel</xc-button>
-          <xc-button (click)="apply()" class="items-right" i18n>Apply</xc-button>
+          <xc-button (click)="cancel()" class="items-left" xc-i18n>Cancel</xc-button>
+          <xc-button (click)="apply()" class="items-right" xc-i18n>Apply</xc-button>
         </footer>
       </xc-panel>
     </xc-master-detail>
   </ng-container>
   <ng-container footer>
-    <xc-button (click)="dismiss()" i18n>Close</xc-button>
+    <xc-button (click)="dismiss()" xc-i18n>Close</xc-button>
   </ng-container>
 </xc-dialog-wrapper>

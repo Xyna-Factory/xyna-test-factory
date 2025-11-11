@@ -1,5 +1,5 @@
 <xc-dialog-wrapper>
-    <ng-container header i18n>Add Test Data Instance</ng-container>
+    <ng-container header xc-i18n>Add Test Data Instance</ng-container>
     <section content>
         <section>
             <xc-form-label>Prototype</xc-form-label>
@@ -7,17 +7,17 @@
                 [xc-table-datasource]="dataSource"
                 xc-table-allowselect
                 xc-table-lazyupdate
-                i18n-label
+                xc-i18n
             ></xc-table>
         </section>
         <xc-form-input
             label="Name"
-            i18n-label="label for Name in add-test-data-instance component"
+            xc-i18n
             [(value)]="name"
         ></xc-form-input>
     </section>
     <ng-container footer>
-        <xc-button (click)="dismiss()" i18n>Cancel</xc-button>
-        <xc-button (click)="ok()" [disabled]="!valid" i18n>Ok</xc-button>
+        <xc-button (click)="dismiss()" xc-i18n>Cancel</xc-button>
+        <xc-button (click)="ok()" [disabled]="!valid" xc-i18n>Ok</xc-button>
     </ng-container>
 </xc-dialog-wrapper>

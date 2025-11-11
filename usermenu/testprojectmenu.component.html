@@ -2,29 +2,22 @@
   <ng-container header>
     <div class="headerContent">
       @if (chooseProject) {
-        <h2 i18n>Choose Test Project</h2>
+      <h2 xc-i18n>Choose Test Project</h2>
       }
       @if (createProject) {
-        <h2 i18n>Create Test Project</h2>
+      <h2 xc-i18n>Create Test Project</h2>
       }
       @if (creationMode) {
-        <h2 i18n>Duplicate Test Project</h2>
+      <h2 xc-i18n>Duplicate Test Project</h2>
       }
       <div style="display: flex;">
         @if (!duplicateProject) {
-          <xc-icon-button
-            [disabled]="createProject"
-            (click)="importTestProject()"
-            xc-icon-name="fileimport"
-            color="normal"
-            xc-icon-style="xds"
-            xc-tooltip="Import Test Project"
-            i18n-xc-tooltip
-          ></xc-icon-button>
+        <xc-icon-button [disabled]="createProject" (click)="importTestProject()" xc-icon-name="fileimport"
+          color="normal" xc-icon-style="xds" xc-tooltip="Import Test Project" xc-i18n></xc-icon-button>
         }
         @if (!duplicateProject) {
-          <xc-icon-button [disabled]="createProject" (click)="switchToCreateTestProject()" xc-icon-name="add"
-          color="normal" xc-icon-style="xds" xc-tooltip="Create Test Project" i18n-xc-tooltip></xc-icon-button>
+        <xc-icon-button [disabled]="createProject" (click)="switchToCreateTestProject()" xc-icon-name="add"
+          color="normal" xc-icon-style="xds" xc-tooltip="Create Test Project" xc-i18n></xc-icon-button>
         }
       </div>
     </div>
@@ -33,48 +26,52 @@
   <section content>
 
     @if (note) {
-      <note-component [note]="note"></note-component>
+    <note-component [note]="note"></note-component>
     }
 
     @if (chooseProject) {
-      <div class="items-row">
-        <xc-form-autocomplete
-          label="Test Project" i18n-label="label for TestProject in usermenu component"
-          placeholder="choose..." i18n-placeholder
-          [(xc-form-autocomplete-option)]="testProjectsDataWrapper.value"
-          [xc-form-autocomplete-options]="testProjectsDataWrapper.values"
-          xc-form-autocomplete-sortdirection="asc"
-          xc-form-field-suffix="clear" xc-form-validator-required
-          xc-form-autocomplete-fulltextsearch
-        ></xc-form-autocomplete>
-        <xc-icon-button [xc-icon-name]="XDSIconName.RELOAD" (click)="refreshTestProjectsDataWrapper()"></xc-icon-button>
-      </div>
-      <p i18n>Test Projects, which are currently part of an import or duplicate process, can only be selected after the respective process is done.</p>
+    <div class="items-row">
+      <xc-form-autocomplete label="Test Project" xc-i18n placeholder="choose..."
+        [(xc-form-autocomplete-option)]="testProjectsDataWrapper.value"
+        [xc-form-autocomplete-options]="testProjectsDataWrapper.values" xc-form-autocomplete-sortdirection="asc"
+        xc-form-field-suffix="clear" xc-form-validator-required
+        xc-form-autocomplete-fulltextsearch></xc-form-autocomplete>
+      <xc-icon-button [xc-icon-name]="XDSIconName.RELOAD" (click)="refreshTestProjectsDataWrapper()"></xc-icon-button>
+    </div>
+    <p xc-i18n>Test Projects, which are currently part of an import or duplicate process, can only be selected after the
+      respective process is done.</p>
     }
     @if (createProject) {
-      <xc-form-input label="Name" i18n-label="label for name in usermenu component" xc-form-validator-required [(value)]="projectToCreate.name"></xc-form-input>
-      <xc-form-input label="Version" i18n-label="label for version in usermenu component" xc-form-validator-required [(value)]="projectToCreate.version"></xc-form-input>
-      <xc-form-textarea label="Description" i18n-label="label for description in usermenu component" [(value)]="projectToCreate.description"></xc-form-textarea>
-      <xc-button (click)="abortCreation()" i18n>Back</xc-button>
+    <xc-form-input label="Name" xc-i18n xc-form-validator-required [(value)]="projectToCreate.name"></xc-form-input>
+    <xc-form-input label="Version" xc-i18n xc-form-validator-required
+      [(value)]="projectToCreate.version"></xc-form-input>
+    <xc-form-textarea label="Description" xc-i18n [(value)]="projectToCreate.description"></xc-form-textarea>
+    <xc-button (click)="abortCreation()" xc-i18n>Back</xc-button>
     }
     @if (duplicateProject) {
-      <xc-form-input label="Name" i18n-label="label for name in usermenu component" xc-form-validator-required [(value)]="testProject.name"></xc-form-input>
-      <xc-form-input label="Version" i18n-label="label for version in usermenu component" xc-form-validator-required [(value)]="testProject.version"></xc-form-input>
-      <xc-form-textarea label="Description" i18n-label="label for description in usermenu component" [(value)]="testProject.description">
-      </xc-form-textarea>
+    <xc-form-input label="Name" xc-i18n xc-form-validator-required
+      [(value)]="testProject.name"></xc-form-input>
+    <xc-form-input label="Version" xc-i18n xc-form-validator-required
+      [(value)]="testProject.version"></xc-form-input>
+    <xc-form-textarea label="Description" xc-i18n
+      [(value)]="testProject.description">
+    </xc-form-textarea>
     }
 
   </section>
   <ng-container footer>
-    <xc-button (click)="dismiss()" i18n>Cancel</xc-button>
+    <xc-button (click)="dismiss()" xc-i18n>Cancel</xc-button>
     @if (chooseProject) {
-      <xc-button (click)="ok()" [disabled]="okButtonBusyFlag || invalidChoose" [busy]="okButtonBusyFlag" i18n>Ok</xc-button>
+    <xc-button (click)="ok()" [disabled]="okButtonBusyFlag || invalidChoose" [busy]="okButtonBusyFlag"
+      xc-i18n>Ok</xc-button>
     }
     @if (createProject) {
-      <xc-button (click)="createTestProject()"  [disabled]="okButtonBusyFlag || invalidCreate" [busy]="okButtonBusyFlag" color="primary" i18n>Ok</xc-button>
+    <xc-button (click)="createTestProject()" [disabled]="okButtonBusyFlag || invalidCreate" [busy]="okButtonBusyFlag"
+      color="primary" xc-i18n>Ok</xc-button>
     }
     @if (creationMode) {
-      <xc-button (click)="duplicateTestProject()" [disabled]="okButtonBusyFlag || invalidDuplicate" [busy]="okButtonBusyFlag" color="primary" i18n>Ok</xc-button>
+    <xc-button (click)="duplicateTestProject()" [disabled]="okButtonBusyFlag || invalidDuplicate"
+      [busy]="okButtonBusyFlag" color="primary" xc-i18n>Ok</xc-button>
     }
   </ng-container>
 </xc-dialog-wrapper>
