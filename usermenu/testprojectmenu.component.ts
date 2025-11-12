@@ -21,13 +21,13 @@ import { ApiService, RuntimeContext } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcAutocompleteDataWrapper, XcDialogComponent, XcDialogService, XcOptionItem, XDSIconName } from '@zeta/xc';
 
+import { XcModule } from '../../../zeta/xc/xc.module';
 import { extractError, GET_DUPLICATE_TEST_PROJECT_MSG, GET_IMPORT_TEST_PROJECT_MSG, OPTIONS_WITH_ERROR } from '../const';
 import { XoProjectDetails } from '../project-details/xo/xo-project-details.model';
+import { NoteComponent } from '../shared/components/note-component/note-component';
 import { ImexService } from '../shared/imex.service';
 import { SettingsService } from '../shared/settings.service';
 import { XoTestProjectSelector } from './xo/test-project-selector';
-import { XcModule } from '../../../zeta/xc/xc.module';
-import { NoteComponent } from '../shared/components/note-component/note-component';
 
 
 export interface TestProjectMenuData {
@@ -149,7 +149,7 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
                     } else if (res) {
                         const msgObj = GET_DUPLICATE_TEST_PROJECT_MSG(this.injectedData.i18nService, res.orderId);
 
-                        this.beforeDismiss().subscribe(dismissed => this.dialogService.info(msgObj.header, msgObj.message));
+                        this.beforeDismiss().subscribe(() => this.dialogService.info(msgObj.header, msgObj.message));
                         this.dismiss();
                     }
                 },
