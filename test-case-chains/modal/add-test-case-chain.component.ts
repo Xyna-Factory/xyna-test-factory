@@ -24,6 +24,8 @@ import { XcDialogComponent } from '@zeta/xc';
 import { extractError } from '../../const';
 import { SettingsService } from '../../shared/settings.service';
 import { XoBaseText } from '../../shared/xo/base-text.model';
+import { XcModule } from '../../../../zeta/xc/xc.module';
+import { NoteComponent } from '../../shared/components/note-component/note-component';
 
 
 export interface AddTestCaseChainComponentModalData {
@@ -33,7 +35,7 @@ export interface AddTestCaseChainComponentModalData {
 @Component({
     templateUrl: './add-test-case-chain.component.html',
     styleUrls: ['./add-test-case-chain.component.scss'],
-    standalone: false
+    imports: [XcModule, NoteComponent]
 })
 export class AddTestCaseChainComponent extends XcDialogComponent<string, AddTestCaseChainComponentModalData> {
 

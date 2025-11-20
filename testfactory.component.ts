@@ -16,7 +16,9 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
+import { FactoryManagerSettingsService } from '@fman/misc/services/factory-manager-settings.service';
 import { ApiService, RuntimeContext } from '@zeta/api';
 import { I18nService, LocaleService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
@@ -24,6 +26,9 @@ import { XcDialogService, XcNavListItem, XcNavListOrientation } from '@zeta/xc';
 
 import { Subscription } from 'rxjs';
 
+import { XcModule } from '../../zeta/xc/xc.module';
+import { ACMSettingsService } from '../acm/acm-settings.service';
+import { ProcessmonitorSettingsService } from '../processmonitor/processmonitor-settings.service';
 import { xtf_error_code_translations_de_DE } from './locale/xtf-error-code-translations.de-DE';
 import { xtf_error_code_translations_en_US } from './locale/xtf-error-code-translations.en-US';
 import { xtf_translations_de_DE } from './locale/xtf-translations.de-DE';
@@ -35,7 +40,7 @@ import { TestProjectMenuComponent, TestProjectMenuData } from './usermenu/testpr
 @Component({
     templateUrl: './testfactory.component.html',
     styleUrls: ['./testfactory.component.scss'],
-    standalone: false
+    imports: [XcModule, RouterOutlet]
 })
 export class TestfactoryComponent extends RouteComponent {
 
@@ -49,7 +54,10 @@ export class TestfactoryComponent extends RouteComponent {
         private readonly settingsService: SettingsService,
         private readonly apiService: ApiService,
         private readonly i18n: I18nService,
-        private readonly dialogService: XcDialogService
+        private readonly dialogService: XcDialogService,
+        private readonly factoryManagerSettings: FactoryManagerSettingsService,
+        private readonly processmonitorSettings: ProcessmonitorSettingsService,
+        private readonly acmSettings: ACMSettingsService
     ) {
         super();
 
@@ -65,11 +73,13 @@ export class TestfactoryComponent extends RouteComponent {
         }
 
         this.navListItems = [
-            { link: 'Test-Project', name: i18n.translate('xtf.test-project'), collapsed: true, disabled: true, children: [
-                { link: 'Project-Details', name: i18n.translate('xtf.project-details'), disabled: true },
-                { link: 'Test-Reports', name: i18n.translate('xtf.test-reports'), disabled: true },
-                { link: 'Counters', name: i18n.translate('xtf.counters'), disabled: true }
-            ]},
+            {
+                link: 'Test-Project', name: i18n.translate('xtf.test-project'), collapsed: true, disabled: true, children: [
+                    { link: 'Project-Details', name: i18n.translate('xtf.project-details'), disabled: true },
+                    { link: 'Test-Reports', name: i18n.translate('xtf.test-reports'), disabled: true },
+                    { link: 'Counters', name: i18n.translate('xtf.counters'), disabled: true }
+                ]
+            },
             { link: 'Test-Cases', name: i18n.translate('xtf.test-cases'), disabled: true },
             { link: 'Test-Case-Chains', name: i18n.translate('xtf.test-case-chains'), disabled: true },
             { link: 'Test-Data', name: i18n.translate('xtf.test-data'), disabled: true }
@@ -80,6 +90,10 @@ export class TestfactoryComponent extends RouteComponent {
                 this.disableNavList(false);  // enable menu (which has been disabled after setting an RTC that wasn't a Test Project)
             }
         });
+
+        this.factoryManagerSettings.tableRefreshOnFilterChange = false;
+        this.processmonitorSettings.tableRefreshOnFilterChange = false;
+        this.acmSettings.tableRefreshOnFilterChange = false;
     }
 
 

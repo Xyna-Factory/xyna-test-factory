@@ -22,13 +22,15 @@ import { XcDialogComponent, XcRemoteTableDataSource } from '@zeta/xc';
 
 import { SettingsService } from '../../shared/settings.service';
 import { XoTestCaseEntry, XoTestCaseEntryArray } from '../xo/test-case-entry.model';
+import { XcModule } from '../../../../zeta/xc/xc.module';
+import { NoteComponent } from '../../shared/components/note-component/note-component';
 
 
 @Component({
     selector: 'get-test-case-reference',
     templateUrl: './get-test-case-reference.component.html',
     styleUrls: ['./get-test-case-reference.component.scss'],
-    standalone: false
+    imports: [XcModule, NoteComponent]
 })
 export class GetTestCaseReferenceComponent extends XcDialogComponent<{ value: string; label?: string }> {
 

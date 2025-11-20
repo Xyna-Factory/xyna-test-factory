@@ -28,6 +28,8 @@ import { extractError, OPTIONS_WITH_ERROR } from '../../../const';
 import { SettingsService } from '../../../shared/settings.service';
 import { XoTestData } from '../../../test-cases/xo/test-data.model';
 import { XoTestDataMetaData } from '../../xo/test-data-meta-data.model';
+import { XcModule } from '../../../../../zeta/xc/xc.module';
+import { NoteComponent } from '../../../shared/components/note-component/note-component';
 
 
 export interface CreateTestDataComponentData {
@@ -40,7 +42,7 @@ export interface CreateTestDataComponentData {
     selector: 'create-test-data',
     templateUrl: './create-test-data.component.html',
     styleUrls: ['./create-test-data.component.scss'],
-    standalone: false
+    imports: [XcModule, NoteComponent]
 })
 export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTestDataComponentData> {
 

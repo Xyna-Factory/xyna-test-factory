@@ -27,7 +27,9 @@ import { map } from 'rxjs/operators';
 import { XoTestProjectSelector, XoTestProjectSelectorArray } from '../usermenu/xo/test-project-selector';
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class SettingsService {
 
     readonly fallbackRtc = RuntimeContext.fromApplication('XynaTestFactoryInfrastructure');

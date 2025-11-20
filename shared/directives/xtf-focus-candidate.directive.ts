@@ -20,10 +20,7 @@ import { Directive, ElementRef, Host, Input, OnDestroy, OnInit, Optional } from 
 import { coerceBoolean } from '@zeta/base';
 
 
-@Directive({
-    selector: '[xtf-focus-candidate]',
-    standalone: false
-})
+@Directive({ selector: '[xtf-focus-candidate]' })
 export class XTFFocusCandidateDirective implements OnInit, OnDestroy {
 
     private readonly element: HTMLElement;

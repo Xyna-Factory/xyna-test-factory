@@ -26,6 +26,8 @@ import { extractError, OPTIONS_WITH_ERROR } from '../../const';
 import { SettingsService } from '../../shared/settings.service';
 import { XoTestCaseEntry } from '../xo/test-case-entry.model';
 import { XoTestCaseID } from '../xo/test-case-id.model';
+import { XcModule } from '../../../../zeta/xc/xc.module';
+import { NoteComponent } from '../../shared/components/note-component/note-component';
 
 
 export interface AddTestCaseComponentModalData {
@@ -37,7 +39,7 @@ export interface AddTestCaseComponentModalData {
     selector: 'add-test-case',
     templateUrl: './add-test-case.component.html',
     styleUrls: ['./add-test-case.component.scss'],
-    standalone: false
+    imports: [XcModule, NoteComponent]
 })
 export class AddTestCaseComponent extends XcDialogComponent<XoTestCaseEntry, AddTestCaseComponentModalData> {
 

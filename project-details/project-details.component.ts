@@ -26,13 +26,14 @@ import { ImexService } from '../shared/imex.service';
 import { SettingsService } from '../shared/settings.service';
 import { TestProjectMenuComponent, TestProjectMenuData } from '../usermenu/testprojectmenu.component';
 import { XoProjectDetails } from './xo/xo-project-details.model';
+import { XcModule } from '../../../zeta/xc/xc.module';
 
 
 @Component({
     selector: 'app-project-details',
     templateUrl: './project-details.component.html',
     styleUrls: ['./project-details.component.scss'],
-    standalone: false
+    imports: [XcModule]
 })
 export class ProjectDetailsComponent {
 

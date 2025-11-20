@@ -36,13 +36,14 @@ import { ShowTestDataComponent, ShowTestDataComponentData } from './modal/show-t
 import { XoTestDataMetaDataEntry, XoTestDataMetaDataEntryArray } from './xo/test-data-meta-data-entry.model';
 import { XoTestDataMetaDataId } from './xo/test-data-meta-data-id.model';
 import { XoTestDataMetaData } from './xo/test-data-meta-data.model';
+import { XcModule } from '../../../zeta/xc/xc.module';
 
 
 @Component({
     selector: 'app-test-data',
     templateUrl: './test-data.component.html',
     styleUrls: ['./test-data.component.scss'],
-    standalone: false
+    imports: [XcModule]
 })
 export class TestDataComponent extends RouteComponent {
 
