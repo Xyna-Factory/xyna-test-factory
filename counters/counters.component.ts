@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService } from '@zeta/api';
@@ -41,6 +41,13 @@ import { XcModule } from '../../../zeta/xc/xc.module';
     imports: [XcModule]
 })
 export class CountersComponent extends RouteComponent {
+    private readonly apiService = inject(ApiService);
+    private readonly settingsService = inject(SettingsService);
+    private readonly dialogService = inject(XcDialogService);
+    private readonly activatedRoute = inject(ActivatedRoute);
+    private readonly i18nService = inject(I18nService);
+    private readonly router = inject(Router);
+
 
     dsCounters: XcTableInfoRemoteTableDataSource<XoCounterEntry>;
     counterEdit: XoCounterEntry = null;
@@ -54,15 +61,10 @@ export class CountersComponent extends RouteComponent {
     isTestprojectSelected = false;
 
 
-    constructor(
-        private readonly apiService: ApiService,
-        private readonly settingsService: SettingsService,
-        private readonly dialogService: XcDialogService,
-        private readonly activatedRoute: ActivatedRoute,
-        private readonly i18nService: I18nService,
-        private readonly router: Router
-    ) {
+    constructor() {
         super();
+        const settingsService = this.settingsService;
+
 
         this.dsCounters = new XcTableInfoRemoteTableDataSource(this.apiService, null, this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.GetCounters');
         this.dsCounters.output = XoCounterEntryArray;

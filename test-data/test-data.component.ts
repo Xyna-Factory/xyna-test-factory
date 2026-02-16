@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService, XoStructureType } from '@zeta/api';
@@ -46,6 +46,14 @@ import { XcModule } from '../../../zeta/xc/xc.module';
     imports: [XcModule]
 })
 export class TestDataComponent extends RouteComponent {
+    private readonly router = inject(Router);
+    private readonly i18n = inject(I18nService);
+    private readonly apiService = inject(ApiService);
+    private readonly settings = inject(SettingsService);
+    private readonly activatedRoute = inject(ActivatedRoute);
+    private readonly imexService = inject(ImexService);
+    private readonly dialogService = inject(XcDialogService);
+
 
     dsTestData: XcTableInfoRemoteTableDataSource<XoTestDataMetaDataEntry>;
     testDataEdit: XoTestDataMetaData = null;
@@ -63,16 +71,11 @@ export class TestDataComponent extends RouteComponent {
     @ViewChild(XcFormDirective, { static: false })
     form: XcFormDirective;
 
-    constructor(
-        private readonly router: Router,
-        private readonly i18n: I18nService,
-        private readonly apiService: ApiService,
-        private readonly settings: SettingsService,
-        private readonly activatedRoute: ActivatedRoute,
-        private readonly imexService: ImexService,
-        private readonly dialogService: XcDialogService
-    ) {
+    constructor() {
         super();
+        const settings = this.settings;
+        const dialogService = this.dialogService;
+
 
         const orderType = 'xdev.xtestfactory.infrastructure.actions.GetAllTestDataMetaData';
         this.dsTestData = new XcTableInfoRemoteTableDataSource(this.apiService, this.i18n, this.settings.testProjectRtc, orderType);

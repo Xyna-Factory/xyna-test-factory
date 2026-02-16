@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { ApiService, StartOrderOptions } from '@zeta/api';
@@ -44,6 +44,13 @@ const FOLLOW_UP_WF = 'xdev.xtestfactory.infrastructure.gui.GetFollowupTestCases'
     imports: [XcModule, RouterLink]
 })
 export class TestCaseChainsComponent extends RouteComponent {
+    private readonly settingsService = inject(SettingsService);
+    private readonly router = inject(Router);
+    private readonly apiService = inject(ApiService);
+    private readonly dialogService = inject(XcDialogService);
+    private readonly activatedRoute = inject(ActivatedRoute);
+    private readonly i18nService = inject(I18nService);
+
 
     dsTestCaseChains: XcTableInfoRemoteTableDataSource<XoTestCaseChainEntry>;
     dsTestObjects: XcTableInfoRemoteTableDataSource<XoTestObjectEntry>;
@@ -67,15 +74,11 @@ export class TestCaseChainsComponent extends RouteComponent {
     showInitialTestCases = true; // switching between initial test cases and followup test cases
 
 
-    constructor(
-        private readonly settingsService: SettingsService,
-        private readonly router: Router,
-        private readonly apiService: ApiService,
-        private readonly dialogService: XcDialogService,
-        private readonly activatedRoute: ActivatedRoute,
-        private readonly i18nService: I18nService
-    ) {
+    constructor() {
         super();
+        const settingsService = this.settingsService;
+        const apiService = this.apiService;
+
 
         this.dsTestCaseChains = new XcTableInfoRemoteTableDataSource(apiService, this.i18nService, this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.GetTestCaseChains');
         this.dsTestCaseChains.actionElements = [

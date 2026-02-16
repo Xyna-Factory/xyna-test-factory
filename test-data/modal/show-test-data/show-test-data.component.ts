@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Injector } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { ApiService, XoArray, XoDescriber, XoStructureType } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -23,13 +23,13 @@ import { XcDialogComponent, XcDialogService, XcStructureTreeDataSource, XcTreeNo
 
 import { filter } from 'rxjs/operators';
 
+import { XcModule } from '../../../../../zeta/xc/xc.module';
 import { OPTIONS_WITH_ERROR } from '../../../const';
+import { NoteComponent } from '../../../shared/components/note-component/note-component';
 import { SettingsService } from '../../../shared/settings.service';
 import { XcTableInfoRemoteTableDataSource } from '../../../shared/table-info-remote-table-data-source';
 import { XoBaseText } from '../../../shared/xo/base-text.model';
 import { XoTestData, XoTestDataArray } from '../../../test-cases/xo/test-data.model';
-import { XcModule } from '../../../../../zeta/xc/xc.module';
-import { NoteComponent } from '../../../shared/components/note-component/note-component';
 
 
 export interface ShowTestDataComponentData {
@@ -44,6 +44,10 @@ export interface ShowTestDataComponentData {
     imports: [XcModule, NoteComponent]
 })
 export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataComponentData> {
+    private readonly apiService = inject(ApiService);
+    private readonly settingsService = inject(SettingsService);
+    private readonly dialogService = inject(XcDialogService);
+
 
     tableDataSource: XcTableInfoRemoteTableDataSource<XoTestData>;
     treeDataSource: XcStructureTreeDataSource;
@@ -55,13 +59,8 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
     note = '';
 
 
-    constructor(
-        injector: Injector,
-        private readonly apiService: ApiService,
-        private readonly settingsService: SettingsService,
-        private readonly dialogService: XcDialogService
-    ) {
-        super(injector);
+    constructor() {
+        super();
         this.dataInput = new XoBaseText(undefined, this.injectedData.structureType.typeFqn.encode());
         this.dataLabel = this.injectedData.structureType.typeLabel || 'Instances';
 

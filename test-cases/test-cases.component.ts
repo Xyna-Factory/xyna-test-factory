@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { OrderInputSourceDetailsModalComponent, OrderInputSourceDetailsModalComponentData } from '@fman/order-input-sources/modal/order-input-source-details-modal/order-input-source-details-modal.component';
@@ -29,6 +29,7 @@ import { XcDialogService, XcFormAutocompleteTemplate, XcFormBaseComponent, XcFor
 
 import { filter, finalize, map } from 'rxjs/operators';
 
+import { XcModule } from '../../../zeta/xc/xc.module';
 import { extractError, OPTIONS_WITH_ERROR } from '../const';
 import { ImexService } from '../shared/imex.service';
 import { SettingsService } from '../shared/settings.service';
@@ -42,7 +43,6 @@ import { XoSimpleTestDataInstanceArray } from './xo/simple-test-data-instance.mo
 import { XoTestCaseEntry, XoTestCaseEntryArray } from './xo/test-case-entry.model';
 import { XoTestCase } from './xo/test-case.model';
 import { XoTestDataSelectorInstance, XoTestDataSelectorInstanceArray, XoTestDataSelectorTableInfo } from './xo/test-data-selector-instance.model';
-import { XcModule } from '../../../zeta/xc/xc.module';
 
 
 interface StartTestCaseError {
@@ -63,6 +63,14 @@ interface StartTestCaseError {
     imports: [XcModule]
 })
 export class TestCasesComponent extends RouteComponent {
+    private readonly settingsService = inject(SettingsService);
+    private readonly router = inject(Router);
+    private readonly apiService = inject(ApiService);
+    private readonly dialogService = inject(XcDialogService);
+    private readonly activatedRoute = inject(ActivatedRoute);
+    private readonly i18nService = inject(I18nService);
+    private readonly imexService = inject(ImexService);
+
 
     /**
      * TODO - refactoring
@@ -93,19 +101,10 @@ export class TestCasesComponent extends RouteComponent {
     testCase: XoTestCase; // details of the selected entry
 
 
-    constructor(
-        private readonly settingsService: SettingsService,
-        private readonly router: Router,
-        private readonly apiService: ApiService,
-        private readonly dialogService: XcDialogService,
-        private readonly activatedRoute: ActivatedRoute,
-        private readonly i18nService: I18nService,
-        private readonly imexService: ImexService
-    ) {
+    constructor() {
         super();
-
-        const dataSourceTestCaseOrderType = 'xdev.xtestfactory.infrastructure.gui.GetAllTestCases';
-        this.dsTestCases = new XcTableInfoRemoteTableDataSource(apiService, i18nService, settingsService.testProjectRtc, dataSourceTestCaseOrderType);
+            const dataSourceTestCaseOrderType = 'xdev.xtestfactory.infrastructure.gui.GetAllTestCases';
+        this.dsTestCases = new XcTableInfoRemoteTableDataSource(this.apiService, this.i18nService, this.settingsService.testProjectRtc, dataSourceTestCaseOrderType);
         this.dsTestCases.output = XoTestCaseEntryArray;
         this.dsTestCases.tableInfoClass = XoRemappingTableInfoClass(XoTableInfo, XoTestCaseEntry, { src: t => t.description, dst: t => t.desc });
         this.dsTestCases.actionElements = [
@@ -133,10 +132,10 @@ export class TestCasesComponent extends RouteComponent {
             }
         ];
         this.dsTestCases.selectionModel.selectionChange.subscribe(model => this.testCasesSelectionChange(model));
-        this.dsTestCases.refreshOnFilterChange = settingsService.tableRefreshOnFilterChange;
+        this.dsTestCases.refreshOnFilterChange = this.settingsService.tableRefreshOnFilterChange;
 
         // test project rtc changes
-        settingsService.testProject.subscribe(
+        this.settingsService.testProject.subscribe(
             selector => {
                 if (selector) {
                     this.isTestprojectSelected = true;

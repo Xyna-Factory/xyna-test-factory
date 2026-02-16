@@ -15,15 +15,15 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Injector } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
 import { XcDialogComponent, XcRemoteTableDataSource } from '@zeta/xc';
 
-import { SettingsService } from '../../shared/settings.service';
-import { XoTestCaseEntry, XoTestCaseEntryArray } from '../xo/test-case-entry.model';
 import { XcModule } from '../../../../zeta/xc/xc.module';
 import { NoteComponent } from '../../shared/components/note-component/note-component';
+import { SettingsService } from '../../shared/settings.service';
+import { XoTestCaseEntry, XoTestCaseEntryArray } from '../xo/test-case-entry.model';
 
 
 @Component({
@@ -33,16 +33,18 @@ import { NoteComponent } from '../../shared/components/note-component/note-compo
     imports: [XcModule, NoteComponent]
 })
 export class GetTestCaseReferenceComponent extends XcDialogComponent<{ value: string; label?: string }> {
+    private readonly apiService = inject(ApiService);
+    private readonly settingsService = inject(SettingsService);
 
     dataSource: XcRemoteTableDataSource;
 
     note: string;
 
-    constructor(injector: Injector, apiService: ApiService, settingsService: SettingsService) {
-        super(injector);
+    constructor() {
+        super();
 
         const orderType = 'xdev.xtestfactory.infrastructure.selector.GetTestCasesForSelection';
-        this.dataSource = new XcRemoteTableDataSource(apiService, undefined, settingsService.testProjectRtc, orderType);
+        this.dataSource = new XcRemoteTableDataSource(this.apiService, undefined, this.settingsService.testProjectRtc, orderType);
         this.dataSource.output = XoTestCaseEntryArray;
         this.dataSource.dataChange.subscribe(() => this.note = '');
         this.dataSource.error.subscribe(result => this.note = result.errorMessage);

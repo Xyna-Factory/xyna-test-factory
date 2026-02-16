@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { environment } from '@environments/environment';
 import { ApiService, RuntimeContext, StartOrderOptions, StartOrderResult, Xo, XoClassInterface, XoObject, XoObjectClass, XoProperty, XoUnique } from '@zeta/api';
@@ -72,8 +72,9 @@ export class XoManagedFileID extends XoObject {
  * This File-WebService only allows same origin requests - you can't use this service running locally or somewhere else
  */
 export class ImexService {
+    private readonly apiService = inject(ApiService);
+    private readonly dlgService = inject(XcDialogService);
 
-    constructor(private readonly apiService: ApiService, private readonly dlgService: XcDialogService) { }
 
     /**
      * Method opens a file dialog, uploads the selected file to the xyna file webservice. When upload was successful

@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -36,6 +36,12 @@ import { XcModule } from '../../../zeta/xc/xc.module';
     imports: [XcModule]
 })
 export class ProjectDetailsComponent {
+    private readonly apiService = inject(ApiService);
+    private readonly settingsService = inject(SettingsService);
+    private readonly i18nService = inject(I18nService);
+    private readonly dialogService = inject(XcDialogService);
+    private readonly imexService = inject(ImexService);
+
 
     testProjectDetails = new XoProjectDetails();
     @ViewChild(XcFormDirective, {static: false})
@@ -44,13 +50,7 @@ export class ProjectDetailsComponent {
     isTestprojectSelected = false;
     saving = false;
 
-    constructor(
-        private readonly apiService: ApiService,
-        private readonly settingsService: SettingsService,
-        private readonly i18nService: I18nService,
-        private readonly dialogService: XcDialogService,
-        private readonly imexService: ImexService
-    ) {
+    constructor() {
         this.settingsService.testProject.subscribe(selector => {
             if (selector !== null) {
                 this.isTestprojectSelected = true;

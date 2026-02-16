@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService, XoArray, XoDescriber } from '@zeta/api';
@@ -40,6 +40,14 @@ import { XcModule } from '../../../zeta/xc/xc.module';
     imports: [XcModule]
 })
 export class TestReportsComponent {
+    private readonly router = inject(Router);
+    private readonly apiSerivce = inject(ApiService);
+    private readonly dialogService = inject(XcDialogService);
+    private readonly settingsService = inject(SettingsService);
+    private readonly activatedRoute = inject(ActivatedRoute);
+    private readonly imexService = inject(ImexService);
+    private readonly i18nService = inject(I18nService);
+
 
     dsTestReport: XcTableInfoRemoteTableDataSource<XoTestReportEntry>;
     dsTestReportTree: XcStructureTreeDataSource;
@@ -49,15 +57,9 @@ export class TestReportsComponent {
     isTestprojectSelected = false;
     exporting = false;
 
-    constructor(
-        private readonly router: Router,
-        private readonly apiSerivce: ApiService,
-        private readonly dialogService: XcDialogService,
-        private readonly settingsService: SettingsService,
-        private readonly activatedRoute: ActivatedRoute,
-        private readonly imexService: ImexService,
-        private readonly i18nService: I18nService
-    ) {
+    constructor() {
+        const settingsService = this.settingsService;
+
         const orderType = 'xdev.xtestfactory.infrastructure.gui.GetTestReports';
         this.dsTestReport = new XcTableInfoRemoteTableDataSource(this.apiSerivce, null, this.settingsService.testProjectRtc, orderType);
         this.dsTestReport.output = XoTestReportEntryArray;
