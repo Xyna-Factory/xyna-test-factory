@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Injector } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { ApiService, RuntimeContext } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -45,6 +45,11 @@ export interface TestProjectMenuData {
 })
 
 export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSelector, TestProjectMenuData> {
+    private readonly apiService = inject(ApiService);
+    private readonly settingsService = inject(SettingsService);
+    private readonly dialogService = inject(XcDialogService);
+    private readonly imexService = inject(ImexService);
+
 
     projectToCreate: XoProjectDetails;
     testProject: XoProjectDetails;
@@ -66,14 +71,8 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
 
     XDSIconName = XDSIconName;
 
-    constructor(
-        injector: Injector,
-        private readonly apiService: ApiService,
-        private readonly settingsService: SettingsService,
-        private readonly dialogService: XcDialogService,
-        private readonly imexService: ImexService
-    ) {
-        super(injector);
+    constructor() {
+        super();
         this.testProjectSelector = this.settingsService.testProjectSelector;
 
         if (this.injectedData.selectRtc) {

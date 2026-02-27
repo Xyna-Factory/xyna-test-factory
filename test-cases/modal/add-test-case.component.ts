@@ -15,19 +15,19 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Injector } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
 import { AuthService } from '@zeta/auth';
 import { I18nService } from '@zeta/i18n';
 import { XcDialogComponent } from '@zeta/xc';
 
+import { XcModule } from '../../../../zeta/xc/xc.module';
 import { extractError, OPTIONS_WITH_ERROR } from '../../const';
+import { NoteComponent } from '../../shared/components/note-component/note-component';
 import { SettingsService } from '../../shared/settings.service';
 import { XoTestCaseEntry } from '../xo/test-case-entry.model';
 import { XoTestCaseID } from '../xo/test-case-id.model';
-import { XcModule } from '../../../../zeta/xc/xc.module';
-import { NoteComponent } from '../../shared/components/note-component/note-component';
 
 
 export interface AddTestCaseComponentModalData {
@@ -42,6 +42,10 @@ export interface AddTestCaseComponentModalData {
     imports: [XcModule, NoteComponent]
 })
 export class AddTestCaseComponent extends XcDialogComponent<XoTestCaseEntry, AddTestCaseComponentModalData> {
+    private readonly apiService = inject(ApiService);
+    private readonly settingsService = inject(SettingsService);
+    private readonly authService = inject(AuthService);
+
 
     readonly testCase = new XoTestCaseEntry();
     note: string;
@@ -49,13 +53,8 @@ export class AddTestCaseComponent extends XcDialogComponent<XoTestCaseEntry, Add
     duplicateMode = false;
 
 
-    constructor(
-        injector: Injector,
-        authService: AuthService,
-        private readonly apiService: ApiService,
-        private readonly settingsService: SettingsService
-    ) {
-        super(injector);
+    constructor() {
+        super();
 
         if (this.injectedData && this.injectedData.caseEntry) {
             this.testCase.name = this.injectedData.caseEntry.name;
@@ -65,7 +64,7 @@ export class AddTestCaseComponent extends XcDialogComponent<XoTestCaseEntry, Add
         } else {
             this.testCase.priority = 7;
         }
-        this.testCase.author = authService.username;
+        this.testCase.author = this.authService.username;
     }
 
     add() {

@@ -15,17 +15,17 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Injector } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcDialogComponent } from '@zeta/xc';
 
+import { XcModule } from '../../../../zeta/xc/xc.module';
 import { extractError } from '../../const';
+import { NoteComponent } from '../../shared/components/note-component/note-component';
 import { SettingsService } from '../../shared/settings.service';
 import { XoBaseText } from '../../shared/xo/base-text.model';
-import { XcModule } from '../../../../zeta/xc/xc.module';
-import { NoteComponent } from '../../shared/components/note-component/note-component';
 
 
 export interface AddTestCaseChainComponentModalData {
@@ -38,13 +38,12 @@ export interface AddTestCaseChainComponentModalData {
     imports: [XcModule, NoteComponent]
 })
 export class AddTestCaseChainComponent extends XcDialogComponent<string, AddTestCaseChainComponentModalData> {
+    private readonly apiService = inject(ApiService);
+    private readonly settingsService = inject(SettingsService);
+
 
     testCaseChainName = '';
     note = '';
-
-    constructor(injector: Injector, private readonly apiService: ApiService, private readonly settingsService: SettingsService) {
-        super(injector);
-    }
 
 
     get valid(): boolean {

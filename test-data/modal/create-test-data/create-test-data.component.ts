@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Injector } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -24,12 +24,12 @@ import { XcAutocompleteDataWrapper, XcDialogComponent, XcOptionItem, XcOptionIte
 import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
+import { XcModule } from '../../../../../zeta/xc/xc.module';
 import { extractError, OPTIONS_WITH_ERROR } from '../../../const';
+import { NoteComponent } from '../../../shared/components/note-component/note-component';
 import { SettingsService } from '../../../shared/settings.service';
 import { XoTestData } from '../../../test-cases/xo/test-data.model';
 import { XoTestDataMetaData } from '../../xo/test-data-meta-data.model';
-import { XcModule } from '../../../../../zeta/xc/xc.module';
-import { NoteComponent } from '../../../shared/components/note-component/note-component';
 
 
 export interface CreateTestDataComponentData {
@@ -45,6 +45,9 @@ export interface CreateTestDataComponentData {
     imports: [XcModule, NoteComponent]
 })
 export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTestDataComponentData> {
+    private readonly apiService = inject(ApiService);
+    private readonly settings = inject(SettingsService);
+
 
     readonly testData: XoTestDataMetaData;
     readonly testDataDefinitionSubject = new Subject<XcOptionItem<string>[]>();
@@ -60,8 +63,8 @@ export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTe
     note = '';
 
 
-    constructor(injector: Injector, private readonly apiService: ApiService, private readonly settings: SettingsService) {
-        super(injector);
+    constructor() {
+        super();
 
         this.testData = this.injectedData.testDataMetaData
             ? this.injectedData.testDataMetaData.cloneWithZeroId()

@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { FactoryManagerSettingsService } from '@fman/misc/services/factory-manager-settings.service';
@@ -43,6 +43,14 @@ import { TestProjectMenuComponent, TestProjectMenuData } from './usermenu/testpr
     imports: [XcModule, RouterOutlet]
 })
 export class TestfactoryComponent extends RouteComponent {
+    private readonly settingsService = inject(SettingsService);
+    private readonly apiService = inject(ApiService);
+    private readonly i18n = inject(I18nService);
+    private readonly dialogService = inject(XcDialogService);
+    private readonly factoryManagerSettings = inject(FactoryManagerSettingsService);
+    private readonly processmonitorSettings = inject(ProcessmonitorSettingsService);
+    private readonly acmSettings = inject(ACMSettingsService);
+
 
     private runtimeContextSelectionSubscription: Subscription;
 
@@ -50,15 +58,7 @@ export class TestfactoryComponent extends RouteComponent {
     navListOrientation = XcNavListOrientation.LEFT;
 
 
-    constructor(
-        private readonly settingsService: SettingsService,
-        private readonly apiService: ApiService,
-        private readonly i18n: I18nService,
-        private readonly dialogService: XcDialogService,
-        private readonly factoryManagerSettings: FactoryManagerSettingsService,
-        private readonly processmonitorSettings: ProcessmonitorSettingsService,
-        private readonly acmSettings: ACMSettingsService
-    ) {
+    constructor() {
         super();
 
         switch (this.i18n.language) {
@@ -74,15 +74,15 @@ export class TestfactoryComponent extends RouteComponent {
 
         this.navListItems = [
             {
-                link: 'Test-Project', name: i18n.translate('xtf.test-project'), collapsed: true, disabled: true, children: [
-                    { link: 'Project-Details', name: i18n.translate('xtf.project-details'), disabled: true },
-                    { link: 'Test-Reports', name: i18n.translate('xtf.test-reports'), disabled: true },
-                    { link: 'Counters', name: i18n.translate('xtf.counters'), disabled: true }
+                link: 'Test-Project', name: this.i18n.translate('xtf.test-project'), collapsed: true, disabled: true, children: [
+                    { link: 'Project-Details', name: this.i18n.translate('xtf.project-details'), disabled: true },
+                    { link: 'Test-Reports', name: this.i18n.translate('xtf.test-reports'), disabled: true },
+                    { link: 'Counters', name: this.i18n.translate('xtf.counters'), disabled: true }
                 ]
             },
-            { link: 'Test-Cases', name: i18n.translate('xtf.test-cases'), disabled: true },
-            { link: 'Test-Case-Chains', name: i18n.translate('xtf.test-case-chains'), disabled: true },
-            { link: 'Test-Data', name: i18n.translate('xtf.test-data'), disabled: true }
+            { link: 'Test-Cases', name: this.i18n.translate('xtf.test-cases'), disabled: true },
+            { link: 'Test-Case-Chains', name: this.i18n.translate('xtf.test-case-chains'), disabled: true },
+            { link: 'Test-Data', name: this.i18n.translate('xtf.test-data'), disabled: true }
         ];
 
         this.settingsService.testProject.subscribe(selector => {

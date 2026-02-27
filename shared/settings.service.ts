@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { ApiService, RuntimeContext, StartOrderResult } from '@zeta/api';
 import { AuthService } from '@zeta/auth';
@@ -31,6 +31,10 @@ import { XoTestProjectSelector, XoTestProjectSelectorArray } from '../usermenu/x
     providedIn: 'root'
 })
 export class SettingsService {
+    private readonly apiService = inject(ApiService);
+    private readonly authService = inject(AuthService);
+    private readonly http = inject(HttpClient);
+
 
     readonly fallbackRtc = RuntimeContext.fromApplication('XynaTestFactoryInfrastructure');
     private readonly _testProjectSelectorSubject = new BehaviorSubject<XoTestProjectSelector>(null);
@@ -38,10 +42,6 @@ export class SettingsService {
     needRefreshTestCases = false;
     needRefreshTestCaseChains = false;
     tableRefreshOnFilterChange = false;
-
-
-    constructor(private readonly apiService: ApiService, private readonly authService: AuthService, private readonly http: HttpClient) {
-    }
 
     get testProjectRtc(): RuntimeContext {
         return this._testProjectSelectorSubject.getValue() ? this._testProjectSelectorSubject.getValue().runtimeContext : null;

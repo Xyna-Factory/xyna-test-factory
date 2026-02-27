@@ -15,16 +15,16 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Injector } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
 import { XcDialogComponent, XcRemoteTableDataSource } from '@zeta/xc';
 
+import { XcModule } from '../../../../zeta/xc/xc.module';
+import { NoteComponent } from '../../shared/components/note-component/note-component';
 import { SettingsService } from '../../shared/settings.service';
 import { XoTestDataSelectorInstance } from '../xo/test-data-selector-instance.model';
 import { XoTestData, XoTestDataArray } from '../xo/test-data.model';
-import { XcModule } from '../../../../zeta/xc/xc.module';
-import { NoteComponent } from '../../shared/components/note-component/note-component';
 
 
 @Component({
@@ -34,16 +34,18 @@ import { NoteComponent } from '../../shared/components/note-component/note-compo
     imports: [XcModule, NoteComponent]
 })
 export class GetTestDataComplexComponent extends XcDialogComponent<{ value: string; label?: any }, XoTestDataSelectorInstance> {
+    private readonly apiService = inject(ApiService);
+    private readonly settingsService = inject(SettingsService);
 
     dataSource: XcRemoteTableDataSource;
 
     note: string;
 
-    constructor(injector: Injector, apiService: ApiService, settingsService: SettingsService) {
-        super(injector);
+    constructor() {
+        super();
 
         const orderType = 'xdev.xtestfactory.infrastructure.selector.GetTestDataForComplexList';
-        this.dataSource = new XcRemoteTableDataSource(apiService, undefined, settingsService.testProjectRtc, orderType);
+        this.dataSource = new XcRemoteTableDataSource(this.apiService, undefined, this.settingsService.testProjectRtc, orderType);
         this.dataSource.input = this.injectedData;
         this.dataSource.output = XoTestDataArray;
         this.dataSource.dataChange.subscribe(() => this.note = '');

@@ -15,16 +15,16 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Injector } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcDialogComponent } from '@zeta/xc';
 
+import { XcModule } from '../../../../../zeta/xc/xc.module';
 import { OPTIONS_WITH_ERROR } from '../../../const';
 import { SettingsService } from '../../../shared/settings.service';
 import { XoCounterEntry } from '../../xo/counter-entry.model';
-import { XcModule } from '../../../../../zeta/xc/xc.module';
 
 
 export interface AddCounterComponentData {
@@ -40,13 +40,16 @@ export interface AddCounterComponentData {
     imports: [XcModule]
 })
 export class AddCounterComponent extends XcDialogComponent<boolean, AddCounterComponentData> {
+    private readonly apiService = inject(ApiService);
+    private readonly settingsService = inject(SettingsService);
+
 
     readonly counterEntry: XoCounterEntry;
     errorMessage: string;
 
 
-    constructor(injector: Injector, private readonly apiService: ApiService, private readonly settingsService: SettingsService) {
-        super(injector);
+    constructor() {
+        super();
 
         this.counterEntry = this.injectedData.counterEntry
             ? this.injectedData.counterEntry.cloneWithZeroId()
