@@ -17,8 +17,8 @@
  */
 import { Injectable, inject } from '@angular/core';
 
-import { environment } from '@environments/environment';
 import { ApiService, RuntimeContext, StartOrderOptions, StartOrderResult, Xo, XoClassInterface, XoObject, XoObjectClass, XoProperty, XoUnique } from '@zeta/api';
+import { ConfigService } from '@zeta/api/config.service';
 import { getSubdirectory } from '@zeta/base';
 import { XcDialogService } from '@zeta/xc';
 
@@ -72,6 +72,7 @@ export class XoManagedFileID extends XoObject {
  * This File-WebService only allows same origin requests - you can't use this service running locally or somewhere else
  */
 export class ImexService {
+    private readonly configService = inject(ConfigService);
     private readonly apiService = inject(ApiService);
     private readonly dlgService = inject(XcDialogService);
 
@@ -171,7 +172,7 @@ export class ImexService {
 
                 // as long as the project runs locally, we need to hardcode the host name
                 // we can not use relative urls
-                const subdirectory = getSubdirectory(environment.zeta.url);
+                const subdirectory = getSubdirectory(this.configService.config.zeta.url);
                 if (CROSS_ORIGIN) {
                     xhr.open('POST', CROSS_HOST + '/' + subdirectory + UPLOAD_URL_PATH);
                 } else {
@@ -231,7 +232,7 @@ export class ImexService {
                 const managedFileId = sorOutput ? sorOutput.data.iD : null;
 
                 if (managedFileId !== null) {
-                    const subdirectory = getSubdirectory(environment.zeta.url);
+                    const subdirectory = getSubdirectory(this.configService.config.zeta.url);
                     if (CROSS_ORIGIN) {
                         window.location.href = CROSS_HOST + '/' + subdirectory + DOWNLOAD_URL_PATH + managedFileId;
                     } else {
