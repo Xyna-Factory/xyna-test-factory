@@ -20,9 +20,8 @@ import { Component, inject } from '@angular/core';
 import { ApiService } from '@zeta/api';
 import { AuthService } from '@zeta/auth';
 import { I18nService } from '@zeta/i18n';
-import { XcDialogComponent } from '@zeta/xc';
+import { XcButtonComponent, XcDialogComponent, XcDialogWrapperComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorMinValueDirective, XcFormValidatorNumberDirective, XcFormValidatorRequiredDirective } from '@zeta/xc';
 
-import { XcModule } from '../../../../zeta/xc/xc.module';
 import { extractError, OPTIONS_WITH_ERROR } from '../../const';
 import { NoteComponent } from '../../shared/components/note-component/note-component';
 import { SettingsService } from '../../shared/settings.service';
@@ -39,7 +38,7 @@ export interface AddTestCaseComponentModalData {
     selector: 'add-test-case',
     templateUrl: './add-test-case.component.html',
     styleUrls: ['./add-test-case.component.scss'],
-    imports: [XcModule, NoteComponent]
+    imports: [XcButtonComponent, XcDialogWrapperComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorMinValueDirective, XcFormValidatorNumberDirective, XcFormValidatorRequiredDirective, NoteComponent]
 })
 export class AddTestCaseComponent extends XcDialogComponent<XoTestCaseEntry, AddTestCaseComponentModalData> {
     private readonly apiService = inject(ApiService);

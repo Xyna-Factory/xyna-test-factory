@@ -25,11 +25,10 @@ import { ApiService, RuntimeContextType } from '@zeta/api';
 import { stringToInteger } from '@zeta/base';
 import { I18nService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
-import { XcDialogService, XcFormAutocompleteTemplate, XcFormBaseComponent, XcFormDirective, XcFormInputTemplate, XcIconButtonTemplate, XcSelectionModel, XDSIconName, XoRemappingTableInfoClass, XoTableInfo } from '@zeta/xc';
+import { XcButtonComponent, XcDialogService, XcFormAutocompleteComponent, XcFormAutocompleteTemplate, XcFormBaseComponent, XcFormDirective, XcFormInputComponent, XcFormInputTemplate, XcFormLabelComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorMinValueDirective, XcFormValidatorNumberDirective, XcIconButtonComponent, XcIconButtonTemplate, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcSelectionModel, XcTableComponent, XcTooltipDirective, XDSIconName, XoRemappingTableInfoClass, XoTableInfo } from '@zeta/xc';
 
 import { filter, finalize, map } from 'rxjs/operators';
 
-import { XcModule } from '../../../zeta/xc/xc.module';
 import { extractError, OPTIONS_WITH_ERROR } from '../const';
 import { ImexService } from '../shared/imex.service';
 import { SettingsService } from '../shared/settings.service';
@@ -60,7 +59,7 @@ interface StartTestCaseError {
 @Component({
     templateUrl: './test-cases.component.html',
     styleUrls: ['./test-cases.component.scss'],
-    imports: [XcModule]
+    imports: [XcButtonComponent, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormLabelComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorMinValueDirective, XcFormValidatorNumberDirective, XcIconButtonComponent, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective]
 })
 export class TestCasesComponent extends RouteComponent {
     private readonly settingsService = inject(SettingsService);

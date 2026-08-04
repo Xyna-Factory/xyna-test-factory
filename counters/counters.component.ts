@@ -21,7 +21,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@zeta/api';
 import { I18nParam, I18nService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
-import { XcDialogService, XcFormDirective, XcSelectionModel, XDSIconName, XoRemappingTableInfoClass, XoTableInfo } from '@zeta/xc';
+import { XcButtonComponent, XcDialogService, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorNumberDirective, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcSelectionModel, XcTableComponent, XcTooltipDirective, XDSIconName, XoRemappingTableInfoClass, XoTableInfo } from '@zeta/xc';
 
 import { filter } from 'rxjs/operators';
 
@@ -31,14 +31,13 @@ import { XcTableInfoRemoteTableDataSource } from '../shared/table-info-remote-ta
 import { AddCounterComponent } from './modal/add-counter/add-counter.component';
 import { XoCounterEntry, XoCounterEntryArray } from './xo/counter-entry.model';
 import { XoCounterId } from './xo/counter-id.model';
-import { XcModule } from '../../../zeta/xc/xc.module';
 
 
 @Component({
     selector: 'app-counters',
     templateUrl: './counters.component.html',
     styleUrls: ['./counters.component.scss'],
-    imports: [XcModule]
+    imports: [XcButtonComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorNumberDirective, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective]
 })
 export class CountersComponent extends RouteComponent {
     private readonly apiService = inject(ApiService);

@@ -19,12 +19,11 @@ import { Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
-import { XcAutocompleteDataWrapper, XcDialogComponent, XcOptionItem, XcOptionItemString } from '@zeta/xc';
+import { XcAutocompleteDataWrapper, XcButtonComponent, XcCheckboxComponent, XcDialogComponent, XcDialogWrapperComponent, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, XcOptionItem, XcOptionItemString } from '@zeta/xc';
 
 import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import { XcModule } from '../../../../../zeta/xc/xc.module';
 import { extractError, OPTIONS_WITH_ERROR } from '../../../const';
 import { NoteComponent } from '../../../shared/components/note-component/note-component';
 import { SettingsService } from '../../../shared/settings.service';
@@ -42,7 +41,7 @@ export interface CreateTestDataComponentData {
     selector: 'create-test-data',
     templateUrl: './create-test-data.component.html',
     styleUrls: ['./create-test-data.component.scss'],
-    imports: [XcModule, NoteComponent]
+    imports: [XcButtonComponent, XcCheckboxComponent, XcDialogWrapperComponent, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, NoteComponent]
 })
 export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTestDataComponentData> {
     private readonly apiService = inject(ApiService);

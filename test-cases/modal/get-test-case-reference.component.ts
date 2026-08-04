@@ -18,9 +18,8 @@
 import { Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
-import { XcDialogComponent, XcRemoteTableDataSource } from '@zeta/xc';
+import { XcButtonComponent, XcDialogComponent, XcDialogWrapperComponent, XcRemoteTableDataSource, XcTableComponent } from '@zeta/xc';
 
-import { XcModule } from '../../../../zeta/xc/xc.module';
 import { NoteComponent } from '../../shared/components/note-component/note-component';
 import { SettingsService } from '../../shared/settings.service';
 import { XoTestCaseEntry, XoTestCaseEntryArray } from '../xo/test-case-entry.model';
@@ -30,7 +29,7 @@ import { XoTestCaseEntry, XoTestCaseEntryArray } from '../xo/test-case-entry.mod
     selector: 'get-test-case-reference',
     templateUrl: './get-test-case-reference.component.html',
     styleUrls: ['./get-test-case-reference.component.scss'],
-    imports: [XcModule, NoteComponent]
+    imports: [XcButtonComponent, XcDialogWrapperComponent, XcTableComponent, NoteComponent]
 })
 export class GetTestCaseReferenceComponent extends XcDialogComponent<{ value: string; label?: string }> {
     private readonly apiService = inject(ApiService);

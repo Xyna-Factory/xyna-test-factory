@@ -19,9 +19,8 @@ import { Component, inject } from '@angular/core';
 
 import { ApiService, RuntimeContext } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
-import { XcAutocompleteDataWrapper, XcDialogComponent, XcDialogService, XcOptionItem, XDSIconName } from '@zeta/xc';
+import { XcAutocompleteDataWrapper, XcButtonComponent, XcDialogComponent, XcDialogService, XcDialogWrapperComponent, XcFormAutocompleteComponent, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcOptionItem, XcTooltipDirective, XDSIconName } from '@zeta/xc';
 
-import { XcModule } from '../../../zeta/xc/xc.module';
 import { extractError, GET_DUPLICATE_TEST_PROJECT_MSG, GET_IMPORT_TEST_PROJECT_MSG, OPTIONS_WITH_ERROR } from '../const';
 import { XoProjectDetails } from '../project-details/xo/xo-project-details.model';
 import { NoteComponent } from '../shared/components/note-component/note-component';
@@ -41,7 +40,7 @@ export interface TestProjectMenuData {
 @Component({
     templateUrl: './testprojectmenu.component.html',
     styleUrls: ['./testprojectmenu.component.scss'],
-    imports: [XcModule, NoteComponent]
+    imports: [XcButtonComponent, XcDialogWrapperComponent, XcFormAutocompleteComponent, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcTooltipDirective, NoteComponent]
 })
 
 export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSelector, TestProjectMenuData> {
