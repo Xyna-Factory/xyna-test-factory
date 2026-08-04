@@ -17,17 +17,16 @@
  */
 import { Component, Input } from '@angular/core';
 
-import { XDSIconName } from '@zeta/xc';
+import { XcIconComponent, XDSIconName } from '@zeta/xc';
 
 import { XTFFocusCandidateRef, XTFFocusCandidateDirective } from '../../directives/xtf-focus-candidate.directive';
-import { XcModule } from '../../../../../zeta/xc/xc.module';
 
 
 @Component({
     selector: 'note-component',
     templateUrl: './note-component.html',
     styleUrls: ['./note-component.scss'],
-    imports: [XTFFocusCandidateDirective, XcModule]
+    imports: [XTFFocusCandidateDirective, XcIconComponent]
 })
 export class NoteComponent {
 

@@ -19,11 +19,10 @@ import { Component, inject } from '@angular/core';
 
 import { ApiService, XoArray, XoDescriber, XoStructureType } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
-import { XcDialogComponent, XcDialogService, XcStructureTreeDataSource, XcTreeNode, XcTreeObserver, XDSIconName } from '@zeta/xc';
+import { XcButtonComponent, XcDialogComponent, XcDialogService, XcDialogWrapperComponent, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcStructureTreeDataSource, XcTableComponent, XcTooltipDirective, XcTreeComponent, XcTreeNode, XcTreeObserver, XDSIconName } from '@zeta/xc';
 
 import { filter } from 'rxjs/operators';
 
-import { XcModule } from '../../../../../zeta/xc/xc.module';
 import { OPTIONS_WITH_ERROR } from '../../../const';
 import { NoteComponent } from '../../../shared/components/note-component/note-component';
 import { SettingsService } from '../../../shared/settings.service';
@@ -41,7 +40,7 @@ export interface ShowTestDataComponentData {
     selector: 'app-show-test-data',
     templateUrl: './show-test-data.component.html',
     styleUrls: ['./show-test-data.component.scss'],
-    imports: [XcModule, NoteComponent]
+    imports: [XcButtonComponent, XcDialogWrapperComponent, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective, XcTreeComponent, NoteComponent]
 })
 export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataComponentData> {
     private readonly apiService = inject(ApiService);

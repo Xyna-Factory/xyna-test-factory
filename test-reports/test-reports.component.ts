@@ -20,7 +20,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService, XoArray, XoDescriber } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
-import { XcDialogService, XcSelectionModel, XcStructureTreeDataSource, XoRemappingTableInfoClass, XoTableInfo } from '@zeta/xc';
+import { XcButtonComponent, XcDialogService, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcSelectionModel, XcStructureTreeDataSource, XcTableComponent, XcTooltipDirective, XcTreeComponent, XoRemappingTableInfoClass, XoTableInfo } from '@zeta/xc';
 
 import { finalize } from 'rxjs';
 
@@ -30,14 +30,13 @@ import { SettingsService } from '../shared/settings.service';
 import { XcTableInfoRemoteTableDataSource } from '../shared/table-info-remote-table-data-source';
 import { XoTestReportEntry, XoTestReportEntryArray } from './xo/test-report-entry.model';
 import { XoFCTReport } from './xo/xo-fctreport.model';
-import { XcModule } from '../../../zeta/xc/xc.module';
 
 
 @Component({
     selector: 'app-test-reports',
     templateUrl: './test-reports.component.html',
     styleUrls: ['./test-reports.component.scss'],
-    imports: [XcModule]
+    imports: [XcButtonComponent, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective, XcTreeComponent]
 })
 export class TestReportsComponent {
     private readonly router = inject(Router);
