@@ -19,9 +19,8 @@ import { Component, inject } from '@angular/core';
 
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
-import { XcDialogComponent } from '@zeta/xc';
+import { XcButtonComponent, XcDialogComponent, XcDialogWrapperComponent, XcFormInputComponent } from '@zeta/xc';
 
-import { XcModule } from '../../../../zeta/xc/xc.module';
 import { extractError } from '../../const';
 import { NoteComponent } from '../../shared/components/note-component/note-component';
 import { SettingsService } from '../../shared/settings.service';
@@ -35,7 +34,7 @@ export interface AddTestCaseChainComponentModalData {
 @Component({
     templateUrl: './add-test-case-chain.component.html',
     styleUrls: ['./add-test-case-chain.component.scss'],
-    imports: [XcModule, NoteComponent]
+    imports: [XcButtonComponent, XcDialogWrapperComponent, XcFormInputComponent, NoteComponent]
 })
 export class AddTestCaseChainComponent extends XcDialogComponent<string, AddTestCaseChainComponentModalData> {
     private readonly apiService = inject(ApiService);

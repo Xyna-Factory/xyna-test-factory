@@ -18,9 +18,8 @@
 import { Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
-import { XcDialogComponent, XcRemoteTableDataSource } from '@zeta/xc';
+import { XcButtonComponent, XcDialogComponent, XcDialogWrapperComponent, XcRemoteTableDataSource, XcTableComponent } from '@zeta/xc';
 
-import { XcModule } from '../../../../zeta/xc/xc.module';
 import { NoteComponent } from '../../shared/components/note-component/note-component';
 import { SettingsService } from '../../shared/settings.service';
 import { XoTestDataSelectorInstance } from '../xo/test-data-selector-instance.model';
@@ -31,7 +30,7 @@ import { XoTestData, XoTestDataArray } from '../xo/test-data.model';
     selector: 'get-test-data-complex',
     templateUrl: './get-test-data-complex.component.html',
     styleUrls: ['./get-test-data-complex.component.scss'],
-    imports: [XcModule, NoteComponent]
+    imports: [XcButtonComponent, XcDialogWrapperComponent, XcTableComponent, NoteComponent]
 })
 export class GetTestDataComplexComponent extends XcDialogComponent<{ value: string; label?: any }, XoTestDataSelectorInstance> {
     private readonly apiService = inject(ApiService);

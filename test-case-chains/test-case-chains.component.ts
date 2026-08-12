@@ -21,7 +21,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
-import { XcDialogService, XcSelectionModel, XDSIconName } from '@zeta/xc';
+import { XcButtonComponent, XcDialogService, XcFormInputComponent, XcFormLabelComponent, XcIconButtonComponent, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcSelectionModel, XcTableComponent, XcTooltipDirective, XDSIconName } from '@zeta/xc';
 
 import { OPTIONS_WITH_ERROR } from '../const';
 import { SettingsService } from '../shared/settings.service';
@@ -32,7 +32,6 @@ import { AddTestCaseChainComponent, AddTestCaseChainComponentModalData } from '.
 import { XoInitialTestCaseEntry, XoInitialTestCaseEntryArray } from './xo/initial-test-case-entry.model';
 import { XoTestCaseChainEntry, XoTestCaseChainEntryArray } from './xo/test-case-chain-entry.model';
 import { XoTestObjectEntry, XoTestObjectEntryArray } from './xo/test-object-entry.model';
-import { XcModule } from '../../../zeta/xc/xc.module';
 
 
 const INIT_WF = 'xdev.xtestfactory.infrastructure.gui.GetInitialTestCases';
@@ -41,7 +40,7 @@ const FOLLOW_UP_WF = 'xdev.xtestfactory.infrastructure.gui.GetFollowupTestCases'
 @Component({
     templateUrl: './test-case-chains.component.html',
     styleUrls: ['./test-case-chains.component.scss'],
-    imports: [XcModule, RouterLink]
+    imports: [XcButtonComponent, XcFormInputComponent, XcFormLabelComponent, XcIconButtonComponent, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective, RouterLink]
 })
 export class TestCaseChainsComponent extends RouteComponent {
     private readonly settingsService = inject(SettingsService);

@@ -19,21 +19,20 @@ import { Component, ViewChild, inject } from '@angular/core';
 
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
-import { XcDialogService, XcFormDirective } from '@zeta/xc';
+import { XcButtonComponent, XcDialogService, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcIconComponent, XcPanelComponent } from '@zeta/xc';
 
 import { extractError, OPTIONS_WITH_ERROR } from '../const';
 import { ImexService } from '../shared/imex.service';
 import { SettingsService } from '../shared/settings.service';
 import { TestProjectMenuComponent, TestProjectMenuData } from '../usermenu/testprojectmenu.component';
 import { XoProjectDetails } from './xo/xo-project-details.model';
-import { XcModule } from '../../../zeta/xc/xc.module';
 
 
 @Component({
     selector: 'app-project-details',
     templateUrl: './project-details.component.html',
     styleUrls: ['./project-details.component.scss'],
-    imports: [XcModule]
+    imports: [XcButtonComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcIconComponent, XcPanelComponent]
 })
 export class ProjectDetailsComponent {
     private readonly apiService = inject(ApiService);
@@ -93,7 +92,7 @@ export class ProjectDetailsComponent {
                             } else {
                                 this.dialogService.error(this.i18nService.translateErrorCode(result.errorMessage));
                             }
-                        }, 
+                        },
                         error: err => this.dialogService.error(extractError(err))
                     });
                 }

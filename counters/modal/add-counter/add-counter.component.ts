@@ -19,9 +19,8 @@ import { Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
-import { XcDialogComponent } from '@zeta/xc';
+import { XcButtonComponent, XcDialogComponent, XcDialogWrapperComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorNumberDirective, XcFormValidatorRequiredDirective, XcIconComponent } from '@zeta/xc';
 
-import { XcModule } from '../../../../../zeta/xc/xc.module';
 import { OPTIONS_WITH_ERROR } from '../../../const';
 import { SettingsService } from '../../../shared/settings.service';
 import { XoCounterEntry } from '../../xo/counter-entry.model';
@@ -37,7 +36,7 @@ export interface AddCounterComponentData {
     selector: 'add-counter',
     templateUrl: './add-counter.component.html',
     styleUrls: ['./add-counter.component.scss'],
-    imports: [XcModule]
+    imports: [XcButtonComponent, XcDialogWrapperComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorNumberDirective, XcFormValidatorRequiredDirective, XcIconComponent]
 })
 export class AddCounterComponent extends XcDialogComponent<boolean, AddCounterComponentData> {
     private readonly apiService = inject(ApiService);

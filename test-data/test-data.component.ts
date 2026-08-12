@@ -21,7 +21,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService, XoStructureType } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
-import { XcAutocompleteDataWrapper, XcDialogService, XcFormDirective, XDSIconName } from '@zeta/xc';
+import { XcAutocompleteDataWrapper, XcButtonComponent, XcCheckboxComponent, XcDialogService, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective, XDSIconName } from '@zeta/xc';
 
 import { Observable, Subject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -36,14 +36,13 @@ import { ShowTestDataComponent, ShowTestDataComponentData } from './modal/show-t
 import { XoTestDataMetaDataEntry, XoTestDataMetaDataEntryArray } from './xo/test-data-meta-data-entry.model';
 import { XoTestDataMetaDataId } from './xo/test-data-meta-data-id.model';
 import { XoTestDataMetaData } from './xo/test-data-meta-data.model';
-import { XcModule } from '../../../zeta/xc/xc.module';
 
 
 @Component({
     selector: 'app-test-data',
     templateUrl: './test-data.component.html',
     styleUrls: ['./test-data.component.scss'],
-    imports: [XcModule]
+    imports: [XcButtonComponent, XcCheckboxComponent, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective]
 })
 export class TestDataComponent extends RouteComponent {
     private readonly router = inject(Router);

@@ -22,11 +22,10 @@ import { FactoryManagerSettingsService } from '@fman/misc/services/factory-manag
 import { ApiService, RuntimeContext } from '@zeta/api';
 import { I18nService, LocaleService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
-import { XcDialogService, XcNavListItem, XcNavListOrientation } from '@zeta/xc';
+import { XcDialogService, XcNavListComponent, XcNavListItem, XcNavListOrientation } from '@zeta/xc';
 
 import { Subscription } from 'rxjs';
 
-import { XcModule } from '../../zeta/xc/xc.module';
 import { ACMSettingsService } from '../acm/acm-settings.service';
 import { ProcessmonitorSettingsService } from '../processmonitor/processmonitor-settings.service';
 import { xtf_error_code_translations_de_DE } from './locale/xtf-error-code-translations.de-DE';
@@ -40,7 +39,7 @@ import { TestProjectMenuComponent, TestProjectMenuData } from './usermenu/testpr
 @Component({
     templateUrl: './testfactory.component.html',
     styleUrls: ['./testfactory.component.scss'],
-    imports: [XcModule, RouterOutlet]
+    imports: [XcNavListComponent, RouterOutlet]
 })
 export class TestfactoryComponent extends RouteComponent {
     private readonly settingsService = inject(SettingsService);
