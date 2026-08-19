@@ -84,7 +84,7 @@ export class TestCaseChainsComponent extends RouteComponent {
             {
                 onAction: chain => {
                     this.deleteTestCaseChain(chain);
-                }, tooltip: this.i18nService.translate('Delete selected Entry'), class: XDSIconName.DELETE, iconName: XDSIconName.DELETE
+                }, tooltip: this.i18nService.translateSignal('Delete selected Entry'), class: XDSIconName.DELETE, iconName: XDSIconName.DELETE
             }
         ];
         this.dsTestCaseChains.output = XoTestCaseChainEntryArray;

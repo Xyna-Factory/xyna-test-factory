@@ -86,7 +86,7 @@ export class CountersComponent extends RouteComponent {
                         this.dsCounters.refresh();
                     });
                 },
-                tooltip: this.i18nService.translate('Duplicate selected Entry'),
+                tooltip: this.i18nService.translateSignal('Duplicate selected Entry'),
                 class: XDSIconName.COPY,
                 iconName: XDSIconName.COPY
             },
@@ -110,7 +110,7 @@ export class CountersComponent extends RouteComponent {
                             });
                     });
                 },
-                tooltip: this.i18nService.translate('Delete selected Entry'),
+                tooltip: this.i18nService.translateSignal('Delete selected Entry'),
                 class: XDSIconName.DELETE,
                 iconName: XDSIconName.DELETE
             }

@@ -86,7 +86,7 @@ export class TestDataComponent extends RouteComponent {
         this.dsTestData.actionElements = [
             {
                 iconName: XDSIconName.COPY,
-                tooltip: this.i18n.translate('Duplicate'),
+                tooltip: this.i18n.translateSignal('Duplicate'),
                 onAction: data =>
                     this.getTestDataMetaData(data).subscribe({
                         next: meta => this.createTestData(meta),
@@ -95,7 +95,7 @@ export class TestDataComponent extends RouteComponent {
             },
             {
                 iconName: XDSIconName.DELETE,
-                tooltip: this.i18n.translate('Delete'),
+                tooltip: this.i18n.translateSignal('Delete'),
                 onAction: data => this.deleteTestData(data)
             }
         ];

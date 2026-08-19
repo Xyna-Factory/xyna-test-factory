@@ -120,14 +120,14 @@ export class TestCasesComponent extends RouteComponent {
                         this.dsTestCases.refresh();
                     });
                 },
-                tooltip: this.i18nService.translate('Duplicate'),
+                tooltip: this.i18nService.translateSignal('Duplicate'),
                 class: XDSIconName.COPY,
                 iconName: XDSIconName.COPY
             },
             {
                 onAction: testCase => {
                     this.deleteTestCases([testCase]);
-                }, tooltip: this.i18nService.translate('Delete'), class: XDSIconName.DELETE, iconName: XDSIconName.DELETE
+                }, tooltip: this.i18nService.translateSignal('Delete'), class: XDSIconName.DELETE, iconName: XDSIconName.DELETE
             }
         ];
         this.dsTestCases.selectionModel.selectionChange.subscribe(model => this.testCasesSelectionChange(model));

@@ -73,15 +73,15 @@ export class TestfactoryComponent extends RouteComponent {
 
         this.navListItems = [
             {
-                link: 'Test-Project', name: this.i18n.translate('xtf.test-project'), collapsed: true, disabled: true, children: [
-                    { link: 'Project-Details', name: this.i18n.translate('xtf.project-details'), disabled: true },
-                    { link: 'Test-Reports', name: this.i18n.translate('xtf.test-reports'), disabled: true },
-                    { link: 'Counters', name: this.i18n.translate('xtf.counters'), disabled: true }
+                link: 'Test-Project', name: this.i18n.translateSignal('xtf.test-project'), collapsed: true, disabled: true, children: [
+                    { link: 'Project-Details', name: this.i18n.translateSignal('xtf.project-details'), disabled: true },
+                    { link: 'Test-Reports', name: this.i18n.translateSignal('xtf.test-reports'), disabled: true },
+                    { link: 'Counters', name: this.i18n.translateSignal('xtf.counters'), disabled: true }
                 ]
             },
-            { link: 'Test-Cases', name: this.i18n.translate('xtf.test-cases'), disabled: true },
-            { link: 'Test-Case-Chains', name: this.i18n.translate('xtf.test-case-chains'), disabled: true },
-            { link: 'Test-Data', name: this.i18n.translate('xtf.test-data'), disabled: true }
+            { link: 'Test-Cases', name: this.i18n.translateSignal('xtf.test-cases'), disabled: true },
+            { link: 'Test-Case-Chains', name: this.i18n.translateSignal('xtf.test-case-chains'), disabled: true },
+            { link: 'Test-Data', name: this.i18n.translateSignal('xtf.test-data'), disabled: true }
         ];
 
         this.settingsService.testProject.subscribe(selector => {
