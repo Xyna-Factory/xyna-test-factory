@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
 import { ApiService, XoArray, XoDescriber, XoStructureType } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -73,12 +73,12 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
         this.tableDataSource.actionElements = [
             {
                 iconName: XDSIconName.DELETE,
-                tooltip: this.injectedData.i18nService.translate('Delete'),
+                tooltip: signal(this.injectedData.i18nService.translate('Delete')),
                 onAction: testData => this.delete([testData])
             },
             {
                 iconName: XDSIconName.COPY,
-                tooltip: this.injectedData.i18nService.translate('Duplicate'),
+                tooltip: signal(this.injectedData.i18nService.translate('Duplicate')),
                 onAction: testData => this.copy(testData)
             }
         ];

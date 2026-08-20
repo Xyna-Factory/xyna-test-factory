@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService, XoStructureType } from '@zeta/api';
@@ -244,7 +244,7 @@ export class TestDataComponent extends RouteComponent {
             next: st => {
                 const val = st.typeFqn.encode();
                 if (describers[0].fqn.encode() !== val && !st.typeAbstract) {
-                    this.testDataDefinitionDataWrapper.values.push({ name: val, value: val });
+                    this.testDataDefinitionDataWrapper.values.push({ name: signal(val), value: val });
                 }
             },
             error: err => console.error(err),

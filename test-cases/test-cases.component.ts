@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { OrderInputSourceDetailsModalComponent, OrderInputSourceDetailsModalComponentData } from '@fman/order-input-sources/modal/order-input-source-details-modal/order-input-source-details-modal.component';
@@ -227,7 +227,7 @@ export class TestCasesComponent extends RouteComponent {
                             if (!result.errorMessage) {
                                 const simpleInstances = result.output[0] as XoSimpleTestDataInstanceArray;
                                 formAutocompleteTemplate.dataWrapper.values = simpleInstances.data.map(
-                                    simpleInstance => ({ name: simpleInstance.label, value: simpleInstance.id.toString() })
+                                    simpleInstance => ({ name: signal(simpleInstance.label), value: simpleInstance.id.toString() })
                                 );
                             } else {
                                 this.dialogService.error(extractError(result));

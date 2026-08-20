@@ -16,6 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { XoArray, XoArrayClass, XoObject, XoObjectClass, XoProperty, XoTransient, XoUnique } from '@zeta/api';
+import { signal } from '@angular/core';
 import { XcAutocompleteDataWrapper, XcStringFloatDataWrapper, XcStringIntegerDataWrapper } from '@zeta/xc';
 
 
@@ -143,9 +144,9 @@ export class XoTestCaseEntry extends XoObject {
                 }
             },
             [
-                {name: XoTestCaseEntry.TYPE_SINGLE, value: XoTestCaseEntry.TYPE_SINGLE},
-                {name: XoTestCaseEntry.TYPE_LOAD,   value: XoTestCaseEntry.TYPE_LOAD},
-                {name: XoTestCaseEntry.TYPE_RATE,   value: XoTestCaseEntry.TYPE_RATE}
+                {name: signal(XoTestCaseEntry.TYPE_SINGLE), value: XoTestCaseEntry.TYPE_SINGLE},
+                {name: signal(XoTestCaseEntry.TYPE_LOAD),   value: XoTestCaseEntry.TYPE_LOAD},
+                {name: signal(XoTestCaseEntry.TYPE_RATE),   value: XoTestCaseEntry.TYPE_RATE}
             ]
         );
     }
