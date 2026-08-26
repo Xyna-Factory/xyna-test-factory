@@ -73,12 +73,12 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
         this.tableDataSource.actionElements = [
             {
                 iconName: XDSIconName.DELETE,
-                tooltip: signal(this.injectedData.i18nService.translate('Delete')),
+                tooltip: this.injectedData.i18nService.translateSignal('Delete'),
                 onAction: testData => this.delete([testData])
             },
             {
                 iconName: XDSIconName.COPY,
-                tooltip: signal(this.injectedData.i18nService.translate('Duplicate')),
+                tooltip: this.injectedData.i18nService.translateSignal('Duplicate'),
                 onAction: testData => this.copy(testData)
             }
         ];
@@ -129,8 +129,8 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
     delete(testDataList: XoTestData[]) {
         this.note = '';
         this.dialogService.confirm(
-            this.injectedData.i18nService.translate('Confirm Delete'),
-            this.injectedData.i18nService.translate(testDataList.length === 1 ? 'Delete Test Data Instance?' : 'Delete selected Test Data Instances?')
+            this.injectedData.i18nService.translateSignal('Confirm Delete')(),
+            this.injectedData.i18nService.translateSignal(testDataList.length === 1 ? 'Delete Test Data Instance?' : 'Delete selected Test Data Instances?')()
         ).afterDismiss().pipe(
             filter(confirmed => confirmed)
         ).subscribe(() => {
