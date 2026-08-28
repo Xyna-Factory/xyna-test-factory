@@ -1,3 +1,5 @@
+import { filter } from 'rxjs/operators';
+
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Copyright 2023 Xyna GmbH, Germany
@@ -17,13 +19,10 @@
  */
 import { Component, inject, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { ApiService } from '@zeta/api';
 import { I18nParam, I18nService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
 import { XcButtonComponent, XcDialogService, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorNumberDirective, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcSelectionModel, XcTableComponent, XcTooltipDirective, XDSIconName, XoRemappingTableInfoClass, XoTableInfo } from '@zeta/xc';
-
-import { filter } from 'rxjs/operators';
 
 import { OPTIONS_WITH_ERROR } from '../const';
 import { SettingsService } from '../shared/settings.service';

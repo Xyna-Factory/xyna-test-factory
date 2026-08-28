@@ -17,7 +17,6 @@
  */
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';

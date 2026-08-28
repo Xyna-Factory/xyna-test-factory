@@ -16,10 +16,9 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Component, Input } from '@angular/core';
-
 import { XcIconComponent, XDSIconName } from '@zeta/xc';
 
-import { XTFFocusCandidateRef, XTFFocusCandidateDirective } from '../../directives/xtf-focus-candidate.directive';
+import { XTFFocusCandidateDirective, XTFFocusCandidateRef } from '../../directives/xtf-focus-candidate.directive';
 
 
 @Component({

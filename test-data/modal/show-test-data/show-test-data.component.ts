@@ -1,3 +1,5 @@
+import { filter } from 'rxjs/operators';
+
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Copyright 2023 Xyna GmbH, Germany
@@ -16,12 +18,9 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Component, inject, signal } from '@angular/core';
-
 import { ApiService, XoArray, XoDescriber, XoStructureType } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcButtonComponent, XcDialogComponent, XcDialogService, XcDialogWrapperComponent, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcStructureTreeDataSource, XcTableComponent, XcTooltipDirective, XcTreeComponent, XcTreeNode, XcTreeObserver, XDSIconName } from '@zeta/xc';
-
-import { filter } from 'rxjs/operators';
 
 import { OPTIONS_WITH_ERROR } from '../../../const';
 import { NoteComponent } from '../../../shared/components/note-component/note-component';

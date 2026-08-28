@@ -1,3 +1,6 @@
+import { Observable, Subject, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Copyright 2023 Xyna GmbH, Germany
@@ -17,14 +20,10 @@
  */
 import { Component, inject, signal, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { ApiService, XoStructureType } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
 import { XcAutocompleteDataWrapper, XcButtonComponent, XcCheckboxComponent, XcDialogService, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective, XDSIconName } from '@zeta/xc';
-
-import { Observable, Subject, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 import { extractError, OPTIONS_WITH_ERROR } from '../const';
 import { ImexService } from '../shared/imex.service';

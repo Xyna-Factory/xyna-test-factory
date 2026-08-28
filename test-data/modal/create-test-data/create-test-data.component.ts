@@ -1,3 +1,6 @@
+import { Subject } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Copyright 2023 Xyna GmbH, Germany
@@ -16,13 +19,9 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Component, inject } from '@angular/core';
-
 import { ApiService } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcAutocompleteDataWrapper, XcButtonComponent, XcCheckboxComponent, XcDialogComponent, XcDialogWrapperComponent, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, XcOptionItem, XcOptionItemString } from '@zeta/xc';
-
-import { Subject } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 
 import { extractError, OPTIONS_WITH_ERROR } from '../../../const';
 import { NoteComponent } from '../../../shared/components/note-component/note-component';

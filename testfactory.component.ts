@@ -1,3 +1,5 @@
+import { Subscription } from 'rxjs';
+
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Copyright 2023 Xyna GmbH, Germany
@@ -17,14 +19,11 @@
  */
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
 import { FactoryManagerSettingsService } from '@fman/misc/services/factory-manager-settings.service';
 import { ApiService, RuntimeContext } from '@zeta/api';
 import { I18nService, LocaleService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
 import { XcDialogService, XcNavListComponent, XcNavListItem, XcNavListOrientation } from '@zeta/xc';
-
-import { Subscription } from 'rxjs';
 
 import { ACMSettingsService } from '../acm/acm-settings.service';
 import { ProcessmonitorSettingsService } from '../processmonitor/processmonitor-settings.service';

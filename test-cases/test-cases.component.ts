@@ -1,3 +1,5 @@
+import { filter, finalize, map } from 'rxjs/operators';
+
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Copyright 2023 Xyna GmbH, Germany
@@ -17,7 +19,6 @@
  */
 import { Component, inject, signal, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { OrderInputSourceDetailsModalComponent, OrderInputSourceDetailsModalComponentData } from '@fman/order-input-sources/modal/order-input-source-details-modal/order-input-source-details-modal.component';
 import { FrequencyControlledTaskLoadPreset, FrequencyControlledTaskPreset, FrequencyControlledTaskRatePreset } from '@fman/order-input-sources/order-input-source-details/order-input-source-details.component';
 import { XoOrderInputSource } from '@fman/order-input-sources/xo/xo-order-input-source.model';
@@ -26,8 +27,6 @@ import { stringToInteger } from '@zeta/base';
 import { I18nService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
 import { XcButtonComponent, XcDialogService, XcFormAutocompleteComponent, XcFormAutocompleteTemplate, XcFormBaseComponent, XcFormDirective, XcFormInputComponent, XcFormInputTemplate, XcFormLabelComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorMinValueDirective, XcFormValidatorNumberDirective, XcIconButtonComponent, XcIconButtonTemplate, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcSelectionModel, XcTableComponent, XcTooltipDirective, XDSIconName, XoRemappingTableInfoClass, XoTableInfo } from '@zeta/xc';
-
-import { filter, finalize, map } from 'rxjs/operators';
 
 import { extractError, OPTIONS_WITH_ERROR } from '../const';
 import { ImexService } from '../shared/imex.service';
