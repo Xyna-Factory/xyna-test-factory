@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, inject, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService } from '@zeta/api';
@@ -51,8 +51,7 @@ export class CountersComponent extends RouteComponent {
     dsCounters: XcTableInfoRemoteTableDataSource<XoCounterEntry>;
     counterEdit: XoCounterEntry = null;
 
-    @ViewChild(XcFormDirective, {static: false})
-    form: XcFormDirective;
+    readonly form = viewChild(XcFormDirective);
 
     counterId = '';
 
@@ -139,8 +138,9 @@ export class CountersComponent extends RouteComponent {
             this.counterId = '';
             if (this.counter) {
                 // reset form inputs as pristine
-                if (this.form) {
-                    this.form.markAsPristine();
+                const form = this.form();
+                if (form) {
+                    form.markAsPristine();
                 }
             }
             this.navigateToId();
@@ -178,7 +178,8 @@ export class CountersComponent extends RouteComponent {
     }
 
     get invalid(): boolean {
-        return this.form ? this.form.invalid : false;
+        const form = this.form();
+        return form ? form.invalid : false;
     }
 
     updateCounter() {
