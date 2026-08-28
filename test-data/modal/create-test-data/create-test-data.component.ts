@@ -1,6 +1,3 @@
-import { Subject } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Copyright 2023 Xyna GmbH, Germany
@@ -18,6 +15,10 @@ import { finalize } from 'rxjs/operators';
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
+
+import { Subject } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
 import { Component, inject } from '@angular/core';
 import { ApiService } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';

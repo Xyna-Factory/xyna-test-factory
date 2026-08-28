@@ -1,6 +1,3 @@
-import { Observable, Subject, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Copyright 2023 Xyna GmbH, Germany
@@ -18,6 +15,10 @@ import { filter } from 'rxjs/operators';
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
+
+import { Observable, Subject, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+
 import { Component, inject, signal, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService, XoStructureType } from '@zeta/api';
