@@ -5,13 +5,13 @@
         <h2 xc-i18n>Test Report</h2>
         <div class="items-right">
           <xc-button (click)="refreshTestReports()">Refresh Data</xc-button>
-          <xc-icon-button (click)="refresh()" xc-icon-name="reload" xc-icon-style="xds" xc-tooltip="Refresh" xc-i18n></xc-icon-button>
+          <xc-icon-button (click)="refresh()" xc-icon-name="reload" xc-icon-style="xds" xc-tooltip="Refresh" xc-i18n />
         </div>
       </header>
       <section class="stretch scroll">
         <xc-table [xc-table-datasource]="dsTestReport" xc-table-allowsort xc-table-allowfilter xc-table-allowselect
           xc-table-lazyupdate xc-i18n
-        ></xc-table>
+         />
         @if (!!dsTestReport.requestErrorMessage) {
           <div class="info-box" xc-i18n>
                 There is no Workflow defined for this table. To see data here, at least the TableInfo-Workflow 'xdev.xtestfactory.infrastructure.gui.GetTestReports' has to be created.
@@ -26,7 +26,7 @@
     <xc-panel detail>
       @if (dsTestReportEdit !== null) {
         <section class="stretch scroll">
-          <xc-tree [xc-tree-datasource]="dsTestReportTree" xc-tree-autoexpand="first"></xc-tree>
+          <xc-tree [xc-tree-datasource]="dsTestReportTree" xc-tree-autoexpand="first" />
         </section>
       }
       <footer>
