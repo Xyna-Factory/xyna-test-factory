@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { XcIconComponent, XDSIconName } from '@zeta/xc';
 
 import { XTFFocusCandidateDirective, XTFFocusCandidateRef } from '../../directives/xtf-focus-candidate.directive';
@@ -42,8 +42,7 @@ export class NoteComponent {
         }
     }
 
-    @Input('icon-name')
-    iconName = XDSIconName.MSGWARNING;
+    readonly iconName = input(XDSIconName.MSGWARNING, { alias: "icon-name" });
 
     noteBoxFocusCandidateRef = XTFFocusCandidateRef.getInstance();
 
