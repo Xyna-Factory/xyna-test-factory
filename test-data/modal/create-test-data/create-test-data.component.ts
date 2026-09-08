@@ -19,7 +19,7 @@
 import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcAutocompleteDataWrapper, XcButtonComponent, XcCheckboxComponent, XcDialogComponent, XcDialogWrapperComponent, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, XcOptionItem, XcOptionItemString } from '@zeta/xc';
@@ -41,6 +41,7 @@ export interface CreateTestDataComponentData {
     selector: 'create-test-data',
     templateUrl: './create-test-data.component.html',
     styleUrls: ['./create-test-data.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XcButtonComponent, XcCheckboxComponent, XcDialogWrapperComponent, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, NoteComponent]
 })
 export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTestDataComponentData> {

@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService } from '@zeta/api';
 import { AuthService } from '@zeta/auth';
 import { I18nService } from '@zeta/i18n';
@@ -37,6 +37,7 @@ export interface AddTestCaseComponentModalData {
     selector: 'add-test-case',
     templateUrl: './add-test-case.component.html',
     styleUrls: ['./add-test-case.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XcButtonComponent, XcDialogWrapperComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorMinValueDirective, XcFormValidatorNumberDirective, XcFormValidatorRequiredDirective, NoteComponent]
 })
 export class AddTestCaseComponent extends XcDialogComponent<XoTestCaseEntry, AddTestCaseComponentModalData> {

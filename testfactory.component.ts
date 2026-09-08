@@ -18,7 +18,7 @@
 
 import { Subscription } from 'rxjs';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FactoryManagerSettingsService } from '@fman/misc/services/factory-manager-settings.service';
 import { ApiService, RuntimeContext } from '@zeta/api';
@@ -39,6 +39,7 @@ import { TestProjectMenuComponent, TestProjectMenuData } from './usermenu/testpr
 @Component({
     templateUrl: './testfactory.component.html',
     styleUrls: ['./testfactory.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XcNavListComponent, RouterOutlet]
 })
 export class TestfactoryComponent extends RouteComponent {

@@ -18,7 +18,7 @@
 
 import { filter } from 'rxjs/operators';
 
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService, XoArray, XoDescriber, XoStructureType } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcButtonComponent, XcDialogComponent, XcDialogService, XcDialogWrapperComponent, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcStructureTreeDataSource, XcTableComponent, XcTooltipDirective, XcTreeComponent, XcTreeNode, XcTreeObserver, XDSIconName } from '@zeta/xc';
@@ -40,6 +40,7 @@ export interface ShowTestDataComponentData {
     selector: 'app-show-test-data',
     templateUrl: './show-test-data.component.html',
     styleUrls: ['./show-test-data.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XcButtonComponent, XcDialogWrapperComponent, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective, XcTreeComponent, NoteComponent]
 })
 export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataComponentData> {

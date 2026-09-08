@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService } from '@zeta/api';
 import { XcButtonComponent, XcDialogComponent, XcDialogWrapperComponent, XcRemoteTableDataSource, XcTableComponent } from '@zeta/xc';
 
@@ -28,6 +28,7 @@ import { XoTestCaseEntry, XoTestCaseEntryArray } from '../xo/test-case-entry.mod
     selector: 'get-test-case-reference',
     templateUrl: './get-test-case-reference.component.html',
     styleUrls: ['./get-test-case-reference.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XcButtonComponent, XcDialogWrapperComponent, XcTableComponent, NoteComponent]
 })
 export class GetTestCaseReferenceComponent extends XcDialogComponent<{ value: string; label?: string }> {

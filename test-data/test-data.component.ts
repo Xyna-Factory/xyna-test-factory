@@ -19,7 +19,7 @@
 import { Observable, Subject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { Component, inject, signal, viewChild } from '@angular/core';
+import { Component, inject, signal, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService, XoStructureType } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -42,6 +42,7 @@ import { XoTestDataMetaData } from './xo/test-data-meta-data.model';
     selector: 'app-test-data',
     templateUrl: './test-data.component.html',
     styleUrls: ['./test-data.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XcButtonComponent, XcCheckboxComponent, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective]
 })
 export class TestDataComponent extends RouteComponent {

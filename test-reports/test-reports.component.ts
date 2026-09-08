@@ -18,7 +18,7 @@
 
 import { finalize } from 'rxjs';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService, XoArray, XoDescriber } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -36,6 +36,7 @@ import { XoFCTReport } from './xo/xo-fctreport.model';
     selector: 'app-test-reports',
     templateUrl: './test-reports.component.html',
     styleUrls: ['./test-reports.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XcButtonComponent, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective, XcTreeComponent]
 })
 export class TestReportsComponent {

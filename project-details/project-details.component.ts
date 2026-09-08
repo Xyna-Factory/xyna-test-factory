@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject, viewChild } from '@angular/core';
+import { Component, inject, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcButtonComponent, XcDialogService, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcIconComponent, XcPanelComponent } from '@zeta/xc';
@@ -31,6 +31,7 @@ import { XoProjectDetails } from './xo/xo-project-details.model';
     selector: 'app-project-details',
     templateUrl: './project-details.component.html',
     styleUrls: ['./project-details.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XcButtonComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcIconComponent, XcPanelComponent]
 })
 export class ProjectDetailsComponent {

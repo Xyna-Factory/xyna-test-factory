@@ -18,7 +18,7 @@
 
 import { filter } from 'rxjs/operators';
 
-import { Component, inject, viewChild } from '@angular/core';
+import { Component, inject, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@zeta/api';
 import { I18nParam, I18nService } from '@zeta/i18n';
@@ -37,6 +37,7 @@ import { XoCounterId } from './xo/counter-id.model';
     selector: 'app-counters',
     templateUrl: './counters.component.html',
     styleUrls: ['./counters.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XcButtonComponent, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorNumberDirective, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective]
 })
 export class CountersComponent extends RouteComponent {

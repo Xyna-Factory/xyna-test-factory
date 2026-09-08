@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcButtonComponent, XcDialogComponent, XcDialogWrapperComponent, XcFormInputComponent } from '@zeta/xc';
@@ -33,6 +33,7 @@ export interface AddTestCaseChainComponentModalData {
 @Component({
     templateUrl: './add-test-case-chain.component.html',
     styleUrls: ['./add-test-case-chain.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XcButtonComponent, XcDialogWrapperComponent, XcFormInputComponent, NoteComponent]
 })
 export class AddTestCaseChainComponent extends XcDialogComponent<string, AddTestCaseChainComponentModalData> {

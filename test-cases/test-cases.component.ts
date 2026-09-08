@@ -18,7 +18,7 @@
 
 import { filter, finalize, map } from 'rxjs/operators';
 
-import { Component, inject, signal, viewChild } from '@angular/core';
+import { Component, inject, signal, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderInputSourceDetailsModalComponent, OrderInputSourceDetailsModalComponentData } from '@fman/order-input-sources/modal/order-input-source-details-modal/order-input-source-details-modal.component';
 import { FrequencyControlledTaskLoadPreset, FrequencyControlledTaskPreset, FrequencyControlledTaskRatePreset } from '@fman/order-input-sources/order-input-source-details/order-input-source-details.component';
@@ -59,6 +59,7 @@ interface StartTestCaseError {
 @Component({
     templateUrl: './test-cases.component.html',
     styleUrls: ['./test-cases.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XcButtonComponent, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormLabelComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorMinValueDirective, XcFormValidatorNumberDirective, XcIconButtonComponent, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective]
 })
 export class TestCasesComponent extends RouteComponent {

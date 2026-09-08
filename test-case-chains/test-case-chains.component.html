@@ -40,7 +40,7 @@
              />
             <footer class="items-right">
               <xc-button (click)="deleteTestCase()" [disabled]="dsTestCaseInstances.selectionModel.isEmpty()"><xc-icon xc-icon-name="delete" xc-i18n>Remove</xc-icon></xc-button>
-              <xc-button [routerLink]="['../../Test-Cases/', this.testCase?.testCaseId]" [disabled]="testCase === null" xc-i18n>Show Test Case</xc-button>
+              <xc-button [routerLink]="['../../Test-Cases/', $safeNavigationMigration(this.testCase?.testCaseId)]" [disabled]="testCase === null" xc-i18n>Show Test Case</xc-button>
             </footer>
           </section>
           <section>

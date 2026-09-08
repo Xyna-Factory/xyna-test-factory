@@ -27,6 +27,8 @@ export class XTFFocusCandidateDirective implements OnInit, OnDestroy {
 
     private _ref: XTFFocusCandidateRef;
 
+    // TODO: Skipped for migration because:
+    //  Accessor inputs cannot be migrated as they are too complex.
     @Input('xtf-focus-candidate')
     private set _refXTFFocusCandidateRef(value: XTFFocusCandidateRef) {
         value.setRef(this);
@@ -37,6 +39,8 @@ export class XTFFocusCandidateDirective implements OnInit, OnDestroy {
     private _onload = false;
 
 
+    // TODO: Skipped for migration because:
+    //  Accessor inputs cannot be migrated as they are too complex.
     @Input('xtf-focus-candidate-focus-onload')
     private set onload(value: any) {
         // this._onload = !!(value || value === '');

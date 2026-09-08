@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Input, input } from '@angular/core';
+import { Component, Input, input, ChangeDetectionStrategy } from '@angular/core';
 import { XcIconComponent, XDSIconName } from '@zeta/xc';
 
 import { XTFFocusCandidateDirective, XTFFocusCandidateRef } from '../../directives/xtf-focus-candidate.directive';
@@ -25,6 +25,7 @@ import { XTFFocusCandidateDirective, XTFFocusCandidateRef } from '../../directiv
     selector: 'note-component',
     templateUrl: './note-component.html',
     styleUrls: ['./note-component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [XTFFocusCandidateDirective, XcIconComponent]
 })
 export class NoteComponent {
@@ -34,6 +35,8 @@ export class NoteComponent {
         return this._note;
     }
 
+    // TODO: Skipped for migration because:
+    //  Accessor inputs cannot be migrated as they are too complex.
     @Input()
     set note(value: string) {
         this._note = value;
