@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, input } from '@angular/core';
 
 import { XcIconComponent, XDSIconName } from '@zeta/xc';
 
@@ -44,8 +44,7 @@ export class NoteComponent {
         }
     }
 
-    @Input('icon-name')
-    iconName = XDSIconName.MSGWARNING;
+    readonly iconName = input(XDSIconName.MSGWARNING, { alias: "icon-name" });
 
     noteBoxFocusCandidateRef = XTFFocusCandidateRef.getInstance();
 
