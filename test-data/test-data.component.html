@@ -8,27 +8,27 @@
           <xc-icon xc-icon-name="fileimport" xc-i18n>Import</xc-icon>
         </xc-button>
         <xc-icon-button (click)="refresh()" xc-icon-name="reload" color="normal" xc-icon-style="xds"
-          xc-tooltip="Refresh" xc-i18n></xc-icon-button>
+          xc-tooltip="Refresh" xc-i18n />
         <xc-icon-button (click)="createTestData()" xc-icon-name="add" color="normal" xc-icon-style="xds"
-          xc-tooltip="Add Test Data List" xc-i18n></xc-icon-button>
+          xc-tooltip="Add Test Data List" xc-i18n />
       </div>
     </header>
     <section class="stretch scroll">
       <xc-table [xc-table-datasource]="dsTestData" xc-table-allowsort xc-table-allowfilter xc-table-allowselect
-        xc-table-lazyupdate></xc-table>
+        xc-table-lazyupdate />
     </section>
   </xc-panel>
   <xc-panel detail>
     <header></header>
     @if (testDataEdit) {
     <section class="stretch scroll" xc-form>
-      <xc-form-input label="Name" xc-i18n [(value)]="testDataEdit.name" xc-form-validator-required></xc-form-input>
-      <xc-form-textarea label="Description" xc-i18n [(value)]="testDataEdit.description"></xc-form-textarea>
+      <xc-form-input label="Name" xc-i18n [(value)]="testDataEdit.name" xc-form-validator-required />
+      <xc-form-textarea label="Description" xc-i18n [(value)]="testDataEdit.description" />
       <xc-form-autocomplete label="Test Data Definition" placeholder="Please select ..."
         [(xc-form-autocomplete-option)]="testDataDefinitionDataWrapper.value"
         [xc-form-autocomplete-options]="testDataDefinitionDataWrapper.values" xc-form-field-suffix="clear"
-        xc-form-autocomplete-fulltextsearch xc-form-validator-required xc-i18n></xc-form-autocomplete>
-      <xc-checkbox label="One Time Test Data" xc-i18n [(checked)]="testDataEdit.oneTimeTestData"></xc-checkbox>
+        xc-form-autocomplete-fulltextsearch xc-form-validator-required xc-i18n />
+      <xc-checkbox label="One Time Test Data" xc-i18n [(checked)]="testDataEdit.oneTimeTestData" />
       <xc-button
         [disabled]="!testDataEdit.testDataFullQualifiedStorableName || testDataEdit.testDataFullQualifiedStorableName.length === 0"
         (click)="showTestData()" xc-i18n>Show Corresponding Test Data</xc-button>

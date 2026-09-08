@@ -2,16 +2,16 @@
   <ng-container header xc-i18n>Add Test Case</ng-container>
   <section content xc-form #form="xc-form">
     @if (note) {
-    <note-component [note]="note"></note-component>
+    <note-component [note]="note" />
     }
-    <xc-form-input label="Name" [(value)]="testCase.name" xc-form-validator-required xc-i18n></xc-form-input>
+    <xc-form-input label="Name" [(value)]="testCase.name" xc-form-validator-required xc-i18n />
 
-    <xc-form-textarea label="Description" [(value)]="testCase.description" xc-i18n></xc-form-textarea>
+    <xc-form-textarea label="Description" [(value)]="testCase.description" xc-i18n />
 
     <xc-form-input label="Priority" [(value)]="testCase.priorityDataWrapper.value" xc-form-validator-number
-      xc-form-validator-minvalue="1" xc-form-validator-maxvalue="10" xc-form-validator-required xc-i18n></xc-form-input>
+      xc-form-validator-minvalue="1" xc-form-validator-maxvalue="10" xc-form-validator-required xc-i18n />
 
-    <xc-form-input label="Author" [value]="testCase.author" disabled xc-i18n></xc-form-input>
+    <xc-form-input label="Author" [value]="testCase.author" disabled xc-i18n />
   </section>
   <ng-container footer>
     <xc-button (click)="dismiss()" xc-i18n>Cancel</xc-button>
