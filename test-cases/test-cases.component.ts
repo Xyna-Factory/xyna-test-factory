@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectionStrategy, Component, inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { OrderInputSourceDetailsModalComponent, OrderInputSourceDetailsModalComponentData } from '@fman/order-input-sources/modal/order-input-source-details-modal/order-input-source-details-modal.component';
@@ -86,8 +86,7 @@ export class TestCasesComponent extends RouteComponent {
 
     exportStarted = false;
 
-    @ViewChild(XcFormDirective, {static: false})
-    form: XcFormDirective;
+    readonly form = viewChild(XcFormDirective);
 
     // manageExecutionBusy = false;
     startOrderBusy = false;
@@ -190,8 +189,9 @@ export class TestCasesComponent extends RouteComponent {
                     });
 
                     // reset form inputs as pristine
-                    if (this.form) {
-                        this.form.markAsPristine();
+                    const form = this.form();
+                    if (form) {
+                        form.markAsPristine();
                     }
                     // update data source for tables in drawer
                     const dataSourceTestDataSelectorsOrderType = 'xdev.xtestfactory.infrastructure.selector.GetTestCaseSelectorsFromTestCase';

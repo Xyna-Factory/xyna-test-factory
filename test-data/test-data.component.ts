@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService, XoStructureType } from '@zeta/api';
@@ -68,8 +68,7 @@ export class TestDataComponent extends RouteComponent {
 
     testDataDefinitionDataWrapper: XcAutocompleteDataWrapper;
 
-    @ViewChild(XcFormDirective, { static: false })
-    form: XcFormDirective;
+    readonly form = viewChild(XcFormDirective);
 
     constructor() {
         super();
@@ -230,8 +229,9 @@ export class TestDataComponent extends RouteComponent {
 
             if (this.testData) {
                 // reset form inputs as pristine
-                if (this.form) {
-                    this.form.markAsPristine();
+                const form = this.form();
+                if (form) {
+                    form.markAsPristine();
                 }
             }
             this.navigateToId();

@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -44,8 +44,7 @@ export class ProjectDetailsComponent {
 
 
     testProjectDetails = new XoProjectDetails();
-    @ViewChild(XcFormDirective, {static: false})
-    detailForm: XcFormDirective;
+    readonly detailForm = viewChild(XcFormDirective);
     exportStarted = false;
     isTestprojectSelected = false;
     saving = false;

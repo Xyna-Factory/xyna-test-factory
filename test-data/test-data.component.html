@@ -43,7 +43,7 @@
         <xc-button [busy]="exportStarted" [disabled]="exportStarted" (click)="exportTestData()">
           <xc-icon xc-icon-name="file" xc-i18n>Export</xc-icon>
         </xc-button>
-        <xc-button (click)="save()" [disabled]="form && form.invalid || saving" [busy]="saving" color="primary"
+        <xc-button (click)="save()" [disabled]="form() && form().invalid || saving" [busy]="saving" color="primary"
           xc-i18n>Save</xc-button>
       </div>
     </footer>
