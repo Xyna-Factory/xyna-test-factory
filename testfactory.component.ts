@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { FactoryManagerSettingsService } from '@fman/misc/services/factory-manager-settings.service';
@@ -37,6 +37,7 @@ import { TestProjectMenuComponent, TestProjectMenuData } from './usermenu/testpr
 
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     templateUrl: './testfactory.component.html',
     styleUrls: ['./testfactory.component.scss'],
     imports: [XcNavListComponent, RouterOutlet]

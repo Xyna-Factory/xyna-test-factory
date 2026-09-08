@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
 import { XcButtonComponent, XcDialogComponent, XcDialogWrapperComponent, XcRemoteTableDataSource, XcTableComponent } from '@zeta/xc';
@@ -27,6 +27,7 @@ import { XoTestData, XoTestDataArray } from '../xo/test-data.model';
 
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     selector: 'get-test-data-complex',
     templateUrl: './get-test-data-complex.component.html',
     styleUrls: ['./get-test-data-complex.component.scss'],

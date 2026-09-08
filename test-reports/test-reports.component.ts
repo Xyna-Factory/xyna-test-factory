@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService, XoArray, XoDescriber } from '@zeta/api';
@@ -33,6 +33,7 @@ import { XoFCTReport } from './xo/xo-fctreport.model';
 
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     selector: 'app-test-reports',
     templateUrl: './test-reports.component.html',
     styleUrls: ['./test-reports.component.scss'],

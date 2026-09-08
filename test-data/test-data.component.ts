@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService, XoStructureType } from '@zeta/api';
@@ -39,6 +39,7 @@ import { XoTestDataMetaData } from './xo/test-data-meta-data.model';
 
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     selector: 'app-test-data',
     templateUrl: './test-data.component.html',
     styleUrls: ['./test-data.component.scss'],

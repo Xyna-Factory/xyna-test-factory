@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { ApiService, StartOrderOptions } from '@zeta/api';
@@ -38,6 +38,7 @@ const INIT_WF = 'xdev.xtestfactory.infrastructure.gui.GetInitialTestCases';
 const FOLLOW_UP_WF = 'xdev.xtestfactory.infrastructure.gui.GetFollowupTestCases';
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     templateUrl: './test-case-chains.component.html',
     styleUrls: ['./test-case-chains.component.scss'],
     imports: [XcButtonComponent, XcFormInputComponent, XcFormLabelComponent, XcIconButtonComponent, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective, RouterLink]

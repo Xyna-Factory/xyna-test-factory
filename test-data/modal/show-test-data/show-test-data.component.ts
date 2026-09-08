@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { ApiService, XoArray, XoDescriber, XoStructureType } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -37,6 +37,7 @@ export interface ShowTestDataComponentData {
 }
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     selector: 'app-show-test-data',
     templateUrl: './show-test-data.component.html',
     styleUrls: ['./show-test-data.component.scss'],

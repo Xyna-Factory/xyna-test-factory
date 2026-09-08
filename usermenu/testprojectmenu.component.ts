@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { ApiService, RuntimeContext } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -38,6 +38,7 @@ export interface TestProjectMenuData {
 
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     templateUrl: './testprojectmenu.component.html',
     styleUrls: ['./testprojectmenu.component.scss'],
     imports: [XcButtonComponent, XcDialogWrapperComponent, XcFormAutocompleteComponent, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcTooltipDirective, NoteComponent]

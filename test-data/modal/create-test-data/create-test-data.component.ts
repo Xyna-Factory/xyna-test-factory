@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -38,6 +38,7 @@ export interface CreateTestDataComponentData {
 
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     selector: 'create-test-data',
     templateUrl: './create-test-data.component.html',
     styleUrls: ['./create-test-data.component.scss'],
