@@ -15,13 +15,12 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { filter } from 'rxjs/operators';
 
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ApiService, XoArray, XoDescriber, XoStructureType } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcButtonComponent, XcDialogComponent, XcDialogService, XcDialogWrapperComponent, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcStructureTreeDataSource, XcTableComponent, XcTooltipDirective, XcTreeComponent, XcTreeNode, XcTreeObserver, XDSIconName } from '@zeta/xc';
-
-import { filter } from 'rxjs/operators';
 
 import { OPTIONS_WITH_ERROR } from '../../../const';
 import { NoteComponent } from '../../../shared/components/note-component/note-component';
@@ -74,12 +73,12 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
         this.tableDataSource.actionElements = [
             {
                 iconName: XDSIconName.DELETE,
-                tooltip: this.injectedData.i18nService.translate('Delete'),
+                tooltip: this.injectedData.i18nService.translateSignal('Delete'),
                 onAction: testData => this.delete([testData])
             },
             {
                 iconName: XDSIconName.COPY,
-                tooltip: this.injectedData.i18nService.translate('Duplicate'),
+                tooltip: this.injectedData.i18nService.translateSignal('Duplicate'),
                 onAction: testData => this.copy(testData)
             }
         ];
@@ -130,8 +129,8 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
     delete(testDataList: XoTestData[]) {
         this.note = '';
         this.dialogService.confirm(
-            this.injectedData.i18nService.translate('Confirm Delete'),
-            this.injectedData.i18nService.translate(testDataList.length === 1 ? 'Delete Test Data Instance?' : 'Delete selected Test Data Instances?')
+            this.injectedData.i18nService.translateInstant('Confirm Delete'),
+            this.injectedData.i18nService.translateInstant(testDataList.length === 1 ? 'Delete Test Data Instance?' : 'Delete selected Test Data Instances?')
         ).afterDismiss().pipe(
             filter(confirmed => confirmed)
         ).subscribe(() => {

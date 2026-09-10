@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject , signal} from '@angular/core';
 
 import { ApiService, RuntimeContext } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -113,7 +113,7 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
             next: selectors => {
                 this.showTestProjectWrapper = true;
                 this.testProjectsDataWrapper.values = selectors.data.map(
-                    item => <XcOptionItem>{ name: item.testProjectName + ' ' + item.testProjectVersion, value: item }
+                    item => <XcOptionItem>{ name: signal(item.testProjectName + ' ' + item.testProjectVersion), value: item }
                 );
             },
             error: err => {

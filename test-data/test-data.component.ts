@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild , signal} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService, XoStructureType } from '@zeta/api';
@@ -86,7 +86,7 @@ export class TestDataComponent extends RouteComponent {
         this.dsTestData.actionElements = [
             {
                 iconName: XDSIconName.COPY,
-                tooltip: this.i18n.translate('Duplicate'),
+                tooltip: this.i18n.translateSignal('Duplicate'),
                 onAction: data =>
                     this.getTestDataMetaData(data).subscribe({
                         next: meta => this.createTestData(meta),
@@ -95,7 +95,7 @@ export class TestDataComponent extends RouteComponent {
             },
             {
                 iconName: XDSIconName.DELETE,
-                tooltip: this.i18n.translate('Delete'),
+                tooltip: this.i18n.translateSignal('Delete'),
                 onAction: data => this.deleteTestData(data)
             }
         ];
@@ -245,7 +245,7 @@ export class TestDataComponent extends RouteComponent {
             next: st => {
                 const val = st.typeFqn.encode();
                 if (describers[0].fqn.encode() !== val && !st.typeAbstract) {
-                    this.testDataDefinitionDataWrapper.values.push({ name: val, value: val });
+                    this.testDataDefinitionDataWrapper.values.push({ name: signal(val), value: val });
                 }
             },
             error: err => console.error(err),

@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild , signal} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { OrderInputSourceDetailsModalComponent, OrderInputSourceDetailsModalComponentData } from '@fman/order-input-sources/modal/order-input-source-details-modal/order-input-source-details-modal.component';
@@ -120,14 +120,14 @@ export class TestCasesComponent extends RouteComponent {
                         this.dsTestCases.refresh();
                     });
                 },
-                tooltip: this.i18nService.translate('Duplicate'),
+                tooltip: this.i18nService.translateSignal('Duplicate'),
                 class: XDSIconName.COPY,
                 iconName: XDSIconName.COPY
             },
             {
                 onAction: testCase => {
                     this.deleteTestCases([testCase]);
-                }, tooltip: this.i18nService.translate('Delete'), class: XDSIconName.DELETE, iconName: XDSIconName.DELETE
+                }, tooltip: this.i18nService.translateSignal('Delete'), class: XDSIconName.DELETE, iconName: XDSIconName.DELETE
             }
         ];
         this.dsTestCases.selectionModel.selectionChange.subscribe(model => this.testCasesSelectionChange(model));
@@ -228,7 +228,7 @@ export class TestCasesComponent extends RouteComponent {
                             if (!result.errorMessage) {
                                 const simpleInstances = result.output[0] as XoSimpleTestDataInstanceArray;
                                 formAutocompleteTemplate.dataWrapper.values = simpleInstances.data.map(
-                                    simpleInstance => ({ name: simpleInstance.label, value: simpleInstance.id.toString() })
+                                    simpleInstance => ({ name: signal(simpleInstance.label), value: simpleInstance.id.toString() })
                                 );
                             } else {
                                 this.dialogService.error(extractError(result));
