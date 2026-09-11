@@ -24,7 +24,7 @@ export const APPLICATION_TEST_FACTORY = 'XynaTestFactoryInfrastructure';
 
 export function extractError(err: StartOrderResult | string | { message: string;[key: string]: any }, i18nService?: I18nService): string {
 
-    let msg = i18nService ? i18nService.translate('unexpected error') : 'unexpected error';
+    let msg = i18nService ? i18nService.translateInstant('unexpected error') : 'unexpected error';
 
     if (typeof err === 'string') {
         return err;
@@ -51,8 +51,8 @@ export function GET_IMPORT_TEST_PROJECT_MSG(i18n: I18nService, orderId: string):
     const param: I18nParam = { key: '${orderId}', value: orderId };
     const msg = 'The import may take a while. Please check the Process Monitor (${orderId}). Test Project is selectable after the process.';
     return {
-        message: i18n.translate(msg, param),
-        header: i18n.translate('Attention')
+        message: i18n.translateInstant(msg, param),
+        header: i18n.translateInstant('Attention')
     };
 }
 
@@ -60,7 +60,7 @@ export function GET_DUPLICATE_TEST_PROJECT_MSG(i18n: I18nService, orderId: strin
     const param: I18nParam = { key: '${orderId}', value: orderId };
     const msg = 'The duplication may take a while. Please check the Process Monitor (${orderId}). Test Project is selectable after the process.';
     return {
-        message: i18n.translate(msg, param),
-        header: i18n.translate('Attention')
+        message: i18n.translateInstant(msg, param),
+        header: i18n.translateInstant('Attention')
     };
 }

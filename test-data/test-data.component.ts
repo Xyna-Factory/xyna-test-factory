@@ -132,7 +132,7 @@ export class TestDataComponent extends RouteComponent {
                     if (res.errorMessage) {
                         this.dialogService.error(this.i18n.translateErrorCode(res.errorMessage));
                     } else {
-                        this.dialogService.info(this.i18n.translate('Import'), this.i18n.translate('Import successful!'));
+                        this.dialogService.info(this.i18n.translateInstant('Import'), this.i18n.translateInstant('Import successful!'));
                         this.dsTestData.refresh();
                     }
                 },
@@ -309,7 +309,7 @@ export class TestDataComponent extends RouteComponent {
     }
 
     private deleteTestData(data: XoTestDataMetaDataEntry) {
-        this.dialogService.confirm(this.i18n.translate('Delete Test Data'), 'Really delete Test Data?')
+        this.dialogService.confirm(this.i18n.translateInstant('Delete Test Data'), 'Really delete Test Data?')
             .afterDismiss()
             .pipe(filter(result => !!result))
             .subscribe(() => {

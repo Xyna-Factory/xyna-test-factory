@@ -92,8 +92,8 @@ export class CountersComponent extends RouteComponent {
             {
                 onAction: counterEntry => {
                     this.dialogService.confirm(
-                        this.i18nService.translate('Delete'),
-                        this.i18nService.translate('Delete $0?', <I18nParam>{ key: '$0', value: counterEntry.name })
+                        this.i18nService.translateInstant('Delete'),
+                        this.i18nService.translateInstant('Delete $0?', <I18nParam>{ key: '$0', value: counterEntry.name })
                     ).afterDismiss().pipe(
                         filter(result => result)
                     ).subscribe(() => {

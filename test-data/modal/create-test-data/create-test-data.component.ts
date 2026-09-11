@@ -96,8 +96,8 @@ export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTe
 
     get testDataObjectPlaceHolder() {
         return this.loading
-            ? this.injectedData.i18nService.translate('Loading ...')
-            : this.injectedData.i18nService.translate('Please select ...');
+            ? this.injectedData.i18nService.translateInstant('Loading ...')
+            : this.injectedData.i18nService.translateInstant('Please select ...');
     }
 
 

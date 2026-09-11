@@ -359,8 +359,8 @@ export class TestCasesComponent extends RouteComponent {
 
                 // see XTF-4
                 if (!handled) {
-                    message = this.i18nService.translate('Unknown error') + '\n';
-                    message += this.i18nService.translate('Please make sure that there is an "Input Generator" set in the Order Input Source details.') + '\n';
+                    message = this.i18nService.translateInstant('Unknown error') + '\n';
+                    message += this.i18nService.translateInstant('Please make sure that there is an "Input Generator" set in the Order Input Source details.') + '\n';
                     handled = true;
                 }
 
@@ -424,7 +424,7 @@ export class TestCasesComponent extends RouteComponent {
 
     deleteTestCases(testCases: XoTestCaseEntry[]) {
         const orderType = 'xdev.xtestfactory.infrastructure.gui.DeleteTestCasesFromEntryList';
-        this.dialogService.confirm(this.i18nService.translate('Confirm Delete'), this.i18nService.translate(testCases.length === 1 ? 'Delete Test Case?' : 'Delete selected Test Cases?')).afterDismiss()
+        this.dialogService.confirm(this.i18nService.translateInstant('Confirm Delete'), this.i18nService.translateInstant(testCases.length === 1 ? 'Delete Test Case?' : 'Delete selected Test Cases?')).afterDismiss()
             .pipe(filter(confirmed => confirmed))
             .subscribe(() => {
                 const testCaseArray = new XoTestCaseEntryArray();
