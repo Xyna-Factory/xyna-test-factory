@@ -13,11 +13,11 @@
       <div style="display: flex;">
         @if (!duplicateProject) {
         <xc-icon-button [disabled]="createProject" (click)="importTestProject()" xc-icon-name="fileimport"
-          color="normal" xc-icon-style="xds" xc-tooltip="Import Test Project" xc-i18n></xc-icon-button>
+          color="normal" xc-icon-style="xds" xc-tooltip="Import Test Project" xc-i18n />
         }
         @if (!duplicateProject) {
         <xc-icon-button [disabled]="createProject" (click)="switchToCreateTestProject()" xc-icon-name="add"
-          color="normal" xc-icon-style="xds" xc-tooltip="Create Test Project" xc-i18n></xc-icon-button>
+          color="normal" xc-icon-style="xds" xc-tooltip="Create Test Project" xc-i18n />
         }
       </div>
     </div>
@@ -26,7 +26,7 @@
   <section content>
 
     @if (note) {
-    <note-component [note]="note"></note-component>
+    <note-component [note]="note" />
     }
 
     @if (chooseProject) {
@@ -35,27 +35,26 @@
         [(xc-form-autocomplete-option)]="testProjectsDataWrapper.value"
         [xc-form-autocomplete-options]="testProjectsDataWrapper.values" xc-form-autocomplete-sortdirection="asc"
         xc-form-field-suffix="clear" xc-form-validator-required
-        xc-form-autocomplete-fulltextsearch></xc-form-autocomplete>
-      <xc-icon-button [xc-icon-name]="XDSIconName.RELOAD" (click)="refreshTestProjectsDataWrapper()"></xc-icon-button>
+        xc-form-autocomplete-fulltextsearch />
+      <xc-icon-button [xc-icon-name]="XDSIconName.RELOAD" (click)="refreshTestProjectsDataWrapper()" />
     </div>
     <p xc-i18n>Test Projects, which are currently part of an import or duplicate process, can only be selected after the
       respective process is done.</p>
     }
     @if (createProject) {
-    <xc-form-input label="Name" xc-i18n xc-form-validator-required [(value)]="projectToCreate.name"></xc-form-input>
+    <xc-form-input label="Name" xc-i18n xc-form-validator-required [(value)]="projectToCreate.name" />
     <xc-form-input label="Version" xc-i18n xc-form-validator-required
-      [(value)]="projectToCreate.version"></xc-form-input>
-    <xc-form-textarea label="Description" xc-i18n [(value)]="projectToCreate.description"></xc-form-textarea>
+      [(value)]="projectToCreate.version" />
+    <xc-form-textarea label="Description" xc-i18n [(value)]="projectToCreate.description" />
     <xc-button (click)="abortCreation()" xc-i18n>Back</xc-button>
     }
     @if (duplicateProject) {
     <xc-form-input label="Name" xc-i18n xc-form-validator-required
-      [(value)]="testProject.name"></xc-form-input>
+      [(value)]="testProject.name" />
     <xc-form-input label="Version" xc-i18n xc-form-validator-required
-      [(value)]="testProject.version"></xc-form-input>
+      [(value)]="testProject.version" />
     <xc-form-textarea label="Description" xc-i18n
-      [(value)]="testProject.description">
-    </xc-form-textarea>
+      [(value)]="testProject.description" />
     }
 
   </section>

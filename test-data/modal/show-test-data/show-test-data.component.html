@@ -23,8 +23,7 @@
             xc-table-allowselect
             xc-table-lazyupdate
             xc-table-multiselect
-            >
-          </xc-table>
+             />
         </section>
         <footer>
           <xc-button
@@ -38,11 +37,10 @@
 
       <xc-panel detail>
         <section class="stretch scroll">
-          <xc-tree
-            [xc-tree-datasource]="treeDataSource"
+          <xc-tree [xc-tree-datasource]="treeDataSource"
             [xc-tree-observer]="treeObserver"
             xc-tree-autoexpand="all"
-          ></xc-tree>
+           />
         </section>
         <footer>
           <xc-button (click)="cancel()" class="items-left" xc-i18n>Cancel</xc-button>

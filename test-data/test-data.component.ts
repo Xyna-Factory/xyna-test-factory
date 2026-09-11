@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild , signal} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService, XoStructureType } from '@zeta/api';
@@ -39,6 +39,7 @@ import { XoTestDataMetaData } from './xo/test-data-meta-data.model';
 
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     selector: 'app-test-data',
     templateUrl: './test-data.component.html',
     styleUrls: ['./test-data.component.scss'],
@@ -67,8 +68,7 @@ export class TestDataComponent extends RouteComponent {
 
     testDataDefinitionDataWrapper: XcAutocompleteDataWrapper;
 
-    @ViewChild(XcFormDirective, { static: false })
-    form: XcFormDirective;
+    readonly form = viewChild(XcFormDirective);
 
     constructor() {
         super();
@@ -86,7 +86,7 @@ export class TestDataComponent extends RouteComponent {
         this.dsTestData.actionElements = [
             {
                 iconName: XDSIconName.COPY,
-                tooltip: this.i18n.translate('Duplicate'),
+                tooltip: this.i18n.translateSignal('Duplicate'),
                 onAction: data =>
                     this.getTestDataMetaData(data).subscribe({
                         next: meta => this.createTestData(meta),
@@ -95,7 +95,7 @@ export class TestDataComponent extends RouteComponent {
             },
             {
                 iconName: XDSIconName.DELETE,
-                tooltip: this.i18n.translate('Delete'),
+                tooltip: this.i18n.translateSignal('Delete'),
                 onAction: data => this.deleteTestData(data)
             }
         ];
@@ -132,7 +132,7 @@ export class TestDataComponent extends RouteComponent {
                     if (res.errorMessage) {
                         this.dialogService.error(this.i18n.translateErrorCode(res.errorMessage));
                     } else {
-                        this.dialogService.info(this.i18n.translate('Import'), this.i18n.translate('Import successful!'));
+                        this.dialogService.info(this.i18n.translateInstant('Import'), this.i18n.translateInstant('Import successful!'));
                         this.dsTestData.refresh();
                     }
                 },
@@ -229,8 +229,9 @@ export class TestDataComponent extends RouteComponent {
 
             if (this.testData) {
                 // reset form inputs as pristine
-                if (this.form) {
-                    this.form.markAsPristine();
+                const form = this.form();
+                if (form) {
+                    form.markAsPristine();
                 }
             }
             this.navigateToId();
@@ -244,7 +245,7 @@ export class TestDataComponent extends RouteComponent {
             next: st => {
                 const val = st.typeFqn.encode();
                 if (describers[0].fqn.encode() !== val && !st.typeAbstract) {
-                    this.testDataDefinitionDataWrapper.values.push({ name: val, value: val });
+                    this.testDataDefinitionDataWrapper.values.push({ name: signal(val), value: val });
                 }
             },
             error: err => console.error(err),
@@ -308,7 +309,7 @@ export class TestDataComponent extends RouteComponent {
     }
 
     private deleteTestData(data: XoTestDataMetaDataEntry) {
-        this.dialogService.confirm(this.i18n.translate('Delete Test Data'), 'Really delete Test Data?')
+        this.dialogService.confirm(this.i18n.translateInstant('Delete Test Data'), 'Really delete Test Data?')
             .afterDismiss()
             .pipe(filter(result => !!result))
             .subscribe(() => {

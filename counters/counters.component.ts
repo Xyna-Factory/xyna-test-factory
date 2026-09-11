@@ -1,3 +1,5 @@
+import { filter } from 'rxjs/operators';
+
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Copyright 2023 Xyna GmbH, Germany
@@ -15,15 +17,12 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { ApiService } from '@zeta/api';
 import { I18nParam, I18nService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
 import { XcButtonComponent, XcDialogService, XcFormDirective, XcFormInputComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorNumberDirective, XcFormValidatorRequiredDirective, XcIconButtonComponent, XcMasterDetailComponent, XcPanelComponent, XcSelectionModel, XcTableComponent, XcTooltipDirective, XDSIconName, XoRemappingTableInfoClass, XoTableInfo } from '@zeta/xc';
-
-import { filter } from 'rxjs/operators';
 
 import { OPTIONS_WITH_ERROR } from '../const';
 import { SettingsService } from '../shared/settings.service';
@@ -34,6 +33,7 @@ import { XoCounterId } from './xo/counter-id.model';
 
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     selector: 'app-counters',
     templateUrl: './counters.component.html',
     styleUrls: ['./counters.component.scss'],
@@ -51,8 +51,7 @@ export class CountersComponent extends RouteComponent {
     dsCounters: XcTableInfoRemoteTableDataSource<XoCounterEntry>;
     counterEdit: XoCounterEntry = null;
 
-    @ViewChild(XcFormDirective, {static: false})
-    form: XcFormDirective;
+    readonly form = viewChild(XcFormDirective);
 
     counterId = '';
 
@@ -86,15 +85,15 @@ export class CountersComponent extends RouteComponent {
                         this.dsCounters.refresh();
                     });
                 },
-                tooltip: this.i18nService.translate('Duplicate selected Entry'),
+                tooltip: this.i18nService.translateSignal('Duplicate selected Entry'),
                 class: XDSIconName.COPY,
                 iconName: XDSIconName.COPY
             },
             {
                 onAction: counterEntry => {
                     this.dialogService.confirm(
-                        this.i18nService.translate('Delete'),
-                        this.i18nService.translate('Delete $0?', <I18nParam>{ key: '$0', value: counterEntry.name })
+                        this.i18nService.translateInstant('Delete'),
+                        this.i18nService.translateInstant('Delete $0?', <I18nParam>{ key: '$0', value: counterEntry.name })
                     ).afterDismiss().pipe(
                         filter(result => result)
                     ).subscribe(() => {
@@ -110,7 +109,7 @@ export class CountersComponent extends RouteComponent {
                             });
                     });
                 },
-                tooltip: this.i18nService.translate('Delete selected Entry'),
+                tooltip: this.i18nService.translateSignal('Delete selected Entry'),
                 class: XDSIconName.DELETE,
                 iconName: XDSIconName.DELETE
             }
@@ -139,8 +138,9 @@ export class CountersComponent extends RouteComponent {
             this.counterId = '';
             if (this.counter) {
                 // reset form inputs as pristine
-                if (this.form) {
-                    this.form.markAsPristine();
+                const form = this.form();
+                if (form) {
+                    form.markAsPristine();
                 }
             }
             this.navigateToId();
@@ -178,7 +178,8 @@ export class CountersComponent extends RouteComponent {
     }
 
     get invalid(): boolean {
-        return this.form ? this.form.invalid : false;
+        const form = this.form();
+        return form ? form.invalid : false;
     }
 
     updateCounter() {

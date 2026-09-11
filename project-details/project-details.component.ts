@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -29,6 +29,7 @@ import { XoProjectDetails } from './xo/xo-project-details.model';
 
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     selector: 'app-project-details',
     templateUrl: './project-details.component.html',
     styleUrls: ['./project-details.component.scss'],
@@ -43,8 +44,7 @@ export class ProjectDetailsComponent {
 
 
     testProjectDetails = new XoProjectDetails();
-    @ViewChild(XcFormDirective, {static: false})
-    detailForm: XcFormDirective;
+    readonly detailForm = viewChild(XcFormDirective);
     exportStarted = false;
     isTestprojectSelected = false;
     saving = false;
@@ -73,7 +73,7 @@ export class ProjectDetailsComponent {
     }
 
     delete() {
-        this.dialogService.confirm(this.i18nService.translate('Confirm delete'), this.i18nService.translate('Do you really want to delete this Test Project?')).afterDismiss()
+        this.dialogService.confirm(this.i18nService.translateInstant('Confirm delete'), this.i18nService.translateInstant('Do you really want to delete this Test Project?')).afterDismiss()
             .subscribe(confirmDelete => {
                 if (confirmDelete) {
                     const orderType = 'xdev.xtestfactory.infrastructure.gui.DeleteTestProject';
@@ -134,7 +134,7 @@ export class ProjectDetailsComponent {
                 } else {
                     // TODO
                     this.apiService.runtimeContext = this.settingsService.testProjectRtc;
-                    this.dialogService.info(this.i18nService.translate('Note'), this.i18nService.translate('Saved successful'));
+                    this.dialogService.info(this.i18nService.translateInstant('Note'), this.i18nService.translateInstant('Saved successful'));
                 }
             },
             error: err => this.dialogService.error(extractError(err)),
@@ -143,7 +143,7 @@ export class ProjectDetailsComponent {
     }
 
     reset() {
-        this.dialogService.confirm(this.i18nService.translate('Reset changes'), this.i18nService.translate('Do you want to reset your changes?')).afterDismiss().subscribe(
+        this.dialogService.confirm(this.i18nService.translateInstant('Reset changes'), this.i18nService.translateInstant('Do you want to reset your changes?')).afterDismiss().subscribe(
             confirmReset => {
                 if (confirmReset) {
                     this.getTestProject();

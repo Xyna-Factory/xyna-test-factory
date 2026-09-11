@@ -21,13 +21,13 @@ import { RedirectComponent, redirectGuardCanActivate, redirectGuardCanDeactivate
 import { rightGuardCanActivate } from '@zeta/nav/right.guard';
 
 import { RIGHT_TEST_FACTORY } from './const';
-import { CountersComponent } from './counters/counters.component';
-import { ProjectDetailsComponent } from './project-details/project-details.component';
-import { TestCaseChainsComponent } from './test-case-chains/test-case-chains.component';
-import { TestCasesComponent } from './test-cases/test-cases.component';
-import { TestDataComponent } from './test-data/test-data.component';
-import { TestReportsComponent } from './test-reports/test-reports.component';
-import { TestfactoryComponent } from './testfactory.component';
+
+
+
+
+
+
+
 
 
 const root = 'Test-Factory';
@@ -46,7 +46,7 @@ export const TestfactoryRoutes: XynaRoutes = [
     },
     {
         path: root,
-        component: TestfactoryComponent,
+        loadComponent: () => import('./testfactory.component').then(m => m.TestfactoryComponent),
         canActivate: [rightGuardCanActivate],
         data: { right: RIGHT_TEST_FACTORY, reuse: root },
         children: [
@@ -58,14 +58,14 @@ export const TestfactoryRoutes: XynaRoutes = [
             },
             {
                 path: projectDetails,
-                component: ProjectDetailsComponent,
+                loadComponent: () => import('./project-details/project-details.component').then(m => m.ProjectDetailsComponent),
                 canDeactivate: [redirectGuardCanDeactivate],
                 pathMatch: 'full',
                 data: { reuse: projectDetails, redirectKey: root }
             },
             {
                 path: testReports,
-                component: TestReportsComponent,
+                loadComponent: () => import('./test-reports/test-reports.component').then(m => m.TestReportsComponent),
                 canDeactivate: [redirectGuardCanDeactivate],
                 pathMatch: 'full',
                 data: { reuse: testReports, redirectKey: root }
@@ -77,7 +77,7 @@ export const TestfactoryRoutes: XynaRoutes = [
             },
             {
                 path: counters + '/:id',
-                component: CountersComponent,
+                loadComponent: () => import('./counters/counters.component').then(m => m.CountersComponent),
                 canDeactivate: [redirectGuardCanDeactivate],
                 data: { reuse: counters, redirectKey: root }
             },
@@ -88,7 +88,7 @@ export const TestfactoryRoutes: XynaRoutes = [
             },
             {
                 path: testCases + '/:id',
-                component: TestCasesComponent,
+                loadComponent: () => import('./test-cases/test-cases.component').then(m => m.TestCasesComponent),
                 canDeactivate: [redirectGuardCanDeactivate],
                 data: { reuse: testCases, redirectKey: root }
             },
@@ -99,7 +99,7 @@ export const TestfactoryRoutes: XynaRoutes = [
             },
             {
                 path: testCaseChains + '/:id',
-                component: TestCaseChainsComponent,
+                loadComponent: () => import('./test-case-chains/test-case-chains.component').then(m => m.TestCaseChainsComponent),
                 canDeactivate: [redirectGuardCanDeactivate/*, ConfirmGuard*/],
                 data: { reuse: testCaseChains, redirectKey: root }
             },
@@ -110,7 +110,7 @@ export const TestfactoryRoutes: XynaRoutes = [
             },
             {
                 path: testData + '/:id',
-                component: TestDataComponent,
+                loadComponent: () => import('./test-data/test-data.component').then(m => m.TestDataComponent),
                 canDeactivate: [redirectGuardCanDeactivate],
                 data: { reuse: testData, redirectKey: root }
             }

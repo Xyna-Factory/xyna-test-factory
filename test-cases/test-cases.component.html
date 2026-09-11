@@ -8,14 +8,14 @@
           <xc-icon xc-icon-name="file" xc-i18n>Export</xc-icon>
         </xc-button>
         <xc-icon-button (click)="refresh()" xc-icon-name="reload" color="normal" xc-icon-style="xds"
-          xc-tooltip="Refresh" xc-i18n></xc-icon-button>
+          xc-tooltip="Refresh" xc-i18n />
         <xc-icon-button (click)="createTestCase()" [disabled]="!validTestProject" xc-icon-name="add" color="normal"
-          xc-icon-style="xds" xc-tooltip="Add Test Case" xc-i18n></xc-icon-button>
+          xc-icon-style="xds" xc-tooltip="Add Test Case" xc-i18n />
       </div>
     </header>
     <section class="stretch scroll">
       <xc-table [xc-table-datasource]="dsTestCases" xc-table-allowsort xc-table-allowfilter xc-table-allowselect
-        xc-table-lazyupdate xc-table-multiselect xc-i18n></xc-table>
+        xc-table-lazyupdate xc-table-multiselect xc-i18n />
     </section>
     <footer>
       <xc-button (click)="deleteSelected()" [disabled]="dsTestCases.selectionModel.isEmpty()" class="items-right"
@@ -38,7 +38,7 @@
     <section class="stretch scroll" xc-form>
       <section>
         <xc-form-textarea label="Description" [(value)]="testCaseEntry.description" xc-form-textarea-lines="10"
-          xc-form-field-indicatechanges xc-form-field-compact xc-i18n></xc-form-textarea>
+          xc-form-field-indicatechanges xc-form-field-compact xc-i18n />
       </section>
       <section>
         <xc-form-label xc-i18n>Execution</xc-form-label>
@@ -62,41 +62,39 @@
       <section class="items-row">
         <xc-form-input label="Priority" xc-i18n [(value)]="testCaseEntry.priorityDataWrapper.value"
           xc-form-validator-number xc-form-validator-minvalue="0" xc-form-validator-maxvalue="10"
-          xc-form-field-indicatechanges xc-form-field-compact></xc-form-input>
+          xc-form-field-indicatechanges xc-form-field-compact />
         <xc-form-input label="Responsible User" xc-i18n [(value)]="testCaseEntry.responsibleUser"
-          xc-form-field-indicatechanges xc-form-field-compact>
-        </xc-form-input>
+          xc-form-field-indicatechanges xc-form-field-compact />
       </section>
       <section>
         <xc-form-autocomplete label="Type" xc-i18n [(xc-form-autocomplete-option)]="testCaseEntry.typeDataWrapper.value"
           [xc-form-autocomplete-options]="testCaseEntry.typeDataWrapper.values" xc-form-autocomplete-asdropdown
           xc-form-field-suffix="clear" xc-form-autocomplete-fulltextsearch xc-form-field-indicatechanges
-          xc-form-field-compact></xc-form-autocomplete>
+          xc-form-field-compact />
       </section>
       @if (testCaseEntry.isRate()) {
       <section class="items-row">
         <xc-form-input label="Rate [Hz]" xc-i18n
           [(value)]="testCaseEntry.rateDataWrapper.value" xc-form-validator-number="float" xc-form-field-indicatechanges
-          xc-form-field-compact></xc-form-input>
+          xc-form-field-compact />
         <xc-form-input label="Duration [sec]" xc-i18n
           [(value)]="testCaseEntry.rateDurationDataWrapper.value" xc-form-validator-number xc-form-field-indicatechanges
-          xc-form-field-compact></xc-form-input>
+          xc-form-field-compact />
       </section>
       }
       @if (testCaseEntry.isLoad()) {
       <section class="items-row">
         <xc-form-input label="Load" xc-i18n
           [(value)]="testCaseEntry.loadDataWrapper.value" xc-form-validator-number xc-form-field-indicatechanges
-          xc-form-field-compact></xc-form-input>
+          xc-form-field-compact />
         <xc-form-input label="Count" xc-i18n
           [(value)]="testCaseEntry.loadCount" xc-form-validator-number xc-form-field-indicatechanges
-          xc-form-field-compact></xc-form-input>
+          xc-form-field-compact />
       </section>
       }
       <section>
         <xc-form-label xc-i18n>Test Data Selectors</xc-form-label>
-        <xc-table [xc-table-datasource]="dsTestDataSelectors" xc-table-allowselect xc-table-lazyupdate>
-        </xc-table>
+        <xc-table [xc-table-datasource]="dsTestDataSelectors" xc-table-allowselect xc-table-lazyupdate />
         <footer class="items-right">
           <xc-button (click)="deleteTestDataSelector()" [disabled]="dsTestDataSelectors.selectionModel.isEmpty()"
             xc-i18n>Delete</xc-button>
@@ -110,45 +108,45 @@
         </header>
         <section>
           <xc-form-input label="Selector 1" xc-i18n [(value)]="testCase.testDateSelector.selector1"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 2" xc-i18n [(value)]="testCase.testDateSelector.selector2"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 3" xc-i18n [(value)]="testCase.testDateSelector.selector3"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 4" xc-i18n [(value)]="testCase.testDateSelector.selector4"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 5" xc-i18n [(value)]="testCase.testDateSelector.selector5"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 6" xc-i18n [(value)]="testCase.testDateSelector.selector6"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 7" xc-i18n [(value)]="testCase.testDateSelector.selector7"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 8" xc-i18n [(value)]="testCase.testDateSelector.selector8"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 9" xc-i18n [(value)]="testCase.testDateSelector.selector9"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 10" xc-i18n [(value)]="testCase.testDateSelector.selector10"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 11" xc-i18n [(value)]="testCase.testDateSelector.selector11"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 12" xc-i18n [(value)]="testCase.testDateSelector.selector12"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 13" xc-i18n [(value)]="testCase.testDateSelector.selector13"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 14" xc-i18n [(value)]="testCase.testDateSelector.selector14"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 15" xc-i18n [(value)]="testCase.testDateSelector.selector15"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 16" xc-i18n [(value)]="testCase.testDateSelector.selector16"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 17" xc-i18n [(value)]="testCase.testDateSelector.selector17"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 18" xc-i18n [(value)]="testCase.testDateSelector.selector18"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 19" xc-i18n [(value)]="testCase.testDateSelector.selector19"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
           <xc-form-input label="Selector 20" xc-i18n [(value)]="testCase.testDateSelector.selector20"
-            xc-form-field-compact></xc-form-input>
+            xc-form-field-compact />
         </section>
       </xc-panel>
       }

@@ -3,19 +3,19 @@
   <section content xc-form #form="xc-form">
 
     @if (note) {
-    <note-component [note]="note"></note-component>
+    <note-component [note]="note" />
     }
 
-    <xc-form-input label="Name" xc-i18n [(value)]="testData.name" xc-form-validator-required></xc-form-input>
-    <xc-form-textarea label="Description" xc-i18n [(value)]="testData.description"></xc-form-textarea>
+    <xc-form-input label="Name" xc-i18n [(value)]="testData.name" xc-form-validator-required />
+    <xc-form-textarea label="Description" xc-i18n [(value)]="testData.description" />
 
     <xc-form-autocomplete label="Test Data Object" [placeholder]="testDataObjectPlaceHolder"
       [(xc-form-autocomplete-option)]="testDataDefinitionDataWrapper.value"
       [xc-form-autocomplete-options]="testDataDefinitionDataWrapper.values" xc-form-autocomplete-showtooltip
       xc-form-field-suffix="clear" xc-form-autocomplete-fulltextsearch xc-form-validator-required
-      xc-i18n></xc-form-autocomplete>
+      xc-i18n />
 
-    <xc-checkbox [(checked)]="testData.oneTimeTestData" label="One Time Test Data" xc-i18n></xc-checkbox>
+    <xc-checkbox [(checked)]="testData.oneTimeTestData" label="One Time Test Data" xc-i18n />
   </section>
   <ng-container footer>
     <xc-button (click)="dismiss()" xc-i18n>Cancel</xc-button>

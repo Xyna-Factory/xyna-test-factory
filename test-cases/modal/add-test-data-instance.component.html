@@ -3,18 +3,16 @@
     <section content>
         <section>
             <xc-form-label>Prototype</xc-form-label>
-            <xc-table
-                [xc-table-datasource]="dataSource"
+            <xc-table [xc-table-datasource]="dataSource"
                 xc-table-allowselect
                 xc-table-lazyupdate
                 xc-i18n
-            ></xc-table>
+             />
         </section>
-        <xc-form-input
-            label="Name"
+        <xc-form-input label="Name"
             xc-i18n
             [(value)]="name"
-        ></xc-form-input>
+         />
     </section>
     <ng-container footer>
         <xc-button (click)="dismiss()" xc-i18n>Cancel</xc-button>
