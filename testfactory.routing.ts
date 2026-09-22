@@ -16,18 +16,10 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { RouterModule } from '@angular/router';
-
 import { RedirectComponent, redirectGuardCanActivate, redirectGuardCanDeactivate, RedirectGuardConfigProvider, RedirectGuardProvider, XynaRoutes } from '@zeta/nav';
 import { rightGuardCanActivate } from '@zeta/nav/right.guard';
 
 import { RIGHT_TEST_FACTORY } from './const';
-
-
-
-
-
-
-
 
 
 const root = 'Test-Factory';
