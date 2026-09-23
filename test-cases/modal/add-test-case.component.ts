@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
 import { AuthService } from '@zeta/auth';
@@ -35,6 +35,7 @@ export interface AddTestCaseComponentModalData {
 }
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     selector: 'add-test-case',
     templateUrl: './add-test-case.component.html',
     styleUrls: ['./add-test-case.component.scss'],

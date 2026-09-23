@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { ApiService } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -33,6 +33,7 @@ export interface AddCounterComponentData {
 
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     selector: 'add-counter',
     templateUrl: './add-counter.component.html',
     styleUrls: ['./add-counter.component.scss'],

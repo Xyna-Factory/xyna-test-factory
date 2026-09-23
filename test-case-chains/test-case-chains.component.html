@@ -4,43 +4,40 @@
       <header>
         <h2 xc-i18n>Test Case Chains</h2>
         <div class="items-right">
-          <xc-icon-button (click)="refresh()" xc-icon-name="reload" color="normal" xc-icon-style="xds" xc-tooltip="Refresh table" xc-i18n></xc-icon-button>
-          <xc-icon-button (click)="createTestCaseChain()" [disabled]="!validTestProject" xc-icon-name="add" color="normal" xc-icon-style="xds" xc-tooltip="Add Test Case Chain" xc-i18n></xc-icon-button>
+          <xc-icon-button (click)="refresh()" xc-icon-name="reload" color="normal" xc-icon-style="xds" xc-tooltip="Refresh table" xc-i18n />
+          <xc-icon-button (click)="createTestCaseChain()" [disabled]="!validTestProject" xc-icon-name="add" color="normal" xc-icon-style="xds" xc-tooltip="Add Test Case Chain" xc-i18n />
         </div>
       </header>
       <section class="stretch scroll">
-        <xc-table
-          [xc-table-datasource]="dsTestCaseChains"
+        <xc-table [xc-table-datasource]="dsTestCaseChains"
           xc-table-allowsort
           xc-table-allowfilter
           xc-table-allowselect
           xc-table-lazyupdate
-        ></xc-table>
+         />
       </section>
     </xc-panel>
     <xc-panel detail>
       @if (testCaseChain) {
         <section class="stretch scroll">
           <section>
-            <xc-form-input label="Test Case Chain" xc-i18n [value]="testCaseChain.name" readonly xc-form-field-compact></xc-form-input>
+            <xc-form-input label="Test Case Chain" xc-i18n [value]="testCaseChain.name" readonly xc-form-field-compact />
           </section>
           <section>
             <xc-form-label xc-i18n>Test Objects</xc-form-label>
-            <xc-table
-              [xc-table-datasource]="dsTestObjects"
+            <xc-table [xc-table-datasource]="dsTestObjects"
               xc-table-allowsort
               xc-table-allowselect
               xc-table-lazyupdate
-            ></xc-table>
+             />
           </section>
           <section>
             <xc-form-label xc-i18n>Test Cases</xc-form-label>
-            <xc-table
-              [xc-table-datasource]="dsTestCaseInstances"
+            <xc-table [xc-table-datasource]="dsTestCaseInstances"
               xc-table-allowsort
               xc-table-allowselect
               xc-table-lazyupdate
-            ></xc-table>
+             />
             <footer class="items-right">
               <xc-button (click)="deleteTestCase()" [disabled]="dsTestCaseInstances.selectionModel.isEmpty()"><xc-icon xc-icon-name="delete" xc-i18n>Remove</xc-icon></xc-button>
               <xc-button [routerLink]="['../../Test-Cases/', this.testCase?.testCaseId]" [disabled]="testCase === null" xc-i18n>Show Test Case</xc-button>
@@ -49,21 +46,19 @@
           <section>
             @if (showInitialTestCases) {
               <xc-form-label xc-i18n>Initial Test Cases</xc-form-label>
-              <xc-table
-                [xc-table-datasource]="dsInitialTestCases"
+              <xc-table [xc-table-datasource]="dsInitialTestCases"
                 xc-table-allowsort
                 xc-table-allowselect
                 xc-table-lazyupdate
-              ></xc-table>
+               />
             }
             @if (!showInitialTestCases) {
               <xc-form-label xc-i18n>Followup Test Cases</xc-form-label>
-              <xc-table
-                [xc-table-datasource]="dsFollowupTestCases"
+              <xc-table [xc-table-datasource]="dsFollowupTestCases"
                 xc-table-allowsort
                 xc-table-allowselect
                 xc-table-lazyupdate
-              ></xc-table>
+               />
             }
             <footer class="items-right">
               @if (showInitialTestCases) {

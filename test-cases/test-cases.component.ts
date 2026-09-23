@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild , signal} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { OrderInputSourceDetailsModalComponent, OrderInputSourceDetailsModalComponentData } from '@fman/order-input-sources/modal/order-input-source-details-modal/order-input-source-details-modal.component';
@@ -57,6 +57,7 @@ interface StartTestCaseError {
 }
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     templateUrl: './test-cases.component.html',
     styleUrls: ['./test-cases.component.scss'],
     imports: [XcButtonComponent, XcFormAutocompleteComponent, XcFormDirective, XcFormInputComponent, XcFormLabelComponent, XcFormTextareaComponent, XcFormValidatorMaxValueDirective, XcFormValidatorMinValueDirective, XcFormValidatorNumberDirective, XcIconButtonComponent, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective]
@@ -85,8 +86,7 @@ export class TestCasesComponent extends RouteComponent {
 
     exportStarted = false;
 
-    @ViewChild(XcFormDirective, {static: false})
-    form: XcFormDirective;
+    readonly form = viewChild(XcFormDirective);
 
     // manageExecutionBusy = false;
     startOrderBusy = false;
@@ -120,14 +120,14 @@ export class TestCasesComponent extends RouteComponent {
                         this.dsTestCases.refresh();
                     });
                 },
-                tooltip: this.i18nService.translate('Duplicate'),
+                tooltip: this.i18nService.translateSignal('Duplicate'),
                 class: XDSIconName.COPY,
                 iconName: XDSIconName.COPY
             },
             {
                 onAction: testCase => {
                     this.deleteTestCases([testCase]);
-                }, tooltip: this.i18nService.translate('Delete'), class: XDSIconName.DELETE, iconName: XDSIconName.DELETE
+                }, tooltip: this.i18nService.translateSignal('Delete'), class: XDSIconName.DELETE, iconName: XDSIconName.DELETE
             }
         ];
         this.dsTestCases.selectionModel.selectionChange.subscribe(model => this.testCasesSelectionChange(model));
@@ -189,8 +189,9 @@ export class TestCasesComponent extends RouteComponent {
                     });
 
                     // reset form inputs as pristine
-                    if (this.form) {
-                        this.form.markAsPristine();
+                    const form = this.form();
+                    if (form) {
+                        form.markAsPristine();
                     }
                     // update data source for tables in drawer
                     const dataSourceTestDataSelectorsOrderType = 'xdev.xtestfactory.infrastructure.selector.GetTestCaseSelectorsFromTestCase';
@@ -227,7 +228,7 @@ export class TestCasesComponent extends RouteComponent {
                             if (!result.errorMessage) {
                                 const simpleInstances = result.output[0] as XoSimpleTestDataInstanceArray;
                                 formAutocompleteTemplate.dataWrapper.values = simpleInstances.data.map(
-                                    simpleInstance => ({ name: simpleInstance.label, value: simpleInstance.id.toString() })
+                                    simpleInstance => ({ name: signal(simpleInstance.label), value: simpleInstance.id.toString() })
                                 );
                             } else {
                                 this.dialogService.error(extractError(result));
@@ -358,8 +359,8 @@ export class TestCasesComponent extends RouteComponent {
 
                 // see XTF-4
                 if (!handled) {
-                    message = this.i18nService.translate('Unknown error') + '\n';
-                    message += this.i18nService.translate('Please make sure that there is an "Input Generator" set in the Order Input Source details.') + '\n';
+                    message = this.i18nService.translateInstant('Unknown error') + '\n';
+                    message += this.i18nService.translateInstant('Please make sure that there is an "Input Generator" set in the Order Input Source details.') + '\n';
                     handled = true;
                 }
 
@@ -423,7 +424,7 @@ export class TestCasesComponent extends RouteComponent {
 
     deleteTestCases(testCases: XoTestCaseEntry[]) {
         const orderType = 'xdev.xtestfactory.infrastructure.gui.DeleteTestCasesFromEntryList';
-        this.dialogService.confirm(this.i18nService.translate('Confirm Delete'), this.i18nService.translate(testCases.length === 1 ? 'Delete Test Case?' : 'Delete selected Test Cases?')).afterDismiss()
+        this.dialogService.confirm(this.i18nService.translateInstant('Confirm Delete'), this.i18nService.translateInstant(testCases.length === 1 ? 'Delete Test Case?' : 'Delete selected Test Cases?')).afterDismiss()
             .pipe(filter(confirmed => confirmed))
             .subscribe(() => {
                 const testCaseArray = new XoTestCaseEntryArray();

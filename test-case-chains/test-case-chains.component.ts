@@ -15,9 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-
 import { ApiService, StartOrderOptions } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { RouteComponent } from '@zeta/nav';
@@ -38,6 +37,7 @@ const INIT_WF = 'xdev.xtestfactory.infrastructure.gui.GetInitialTestCases';
 const FOLLOW_UP_WF = 'xdev.xtestfactory.infrastructure.gui.GetFollowupTestCases';
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     templateUrl: './test-case-chains.component.html',
     styleUrls: ['./test-case-chains.component.scss'],
     imports: [XcButtonComponent, XcFormInputComponent, XcFormLabelComponent, XcIconButtonComponent, XcIconComponent, XcMasterDetailComponent, XcPanelComponent, XcTableComponent, XcTooltipDirective, RouterLink]
@@ -84,7 +84,7 @@ export class TestCaseChainsComponent extends RouteComponent {
             {
                 onAction: chain => {
                     this.deleteTestCaseChain(chain);
-                }, tooltip: this.i18nService.translate('Delete selected Entry'), class: XDSIconName.DELETE, iconName: XDSIconName.DELETE
+                }, tooltip: this.i18nService.translateSignal('Delete selected Entry'), class: XDSIconName.DELETE, iconName: XDSIconName.DELETE
             }
         ];
         this.dsTestCaseChains.output = XoTestCaseChainEntryArray;
@@ -202,7 +202,7 @@ export class TestCaseChainsComponent extends RouteComponent {
 
 
     deleteTestCaseChain(chain: XoTestCaseChainEntry) {
-        this.dialogService.confirm(this.i18nService.translate('Delete Test Case Chain'), this.i18nService.translate('Do you really want to delete this test case chain?')).afterDismiss().subscribe(confirmed => {
+        this.dialogService.confirm(this.i18nService.translateInstant('Delete Test Case Chain'), this.i18nService.translateInstant('Do you really want to delete this test case chain?')).afterDismiss().subscribe(confirmed => {
             if (confirmed) {
                 const orderType = 'xdev.xtestfactory.infrastructure.gui.DeleteTestCaseChainFromEntry';
                 const optionsWithError: StartOrderOptions = {
@@ -238,7 +238,7 @@ export class TestCaseChainsComponent extends RouteComponent {
 
 
     deleteTestCase() {
-        this.dialogService.confirm(this.i18nService.translate('Delete Test Case'), this.i18nService.translate('Do you really want to delete this test case?')).afterDismiss().subscribe(confirmed => {
+        this.dialogService.confirm(this.i18nService.translateInstant('Delete Test Case'), this.i18nService.translateInstant('Do you really want to delete this test case?')).afterDismiss().subscribe(confirmed => {
             if (confirmed) {
                 const orderType = 'xdev.xtestfactory.infrastructure.gui.DeleteTestCaseInstance';
                 const input = this.dsTestCaseInstances.selectionModel.selection[0];

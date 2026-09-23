@@ -2,9 +2,9 @@
   <ng-container header xc-i18n>Add Test Case Chain</ng-container>
   <section content>
     @if (note) {
-      <note-component [note]="note"></note-component>
+      <note-component [note]="note" />
     }
-    <xc-form-input label="Name" xc-i18n [(value)]="testCaseChainName"></xc-form-input>
+    <xc-form-input label="Name" xc-i18n [(value)]="testCaseChainName" />
   </section>
   <ng-container footer>
     <xc-button (click)="dismiss()" xc-i18n>Cancel</xc-button>

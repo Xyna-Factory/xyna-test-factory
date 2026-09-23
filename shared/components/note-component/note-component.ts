@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, input } from '@angular/core';
 
 import { XcIconComponent, XDSIconName } from '@zeta/xc';
 
@@ -23,6 +23,7 @@ import { XTFFocusCandidateRef, XTFFocusCandidateDirective } from '../../directiv
 
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.Eager,
     selector: 'note-component',
     templateUrl: './note-component.html',
     styleUrls: ['./note-component.scss'],
@@ -43,8 +44,7 @@ export class NoteComponent {
         }
     }
 
-    @Input('icon-name')
-    iconName = XDSIconName.MSGWARNING;
+    readonly iconName = input(XDSIconName.MSGWARNING, { alias: "icon-name" });
 
     noteBoxFocusCandidateRef = XTFFocusCandidateRef.getInstance();
 
