@@ -34,6 +34,7 @@ export class AddTestDataInstanceComponent extends XcDialogComponent<XoTestDataSe
     readonly apiService = inject(ApiService);
     readonly settingsService = inject(SettingsService);
 
+    // @ts-expect-error(TODO:)
     name: string;
     dataSource: XcRemoteTableDataSource<XoTestDataSelectorInstance>;
 
@@ -42,6 +43,7 @@ export class AddTestDataInstanceComponent extends XcDialogComponent<XoTestDataSe
         super();
 
         const orderType = 'xdev.xtestfactory.infrastructure.selector.GetSelectorPrototypes';
+        // @ts-expect-error(TODO:)
         this.dataSource = new XcRemoteTableDataSource(this.apiService, undefined, this.settingsService.testProjectRtc, orderType);
         this.dataSource.output = XoTestDataSelectorInstanceArray;
         this.dataSource.selectionModel.selectionChange.subscribe(model => {

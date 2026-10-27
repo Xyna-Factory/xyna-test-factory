@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectionStrategy, Component, inject, viewChild , signal} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild, signal} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService, XoStructureType } from '@zeta/api';
@@ -56,14 +56,18 @@ export class TestDataComponent extends RouteComponent {
 
 
     dsTestData: XcTableInfoRemoteTableDataSource<XoTestDataMetaDataEntry>;
+    // @ts-expect-error(TODO:)
     testDataEdit: XoTestDataMetaData = null;
+    // @ts-expect-error(TODO:)
     testData: XoTestDataMetaDataEntry = null;
 
+    // @ts-expect-error(TODO:)
     testDataOrderId: XoTestDataMetaDataId;
     exportStarted = false;
     isTestprojectSelected = false;
     saving = false;
 
+    // @ts-expect-error(TODO:)
     allTestDataChildrenSubscription: Subscription;
 
     testDataDefinitionDataWrapper: XcAutocompleteDataWrapper;
@@ -173,6 +177,7 @@ export class TestDataComponent extends RouteComponent {
     save() {
         this.saving = true;
         const orderType = 'xdev.xtestfactory.infrastructure.actions.StoreTestDataMetaDataWithoutStoreParameter';
+        // @ts-expect-error(TODO:)
         this.apiService.startOrder(this.settings.testProjectRtc, orderType, [this.testDataEdit], null, OPTIONS_WITH_ERROR).subscribe({
             next: response => {
                 if (response.errorMessage) {
@@ -190,6 +195,7 @@ export class TestDataComponent extends RouteComponent {
     showTestData() {
         this.allTestDataChildrenSubscription = this.getAllTestDataChildren().subscribe({
             next: st => {
+                // @ts-expect-error(TODO:)
                 const fqn = st.typeFqn.encode();
                 const data: ShowTestDataComponentData = {
                     structureType: st,
@@ -224,6 +230,7 @@ export class TestDataComponent extends RouteComponent {
                     this.testDataDefinitionDataWrapper.update();
                 });
             } else {
+                // @ts-expect-error(TODO:)
                 return this.testDataEdit = null;
             }
 
@@ -243,7 +250,9 @@ export class TestDataComponent extends RouteComponent {
         const describers = new XoTestData().getDescribers();
         this.allTestDataChildrenSubscription = this.getAllTestDataChildren().subscribe({
             next: st => {
+                // @ts-expect-error(TODO:)
                 const val = st.typeFqn.encode();
+                // @ts-expect-error(TODO:)
                 if (describers[0].fqn.encode() !== val && !st.typeAbstract) {
                     this.testDataDefinitionDataWrapper.values.push({ name: signal(val), value: val });
                 }
@@ -267,7 +276,9 @@ export class TestDataComponent extends RouteComponent {
                     next: stArr => {
                         if (stArr) {
                             stArr.forEach(st => {
+                                // @ts-expect-error(TODO:)
                                 const val = st.typeFqn.encode();
+                                // @ts-expect-error(TODO:)
                                 if (describers[0].fqn.encode() !== val && !st.typeAbstract) {
                                     subj.next(st);
                                 }
@@ -291,9 +302,11 @@ export class TestDataComponent extends RouteComponent {
             .subscribe({
                 next: result => {
                     if (result && !result.errorMessage) {
+                        // @ts-expect-error(TODO:)
                         const metaData = result.output[0] as XoTestDataMetaData;
                         subj.next(metaData);
                     } else {
+                        // @ts-expect-error(TODO:)
                         subj.error(this.i18n.translateErrorCode(result.errorMessage));
                     }
                 },
@@ -316,6 +329,7 @@ export class TestDataComponent extends RouteComponent {
                 const otDelete = 'xdev.xtestfactory.infrastructure.actions.DeleteTestDataMetaDataWithoutDeleteParameter';
                 const testDataId = new XoTestDataMetaDataId();
                 testDataId.iD = data.iD;
+                // @ts-expect-error(TODO:)
                 this.apiService.startOrder(this.settings.testProjectRtc, otDelete, testDataId, null, OPTIONS_WITH_ERROR)
                     .subscribe(result => {
                         if (result.errorMessage) {

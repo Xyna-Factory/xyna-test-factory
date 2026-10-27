@@ -59,13 +59,17 @@ export class TestCaseChainsComponent extends RouteComponent {
     dsFollowupTestCases: XcTableInfoRemoteTableDataSource<XoTestCaseEntry>;
 
     // selected test case chain
+    // @ts-expect-error(TODO:)
     testCaseChain: XoTestCaseChainEntry = null;
 
     // selected test case
+    // @ts-expect-error(TODO:)
     testCase: XoTestCaseInstanceEntry = null;
 
     // selected initial or followup test case
+    // @ts-expect-error(TODO:)
     initialTestCase: XoInitialTestCaseEntry;
+    // @ts-expect-error(TODO:)
     followupTestCase: XoTestCaseEntry;
 
     isTestprojectSelected = false;
@@ -128,6 +132,7 @@ export class TestCaseChainsComponent extends RouteComponent {
                     this.dsInitialTestCases.rtc = selector.runtimeContext;
                     this.dsFollowupTestCases.rtc = selector.runtimeContext;
                     // reset selected table row
+                    // @ts-expect-error(TODO:)
                     this.testCaseChain = null;
                 } else {
                     this.dsTestCaseChains.clear();
@@ -195,7 +200,9 @@ export class TestCaseChainsComponent extends RouteComponent {
                 // this.dsInitialTestCases.selectionModel.clear();
                 // this.dsInitialTestCases.refresh();
             }
+            // @ts-expect-error(TODO:)
             this.initialTestCase = null;
+            // @ts-expect-error(TODO:)
             this.followupTestCase = null;
         }
     }
@@ -209,6 +216,7 @@ export class TestCaseChainsComponent extends RouteComponent {
                     async: false,
                     withErrorMessage: true
                 };
+                // @ts-expect-error(TODO:)
                 this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, chain, null, optionsWithError).subscribe(
                     result => {
                         if (!result.errorMessage) {
@@ -242,6 +250,7 @@ export class TestCaseChainsComponent extends RouteComponent {
             if (confirmed) {
                 const orderType = 'xdev.xtestfactory.infrastructure.gui.DeleteTestCaseInstance';
                 const input = this.dsTestCaseInstances.selectionModel.selection[0];
+                // @ts-expect-error(TODO:)
                 this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, input, null, OPTIONS_WITH_ERROR).subscribe(
                     result => {
                         if (!result.errorMessage) {
@@ -262,6 +271,7 @@ export class TestCaseChainsComponent extends RouteComponent {
         const orderType = 'xdev.xtestfactory.infrastructure.gui.AddFollowupTestCase';
         const input = [this.testCase, this.followupTestCase];
 
+        // @ts-expect-error(TODO:)
         this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, input, null, OPTIONS_WITH_ERROR).subscribe(
             result => {
                 if (!result.errorMessage) {
@@ -279,6 +289,7 @@ export class TestCaseChainsComponent extends RouteComponent {
         const orderType = 'xdev.xtestfactory.infrastructure.gui.AddInitialTestCase';
         const input = [this.testCaseChain, this.initialTestCase];
 
+        // @ts-expect-error(TODO:)
         this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, input, null, OPTIONS_WITH_ERROR).subscribe(
             result => {
                 if (!result.errorMessage) {

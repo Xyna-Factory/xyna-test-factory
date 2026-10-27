@@ -44,7 +44,7 @@ export class NoteComponent {
         }
     }
 
-    readonly iconName = input(XDSIconName.MSGWARNING, { alias: "icon-name" });
+    readonly iconName = input(XDSIconName.MSGWARNING, { alias: 'icon-name' });
 
     noteBoxFocusCandidateRef = XTFFocusCandidateRef.getInstance();
 

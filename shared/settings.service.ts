@@ -37,6 +37,7 @@ export class SettingsService {
 
 
     readonly fallbackRtc = RuntimeContext.fromApplication('XynaTestFactoryInfrastructure');
+    // @ts-expect-error(TODO:)
     private readonly _testProjectSelectorSubject = new BehaviorSubject<XoTestProjectSelector>(null);
 
     needRefreshTestCases = false;
@@ -44,6 +45,7 @@ export class SettingsService {
     tableRefreshOnFilterChange = false;
 
     get testProjectRtc(): RuntimeContext {
+        // @ts-expect-error(TODO:)
         return this._testProjectSelectorSubject.getValue() ? this._testProjectSelectorSubject.getValue().runtimeContext : null;
     }
 
@@ -63,13 +65,16 @@ export class SettingsService {
     retrieveTestProjects(): Observable<XoTestProjectSelectorArray> {
         const rtc = /*this.testProjectRtc || */this.fallbackRtc;
         const orderType = 'xdev.xtestfactory.infrastructure.gui.GetTestProjects';
+        // @ts-expect-error(TODO:)
         return this.apiService.startOrder(rtc, orderType, null, XoTestProjectSelectorArray, {
             async: false,
             withErrorMessage: true
         }).pipe(
             map(result => {
                 // map to TestProjectSelector and remove RTC-information (see OP-3819)
+                // @ts-expect-error(TODO:)
                 const selectors = result.output[0] as XoTestProjectSelectorArray;
+                // @ts-expect-error(TODO:)
                 selectors.data.forEach(selector => selector.rtc = null);
                 return selectors;
             })

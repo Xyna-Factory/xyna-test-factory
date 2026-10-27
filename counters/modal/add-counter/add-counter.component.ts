@@ -45,6 +45,7 @@ export class AddCounterComponent extends XcDialogComponent<boolean, AddCounterCo
 
 
     readonly counterEntry: XoCounterEntry;
+    // @ts-expect-error(TODO:)
     errorMessage: string;
 
 
@@ -59,9 +60,11 @@ export class AddCounterComponent extends XcDialogComponent<boolean, AddCounterCo
 
     add() {
         const orderType = 'xdev.xtestfactory.infrastructure.actions.UpsertCounterWithUniquenessCheck';
+        // @ts-expect-error(TODO:)
         this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, this.counterEntry, null, OPTIONS_WITH_ERROR).subscribe({
             next: response => {
                 if (response.stackTrace) {
+                    // @ts-expect-error(TODO:)
                     this.errorMessage = this.injectedData.i18nService.translateErrorCode(response.errorMessage);
                 } else {
                     this.dismiss(true);

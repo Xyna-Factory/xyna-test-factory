@@ -51,6 +51,7 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
     tableDataSource: XcTableInfoRemoteTableDataSource<XoTestData>;
     treeDataSource: XcStructureTreeDataSource;
     treeObserver: XcTreeObserver;
+    // @ts-expect-error(TODO:)
     testData: XoTestData;
     dataInput: XoBaseText;
     dataLabel: string;
@@ -60,6 +61,7 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
 
     constructor() {
         super();
+        // @ts-expect-error(TODO:)
         this.dataInput = new XoBaseText(undefined, this.injectedData.structureType.typeFqn.encode());
         this.dataLabel = this.injectedData.structureType.typeLabel || 'Instances';
 
@@ -108,6 +110,7 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
 
     cancel() {
         this.tableDataSource.selectionModel.clear();
+        // @ts-expect-error(TODO:)
         this.testData = undefined;
     }
 
@@ -137,6 +140,7 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
             const orderType = 'xdev.xtestfactory.infrastructure.gui.DeleteTestDataInstanceList';
             const input = new XoTestDataArray();
             input.data.push(...testDataList);
+            // @ts-expect-error(TODO:)
             this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, input, null, OPTIONS_WITH_ERROR).subscribe(result => {
                 if (result.errorMessage) {
                     this.note = this.injectedData.i18nService.translateErrorCode(result.errorMessage);
@@ -150,8 +154,11 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
 
     add() {
         this.tableDataSource.selectionModel.clear();
+        // @ts-expect-error(TODO:)
         const testData = new XoTestData(this.injectedData.structureType.typeFqn.name);
+        // @ts-expect-error(TODO:)
         testData.fqn   = this.injectedData.structureType.typeFqn;
+        // @ts-expect-error(TODO:)
         testData.rtc   = this.injectedData.structureType.typeRtc;
         this.edit(testData);
     }
@@ -177,6 +184,7 @@ export class ShowTestDataComponent extends XcDialogComponent<void, ShowTestDataC
         if (selection.length > 0) {
             this.edit(selection[0]);
         } else {
+            // @ts-expect-error(TODO:)
             this.testData = undefined;
         }
     }

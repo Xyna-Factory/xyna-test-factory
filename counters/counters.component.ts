@@ -49,12 +49,14 @@ export class CountersComponent extends RouteComponent {
 
 
     dsCounters: XcTableInfoRemoteTableDataSource<XoCounterEntry>;
+    // @ts-expect-error(TODO:)
     counterEdit: XoCounterEntry = null;
 
     readonly form = viewChild(XcFormDirective);
 
     counterId = '';
 
+    // @ts-expect-error(TODO:)
     counter: XoCounterEntry;
     isTestprojectSelected = false;
 
@@ -64,6 +66,7 @@ export class CountersComponent extends RouteComponent {
         const settingsService = this.settingsService;
 
 
+        // @ts-expect-error(TODO:)
         this.dsCounters = new XcTableInfoRemoteTableDataSource(this.apiService, null, this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.GetCounters');
         this.dsCounters.output = XoCounterEntryArray;
         this.dsCounters.tableInfoClass = XoRemappingTableInfoClass(XoTableInfo, XoCounterEntry);
@@ -93,13 +96,14 @@ export class CountersComponent extends RouteComponent {
                 onAction: counterEntry => {
                     this.dialogService.confirm(
                         this.i18nService.translateInstant('Delete'),
-                        this.i18nService.translateInstant('Delete $0?', <I18nParam>{ key: '$0', value: counterEntry.name })
+                        this.i18nService.translateInstant('Delete $0?', { key: '$0', value: counterEntry.name })
                     ).afterDismiss().pipe(
                         filter(result => result)
                     ).subscribe(() => {
                         const current = new XoCounterId();
                         current.iD = counterEntry.iD;
 
+                        // @ts-expect-error(TODO:)
                         this.apiService.startOrder(this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.actions.DeleteCounterWithoutStoreParameter', current, null, OPTIONS_WITH_ERROR)
                             .subscribe(response => {
                                 if (response.errorMessage) {
@@ -134,6 +138,7 @@ export class CountersComponent extends RouteComponent {
 
         if (this.counter !== selection) {
             this.counter = selection;
+            // @ts-expect-error(TODO:)
             this.counterEdit = selection ? selection.clone() : null;
             this.counterId = '';
             if (this.counter) {
@@ -191,6 +196,7 @@ export class CountersComponent extends RouteComponent {
         input.nextValue = this.counterEdit.nextValue;
         input.description = this.counterEdit.description;
 
+        // @ts-expect-error(TODO:)
         this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, input, null, OPTIONS_WITH_ERROR).subscribe({
             next: result => {
                 if (result.errorMessage) {

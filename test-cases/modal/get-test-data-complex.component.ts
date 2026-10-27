@@ -39,16 +39,19 @@ export class GetTestDataComplexComponent extends XcDialogComponent<{ value: stri
 
     dataSource: XcRemoteTableDataSource;
 
+    // @ts-expect-error(TODO:)
     note: string;
 
     constructor() {
         super();
 
         const orderType = 'xdev.xtestfactory.infrastructure.selector.GetTestDataForComplexList';
+        // @ts-expect-error(TODO:)
         this.dataSource = new XcRemoteTableDataSource(this.apiService, undefined, this.settingsService.testProjectRtc, orderType);
         this.dataSource.input = this.injectedData;
         this.dataSource.output = XoTestDataArray;
         this.dataSource.dataChange.subscribe(() => this.note = '');
+        // @ts-expect-error(TODO:)
         this.dataSource.error.subscribe(result => this.note = result.errorMessage);
         this.dataSource.refresh();
     }

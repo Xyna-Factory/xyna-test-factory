@@ -79,6 +79,7 @@ export class ProjectDetailsComponent {
                     const orderType = 'xdev.xtestfactory.infrastructure.gui.DeleteTestProject';
 
                     const sel = this.settingsService.testProjectSelector.clone();
+                    // @ts-expect-error(TODO:)
                     this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, sel, null, OPTIONS_WITH_ERROR).subscribe({
                         next: result => {
                             if (!result.errorMessage) {
@@ -86,7 +87,9 @@ export class ProjectDetailsComponent {
                                 this.testProjectDetails.version = '';
                                 this.testProjectDetails.description = '';
                                 // Setting to null
+                                // @ts-expect-error(TODO:)
                                 this.settingsService.testProjectSelector = null;
+                                // @ts-expect-error(TODO:)
                                 this.apiService.runtimeContext = null;
 
                             } else {
@@ -125,6 +128,7 @@ export class ProjectDetailsComponent {
             this.settingsService.testProjectRtc,
             orderType,
             [this.settingsService.testProjectSelector, this.testProjectDetails],
+            // @ts-expect-error(TODO:)
             null,
             optionsWithError
         ).subscribe({
@@ -169,6 +173,7 @@ export class ProjectDetailsComponent {
         ).subscribe({
             next: result => {
                 if (!result.errorMessage) {
+                    // @ts-expect-error(TODO:)
                     this.testProjectDetails = result.output[0] as XoProjectDetails;
                 } else {
                     this.dialogService.error(this.i18nService.translateErrorCode(result.errorMessage));

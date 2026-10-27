@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectionStrategy, Component, inject , signal} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 
 import { ApiService, RuntimeContext } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
@@ -51,7 +51,9 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
     private readonly imexService = inject(ImexService);
 
 
+    // @ts-expect-error(TODO:)
     projectToCreate: XoProjectDetails;
+    // @ts-expect-error(TODO:)
     testProject: XoProjectDetails;
     testProjectSelector: XoTestProjectSelector;
 
@@ -140,6 +142,7 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
             this.settingsService.fallbackRtc,
             orderType,
             [this.settingsService.testProjectSelector, this.testProject],
+            // @ts-expect-error(TODO:)
             null, OPTIONS_WITH_ERROR)
             .subscribe({
                 next: res => {
@@ -162,6 +165,7 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
         this.okButtonBusyFlag = true;
         this.note = '';
 
+        // @ts-expect-error(TODO:)
         this.apiService.startOrder(this.settingsService.fallbackRtc, orderType, this.projectToCreate, null, OPTIONS_WITH_ERROR).subscribe({
             next: res => {
                 if (res.errorMessage) {
@@ -195,6 +199,7 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
         this.note = '';
         this.imexService.import(
             this.settingsService.fallbackRtc,
+            // @ts-expect-error(TODO:)
             'xdev.xtestfactory.infrastructure.actions.ImportTestProject', null, null, true
         ).subscribe({
             next: res => {
@@ -202,6 +207,7 @@ export class TestProjectMenuComponent extends XcDialogComponent<XoTestProjectSel
                     const msgObj = GET_IMPORT_TEST_PROJECT_MSG(this.injectedData.i18nService, res.orderId);
                     this.note = msgObj.message;
                 } else {
+                    // @ts-expect-error(TODO:)
                     this.note = this.injectedData.i18nService.translateErrorCode(res.errorMessage);
                 }
             },

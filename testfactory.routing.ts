@@ -111,7 +111,7 @@ export const TestfactoryRoutes: XynaRoutes = [
 ];
 
 export const TestfactoryRoutingModules = [
-    RouterModule.forChild(TestfactoryRoutes)   
+    RouterModule.forChild(TestfactoryRoutes)
 ];
 
 export const TestfactoryRoutingProviders = [

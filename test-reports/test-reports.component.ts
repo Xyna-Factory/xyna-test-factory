@@ -53,6 +53,7 @@ export class TestReportsComponent {
     dsTestReportTree: XcStructureTreeDataSource;
     dsTestReportEdit = null;
 
+    // @ts-expect-error(TODO:)
     testReport: XoTestReportEntry;
     isTestprojectSelected = false;
     exporting = false;
@@ -61,11 +62,13 @@ export class TestReportsComponent {
         const settingsService = this.settingsService;
 
         const orderType = 'xdev.xtestfactory.infrastructure.gui.GetTestReports';
+        // @ts-expect-error(TODO:)
         this.dsTestReport = new XcTableInfoRemoteTableDataSource(this.apiSerivce, null, this.settingsService.testProjectRtc, orderType);
         this.dsTestReport.output = XoTestReportEntryArray;
         this.dsTestReport.tableInfoClass = XoRemappingTableInfoClass(XoTableInfo, XoTestReportEntry);
         this.dsTestReport.selectionModel.selectionChange.subscribe(this.testReportSelectionChange.bind(this));
         this.dsTestReport.refreshOnFilterChange = settingsService.tableRefreshOnFilterChange;
+        // @ts-expect-error(TODO:)
         this.dsTestReportTree = new XcStructureTreeDataSource(this.apiSerivce, undefined, this.settingsService.testProjectRtc, null, null);
 
         settingsService.testProject.subscribe(selector => {
@@ -85,6 +88,7 @@ export class TestReportsComponent {
     }
 
     refreshTestReports() {
+        // @ts-expect-error(TODO:)
         this.apiSerivce.startOrder(this.settingsService.testProjectRtc, 'xdev.xtestfactory.infrastructure.gui.RefreshTestReports', null, null, OPTIONS_WITH_ERROR).subscribe({
             next: result => {
                 if (result.errorMessage) {
@@ -137,6 +141,7 @@ export class TestReportsComponent {
 
         if (this.testReport !== selection) {
             this.testReport = selection;
+            // @ts-expect-error(TODO:)
             this.dsTestReportEdit = selection ? selection.clone() : null;
 
             if (selection) {
@@ -144,7 +149,9 @@ export class TestReportsComponent {
                     if (response.errorMessage) {
                         this.dialogService.error(this.i18nService.translateErrorCode(response.errorMessage));
                     } else {
+                        // @ts-expect-error(TODO:)
                         dsContainer.data.push(response.output[0]);
+                        // @ts-expect-error(TODO:)
                         descContainer.push(response.output[0]);
                         dsContainer.rtc = this.settingsService.testProjectRtc;
 

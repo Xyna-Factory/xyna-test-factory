@@ -48,6 +48,7 @@ export class AddTestCaseComponent extends XcDialogComponent<XoTestCaseEntry, Add
 
 
     readonly testCase = new XoTestCaseEntry();
+    // @ts-expect-error(TODO:)
     note: string;
 
     duplicateMode = false;
@@ -72,6 +73,7 @@ export class AddTestCaseComponent extends XcDialogComponent<XoTestCaseEntry, Add
         const params = this.duplicateMode ? [this.testCase, XoTestCaseID.fromId(this.injectedData.caseEntry.iD)] : [this.testCase];
 
         this.note = '';
+        // @ts-expect-error(TODO:)
         this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, params, null, OPTIONS_WITH_ERROR).subscribe({
             next: result => {
                 if (result.errorMessage) {

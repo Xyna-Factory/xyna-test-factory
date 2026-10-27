@@ -39,6 +39,7 @@ export enum ImportStatus {
 export class ImportResult {
     constructor(
         public status: ImportStatus,
+        // @ts-expect-error(TODO:)
         public fileId: XoManagedFileID = null,
         public fileName = ''
     ) { }
@@ -52,11 +53,13 @@ export class ImportResult {
  * since upload() was introduced to the service, this is not the case anymore.
  */
 
+// @ts-expect-error(TODO:)
 @XoObjectClass(null, 'xdev.xtestfactory.infrastructure.datatypes', 'ManagedFileID')
 export class XoManagedFileID extends XoObject {
 
     @XoProperty()
     @XoUnique()
+    // @ts-expect-error(TODO:)
     iD: string;
 }
 
@@ -132,7 +135,7 @@ export class ImexService {
          * selected file was sucessfully uploaded and we start the workflow
          * @param {ProgressEvent} - EVENT
          */
-        const uploadHandler = (event) => {
+        const uploadHandler = event => {
             const result = event.currentTarget.responseText;
             const match = result.match(new RegExp('stored with id (\\d*)'));
             if (match && match.length > 1) {
@@ -150,7 +153,7 @@ export class ImexService {
         /**
          * error with the upload
          */
-        const uploadErrorHandler = (event) => {
+        const uploadErrorHandler = event => {
             subject.error('upload error');
             subject.complete();
         };
@@ -172,6 +175,7 @@ export class ImexService {
 
                 // as long as the project runs locally, we need to hardcode the host name
                 // we can not use relative urls
+                // @ts-expect-error(TODO:)
                 const subdirectory = getSubdirectory(this.configService.config.zeta.url);
                 if (CROSS_ORIGIN) {
                     xhr.open('POST', CROSS_HOST + '/' + subdirectory + UPLOAD_URL_PATH);
@@ -194,7 +198,7 @@ export class ImexService {
         const subject: Subject<File> = new Subject();
         const fileInput = document.createElement('INPUT');
 
-        const changeHandler = (event) => {
+        const changeHandler = event => {
             document.body.removeChild(fileInput);
 
             // selects the first file even if more than one file was selected
@@ -228,10 +232,12 @@ export class ImexService {
 
             if (startOrderResult && !startOrderResult.errorMessage) {
 
+                // @ts-expect-error(TODO:)
                 const sorOutput = (startOrderResult) ? startOrderResult.output[0] : null;
                 const managedFileId = sorOutput ? sorOutput.data.iD : null;
 
                 if (managedFileId !== null) {
+                    // @ts-expect-error(TODO:)
                     const subdirectory = getSubdirectory(this.configService.config.zeta.url);
                     if (CROSS_ORIGIN) {
                         window.location.href = CROSS_HOST + '/' + subdirectory + DOWNLOAD_URL_PATH + managedFileId;
@@ -250,7 +256,7 @@ export class ImexService {
             subj.complete();
         };
 
-        const failHandler = (EX) => {
+        const failHandler = EX => {
             const ex = (EX && EX.cause && EX.name) ? EX.cause.replace(EX.name, '$') : '$';
             subj.error(ex);
             subj.complete();
