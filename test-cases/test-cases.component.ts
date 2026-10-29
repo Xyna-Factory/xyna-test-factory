@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectionStrategy, Component, inject, viewChild , signal} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild, signal} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { OrderInputSourceDetailsModalComponent, OrderInputSourceDetailsModalComponentData } from '@fman/order-input-sources/modal/order-input-source-details-modal/order-input-source-details-modal.component';
@@ -82,6 +82,7 @@ export class TestCasesComponent extends RouteComponent {
      */
 
     dsTestCases: XcTableInfoRemoteTableDataSource<XoTestCaseEntry>;
+    // @ts-expect-error(TODO:)
     dsTestDataSelectors: XcTableInfoRemoteTableDataSource<XoTestDataSelectorInstance>;
 
     exportStarted = false;
@@ -96,13 +97,15 @@ export class TestCasesComponent extends RouteComponent {
     testCaseOrderId = '';
 
     // selected test case
+    // @ts-expect-error(TODO:)
     testCaseEntry: XoTestCaseEntry; // the currently selected entry in the table
+    // @ts-expect-error(TODO:)
     testCase: XoTestCase; // details of the selected entry
 
 
     constructor() {
         super();
-            const dataSourceTestCaseOrderType = 'xdev.xtestfactory.infrastructure.gui.GetAllTestCases';
+        const dataSourceTestCaseOrderType = 'xdev.xtestfactory.infrastructure.gui.GetAllTestCases';
         this.dsTestCases = new XcTableInfoRemoteTableDataSource(this.apiService, this.i18nService, this.settingsService.testProjectRtc, dataSourceTestCaseOrderType);
         this.dsTestCases.output = XoTestCaseEntryArray;
         this.dsTestCases.tableInfoClass = XoRemappingTableInfoClass(XoTableInfo, XoTestCaseEntry, { src: t => t.description, dst: t => t.desc });
@@ -142,6 +145,7 @@ export class TestCasesComponent extends RouteComponent {
                     this.dsTestCases.resetTableInfo();
                     this.dsTestCases.refresh();
                     // reset selected table row
+                    // @ts-expect-error(TODO:)
                     this.testCase = null;
                 } else {
                     this.dsTestCases.clear();
@@ -181,6 +185,7 @@ export class TestCasesComponent extends RouteComponent {
                     const testCaseDetailsOrderType = 'xdev.xtestfactory.infrastructure.gui.GetTestCaseDetails';
                     this.apiService.startOrder(this.settingsService.testProjectRtc, testCaseDetailsOrderType, this.testCaseEntry, XoTestCase, OPTIONS_WITH_ERROR).subscribe(result => {
                         if (!result.errorMessage) {
+                            // @ts-expect-error(TODO:)
                             this.testCase = result.output[0] as XoTestCase;
                             this.navigateToId();
                         } else {
@@ -201,13 +206,16 @@ export class TestCasesComponent extends RouteComponent {
                     this.dsTestDataSelectors.dataChange.subscribe(modelSel => this.testDataSelectorsChange(modelSel));
                     this.dsTestDataSelectors.refresh();
                 } else {
+                    // @ts-expect-error(TODO:)
                     this.testCase = null;
                     this.navigateToId();
                 }
                 this.testCaseOrderId = '';
             }
         } else {
+            // @ts-expect-error(TODO:)
             this.testCaseEntry = null;
+            // @ts-expect-error(TODO:)
             this.testCase = null;
             this.navigateToId();
         }
@@ -226,6 +234,7 @@ export class TestCasesComponent extends RouteComponent {
                     this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, instance, XoSimpleTestDataInstanceArray, OPTIONS_WITH_ERROR).subscribe(
                         result => {
                             if (!result.errorMessage) {
+                                // @ts-expect-error(TODO:)
                                 const simpleInstances = result.output[0] as XoSimpleTestDataInstanceArray;
                                 formAutocompleteTemplate.dataWrapper.values = simpleInstances.data.map(
                                     simpleInstance => ({ name: signal(simpleInstance.label), value: simpleInstance.id.toString() })
@@ -273,7 +282,7 @@ export class TestCasesComponent extends RouteComponent {
                         this.dialogService.custom(GetTestCaseReferenceComponent).afterDismissResult().subscribe(
                             result => {
                                 instance.value = result.value;
-                                instance.label = result.label;
+                                instance.label = result.label ?? '';
                                 formInputTemplateReference.callback = markAsDirty;
                                 this.dsTestDataSelectors.triggerMarkForChange();
                             }
@@ -313,6 +322,7 @@ export class TestCasesComponent extends RouteComponent {
         testDataSelectors.data.push(...this.dsTestDataSelectors.rows);
         // start workflow
         const input = [this.testCaseEntry, testDataSelectors, this.testCase.testDateSelector];
+        // @ts-expect-error(TODO:)
         this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, input, null, OPTIONS_WITH_ERROR).subscribe(
             result => {
                 if (!result.errorMessage) {
@@ -364,6 +374,7 @@ export class TestCasesComponent extends RouteComponent {
                     handled = true;
                 }
 
+                // @ts-expect-error(TODO:)
                 this.dialogService.error(message);
                 this.testCaseOrderId = '';
             }
@@ -387,6 +398,7 @@ export class TestCasesComponent extends RouteComponent {
     manageExecutionDetails() {
         // find revision
         this.apiService.getRuntimeContexts(true).pipe(
+            // @ts-expect-error(TODO:)
             map(rtcs => rtcs.find(rtc => rtc.name === this.settingsService.testProjectRtc.ws.workspace && rtc.type !== RuntimeContextType.Application)),
             filter(rtc => {
                 if (!rtc) {
@@ -407,8 +419,9 @@ export class TestCasesComponent extends RouteComponent {
                 preset = new FrequencyControlledTaskLoadPreset(this.testCaseEntry.load, stringToInteger(this.testCaseEntry.loadCount, undefined));
             }
 
-            this.dialogService.custom(OrderInputSourceDetailsModalComponent, <OrderInputSourceDetailsModalComponentData>{
+            this.dialogService.custom(OrderInputSourceDetailsModalComponent, {
                 orderInputSource: ois,
+                // @ts-expect-error(TODO:)
                 fctPreset: preset
             });
         });
@@ -429,6 +442,7 @@ export class TestCasesComponent extends RouteComponent {
             .subscribe(() => {
                 const testCaseArray = new XoTestCaseEntryArray();
                 testCaseArray.data.splice(0, 0, ...testCases);
+                // @ts-expect-error(TODO:)
                 this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, testCaseArray, null, OPTIONS_WITH_ERROR).subscribe(result => {
                     if (!result.errorMessage) {
                         this.dsTestCases.refresh();
@@ -448,6 +462,7 @@ export class TestCasesComponent extends RouteComponent {
     createTestCase() {
         const data: AddTestCaseComponentModalData = {
             i18nService: this.i18nService,
+            // @ts-expect-error(TODO:)
             caseEntry: null
         };
         this.dialogService.custom(AddTestCaseComponent, data).afterDismissResult().subscribe(

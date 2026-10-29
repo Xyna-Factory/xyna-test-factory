@@ -57,6 +57,7 @@ export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTe
         this.testDataDefinitionSubject.asObservable()
     );
 
+    // @ts-expect-error(TODO:)
     errorMessage: string;
     loading = true;
     saving = false;
@@ -86,7 +87,9 @@ export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTe
                 })
             ).subscribe({
                 next: structureTypeList => structureTypeList
+                    // @ts-expect-error(TODO:)
                     .filter(structureType => !structureType.typeAbstract && !structureType.typeFqn.equals(XoTestData.fqn))
+                    // @ts-expect-error(TODO:)
                     .forEach(structureType => subtypes.push(XcOptionItemString(structureType.typeFqn.encode()))),
                 error: error => console.error(error)
             })
@@ -105,6 +108,7 @@ export class CreateTestDataComponent extends XcDialogComponent<boolean, CreateTe
         this.saving = true;
 
         const orderType = 'xdev.xtestfactory.infrastructure.actions.StoreTestDataMetaDataWithoutStoreParameter';
+        // @ts-expect-error(TODO:)
         this.apiService.startOrder(this.settings.testProjectRtc, orderType, this.testData, null, OPTIONS_WITH_ERROR).pipe(
             finalize(() => this.saving = false)
         ).subscribe({

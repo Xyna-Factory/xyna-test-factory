@@ -58,6 +58,7 @@ export class AddTestCaseChainComponent extends XcDialogComponent<string, AddTest
             withErrorMessage: true
         };
         const orderType = 'xdev.xtestfactory.infrastructure.gui.CreateTestCaseChain';
+        // @ts-expect-error(TODO:)
         this.apiService.startOrder(this.settingsService.testProjectRtc, orderType, new XoBaseText(undefined, this.testCaseChainName), null, optionsWithError).subscribe({
             next: res => {
                 if (!res.errorMessage) {

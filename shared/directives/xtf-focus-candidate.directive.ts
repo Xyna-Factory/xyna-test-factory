@@ -25,6 +25,7 @@ export class XTFFocusCandidateDirective implements OnInit, OnDestroy {
 
     private readonly element: HTMLElement;
 
+    // @ts-expect-error(TODO:)
     private _ref: XTFFocusCandidateRef;
 
     @Input('xtf-focus-candidate')
@@ -40,6 +41,7 @@ export class XTFFocusCandidateDirective implements OnInit, OnDestroy {
     @Input('xtf-focus-candidate-focus-onload')
     private set onload(value: any) {
         // this._onload = !!(value || value === '');
+        // @ts-expect-error(TODO:)
         this._onload = coerceBoolean(value);
     }
 
@@ -47,6 +49,7 @@ export class XTFFocusCandidateDirective implements OnInit, OnDestroy {
     constructor() {
         const elementRef = inject(ElementRef, { optional: true, host: true });
 
+        // @ts-expect-error(TODO:)
         this.element = elementRef.nativeElement;
         if (!(this.element.tabIndex >= 0)) {
             this.element.tabIndex = -1;
@@ -63,6 +66,7 @@ export class XTFFocusCandidateDirective implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this._ref) {
+            // @ts-expect-error(TODO:)
             this._ref.setRef(null);
         }
     }
@@ -83,6 +87,7 @@ export class XTFFocusCandidateDirective implements OnInit, OnDestroy {
 
 export class XTFFocusCandidateRef {
 
+    // @ts-expect-error(TODO:)
     private _directiveRef: XTFFocusCandidateDirective;
 
 

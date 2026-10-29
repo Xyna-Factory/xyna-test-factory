@@ -38,15 +38,18 @@ export class GetTestCaseReferenceComponent extends XcDialogComponent<{ value: st
 
     dataSource: XcRemoteTableDataSource;
 
+    // @ts-expect-error(TODO:)
     note: string;
 
     constructor() {
         super();
 
         const orderType = 'xdev.xtestfactory.infrastructure.selector.GetTestCasesForSelection';
+        // @ts-expect-error(TODO:)
         this.dataSource = new XcRemoteTableDataSource(this.apiService, undefined, this.settingsService.testProjectRtc, orderType);
         this.dataSource.output = XoTestCaseEntryArray;
         this.dataSource.dataChange.subscribe(() => this.note = '');
+        // @ts-expect-error(TODO:)
         this.dataSource.error.subscribe(result => this.note = result.errorMessage);
         this.dataSource.refresh();
     }

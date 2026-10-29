@@ -39,16 +39,19 @@ export class GetTestDataMcComponent extends XcDialogComponent<{ value: string; l
 
     dataSource: XcRemoteTableDataSource;
 
+    // @ts-expect-error(TODO:)
     note: string;
 
     constructor() {
         super();
 
         const orderType = 'xdev.xtestfactory.infrastructure.selector.GetTestDataForComplexList';
+        // @ts-expect-error(TODO:)
         this.dataSource = new XcRemoteTableDataSource(this.apiService, undefined, this.settingsService.testProjectRtc, orderType);
         this.dataSource.input = this.injectedData;
         this.dataSource.output = XoTestDataArray;
         this.dataSource.dataChange.subscribe(() => this.note = '');
+        // @ts-expect-error(TODO:)
         this.dataSource.error.subscribe(result => this.note = result.errorMessage);
         this.dataSource.refresh();
     }
@@ -59,6 +62,7 @@ export class GetTestDataMcComponent extends XcDialogComponent<{ value: string; l
         let values = [];
         selectionList.forEach(selection =>
             values = values.concat(
+                // @ts-expect-error(TODO:)
                 this.dataSource.selectionModel.getSubs(selection).map(sub => selection.resolve(sub))
             )
         );
